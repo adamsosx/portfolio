@@ -74,13 +74,17 @@
             overflow: hidden;
         }
 
-        .flag-pl {
-            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
-        }
-
+        /* Adjust English flag size to proper ratio */
         .flag-en {
+            width: 24px;
+            height: 12px;
             background: #012169;
             position: relative;
+        }
+
+
+        .flag-pl {
+            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
         }
 
         .flag-en::before {
@@ -558,6 +562,11 @@
 
         .lang-content.active {
             display: block;
+        }
+
+        /* Ensure CTA buttons keep inline-block display */
+        .cta-button.lang-content.active {
+            display: inline-block;
         }
     </style>
 </head>
