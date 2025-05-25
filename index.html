@@ -65,49 +65,45 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .flag {
-            width: 24px;
-            height: 18px;
-            display: inline-block;
-            border-radius: 2px;
-            position: relative;
-            overflow: hidden;
-        }
+/* ----- Ogólne style dla wszystkich flag ----- */
+.flag {
+    width: 24px;
+    height: 18px;
+    display: inline-block; /* Lub block, jeśli jest w kontenerze flex i ma być osobnym blokiem */
+    border-radius: 2px;
+    position: relative;    /* Ważne dla pozycjonowania pseudoelementów */
+    overflow: hidden;      /* Aby nic nie "wystawało" z flagi */
+}
 
-        .flag-pl {
-            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
-        }
+/* ----- Flaga Polska (PL) ----- */
+.flag-pl {
+    background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
+}
+.flag-pl::before, .flag-pl::after {
+    content: none;
+}
 
-        .flag-en {
-            background: #012169;
-            position: relative;
-        }
 
-        .flag-en::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(to bottom, transparent 40%, white 40%, white 60%, transparent 60%),
-                linear-gradient(to right, transparent 40%, white 40%, white 60%, transparent 60%);
-            background-size: 100% 100%;
-        }
-
-        .flag-en::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(to bottom, transparent 30%, #C8102E 30%, #C8102E 70%, transparent 70%),
-                linear-gradient(to right, transparent 30%, #C8102E 30%, #C8102E 70%, transparent 70%);
-            background-size: 100% 100%;
-        }
+/* ----- Flaga Angielska (EN) - Krzyż Świętego Jerzego ----- */
+.flag-en {
+    background-color: white; /* Białe tło */
+}
+.flag-en::before {
+    content: none;
+}
+.flag-en::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0; /* Rozciągnij na całą flagę */
+    background-image:
+        linear-gradient(#C8102E, #C8102E), /* Czerwony pasek poziomy */
+        linear-gradient(#C8102E, #C8102E); /* Czerwony pasek pionowy */
+    background-repeat: no-repeat;
+    background-position: center center; /* Wyśrodkowanie krzyża */
+    background-size:
+        100% 22.22%,
+        16.66% 100%;
+}
 
         /* Header */
         header {
@@ -226,6 +222,7 @@
             text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(212, 129, 42, 0.3);
         }
@@ -359,6 +356,8 @@
         .portfolio-card p {
             color: var(--medium-gray);
             margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         .tech-tags {
@@ -410,6 +409,19 @@
             font-size: 2rem;
             margin: 0 auto 20px;
         }
+        
+        .service-card h3 {
+            color: var(--navy-blue);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: var(--medium-gray);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
 
         /* Contact Section */
         .contact {
@@ -507,10 +519,32 @@
             .nav-links {
                 display: none;
             }
+             .nav-right .language-selector {
+            }
+
 
             .mobile-menu-toggle {
                 display: block;
             }
+            
+            .nav-links.active-mobile {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--dark-navy);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+            .nav-links.active-mobile li {
+                margin-bottom: 15px;
+            }
+            .nav-links.active-mobile a {
+                font-size: 1.1rem;
+            }
+
 
             .hero h1 {
                 font-size: 2rem;
@@ -559,6 +593,15 @@
         .lang-content.active {
             display: block;
         }
+
+        .cta-button.lang-content.active {
+            display: inline-block;
+        }
+
+        /* Hidden class for Netlify honeypot */
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -581,7 +624,7 @@
                         <span>EN</span>
                     </button>
                 </div>
-                <button class="mobile-menu-toggle">☰</button>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
             </div>
         </nav>
     </header>
@@ -679,23 +722,32 @@
                 <p class="lang-content active" data-lang="pl">Masz projekt, który wymaga połączenia technologii z głębokim zrozumieniem człowieka? Szukasz kogoś, kto spojrzy na Twoje wyzwania z nowej perspektywy? Skontaktuj się ze mną.</p>
                 <p class="lang-content" data-lang="en">Do you have a project that requires combining technology with a deep understanding of humanity? Looking for someone who will look at your challenges from a new perspective? Contact me.</p>
                 
-                <form class="contact-form" id="contact-form">
+                <!-- ZMIANY DLA NETLIFY FORMS TUTAJ -->
+                <form class="contact-form" id="contact-form" data-netlify="true" data-netlify-honeypot="bot-field" name="contact">
+                    <p class="hidden" style="display:none;"> <!-- Możesz użyć klasy .hidden, którą dodałem w CSS -->
+                        <label>
+                            Don’t fill this out if you’re human: <input name="bot-field" />
+                        </label>
+                    </p>
+                    <input type="hidden" name="form-name" value="contact" /> <!-- Netlify potrzebuje tego, jeśli formularz ma atrybut name -->
+
                     <div class="form-group">
-                        <input type="text" id="name-input" placeholder="Twoje imię" required>
-                        <input type="email" placeholder="E-mail" required>
+                        <input type="text" id="name-input" name="name" placeholder="Twoje imię" required>
+                        <input type="email" id="email-input" name="email" placeholder="E-mail" required>
                     </div>
-                    <input type="text" id="subject-input" placeholder="Temat wiadomości" required>
-                    <textarea id="message-input" placeholder="Opisz swój projekt lub pytanie..." required></textarea>
+                    <input type="text" id="subject-input" name="subject" placeholder="Temat wiadomości" required>
+                    <textarea id="message-input" name="message" placeholder="Opisz swój projekt lub pytanie..." required></textarea>
                     <button type="submit" class="submit-btn" id="submit-btn">Wyślij wiadomość</button>
                 </form>
+                <!-- KONIEC ZMIAN DLA NETLIFY FORMS -->
             </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p class="lang-content active" data-lang="pl">&copy; 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
-            <p class="lang-content" data-lang="en">&copy; 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
+            <p class="lang-content active" data-lang="pl">© 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
+            <p class="lang-content" data-lang="en">© 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
         </div>
     </footer>
 
@@ -758,7 +810,8 @@
                     subject: 'Temat wiadomości',
                     message: 'Opisz swój projekt lub pytanie...',
                     submit: 'Wyślij wiadomość',
-                    success: 'Dziękuję za wiadomość! Skontaktuję się z Tobą wkrótce.'
+                    success: 'Dziękuję za wiadomość! Skontaktuję się z Tobą wkrótce.',
+                    error: 'Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.'
                 }
             },
             en: {
@@ -775,12 +828,6 @@
                         title: 'AI Systems and Automation',
                         description: 'Creating intelligent bots and business process automation systems. From simple chatbots to advanced data analysis systems using machine learning.',
                         tags: ['Python', 'OpenAI API', 'TensorFlow', 'Automation']
-                    },
-                    {
-                        icon: '📊',
-                        title: 'Data and Pattern Analysis',
-                        description: 'Deep analysis of behavioral and business data with a focus on discovering hidden patterns. Specializing in combining quantitative analysis with qualitative psychological insights.',
-                        tags: ['SQL', 'Pandas', 'Visualization', 'Statistics']
                     },
                     {
                         icon: '🧪',
@@ -817,26 +864,39 @@
                     subject: 'Message subject',
                     message: 'Describe your project or question...',
                     submit: 'Send message',
-                    success: 'Thank you for your message! I will contact you soon.'
+                    success: 'Thank you for your message! I will contact you soon.',
+                    error: 'There was an error sending your form. Please try again.'
                 }
             }
         };
 
-        // Current language
         let currentLanguage = 'pl';
 
-        // Initialize content
         function initializeContent() {
             updateNavigation();
             updatePortfolio();
             updateServices();
             updateFormPlaceholders();
+            updateAboutSection();
+        }
+        
+        function updateAboutSection() {
+            const aboutTextDivPL = document.querySelector('.about-text .lang-content[data-lang="pl"]');
+            const aboutTextDivEN = document.querySelector('.about-text .lang-content[data-lang="en"]');
+
+            if (currentLanguage === 'pl') {
+                aboutTextDivPL.classList.add('active');
+                aboutTextDivEN.classList.remove('active');
+            } else {
+                aboutTextDivEN.classList.add('active');
+                aboutTextDivPL.classList.remove('active');
+            }
         }
 
-        // Update navigation
+
         function updateNavigation() {
-            const navLinks = document.getElementById('nav-links');
-            navLinks.innerHTML = '';
+            const navLinksContainer = document.getElementById('nav-links');
+            navLinksContainer.innerHTML = '';
             
             content[currentLanguage].nav.forEach(item => {
                 const li = document.createElement('li');
@@ -844,11 +904,10 @@
                 a.href = item.href;
                 a.textContent = item.text;
                 li.appendChild(a);
-                navLinks.appendChild(li);
+                navLinksContainer.appendChild(li);
             });
         }
 
-        // Update portfolio
         function updatePortfolio() {
             const portfolioGrid = document.getElementById('portfolio-grid');
             portfolioGrid.innerHTML = '';
@@ -868,7 +927,6 @@
             });
         }
 
-        // Update services
         function updateServices() {
             const servicesGrid = document.getElementById('services-grid');
             servicesGrid.innerHTML = '';
@@ -885,127 +943,165 @@
             });
         }
 
-        // Update form placeholders
         function updateFormPlaceholders() {
             const formContent = content[currentLanguage].form;
             document.getElementById('name-input').placeholder = formContent.name;
+            document.getElementById('email-input').placeholder = content[currentLanguage].form.email !== undefined ? content[currentLanguage].form.email : 'E-mail'; // Dodatkowe zabezpieczenie dla placeholder email
             document.getElementById('subject-input').placeholder = formContent.subject;
             document.getElementById('message-input').placeholder = formContent.message;
             document.getElementById('submit-btn').textContent = formContent.submit;
         }
 
-        // Change language
         function changeLanguage(lang) {
             currentLanguage = lang;
             document.documentElement.lang = lang;
             
-            // Update language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
             
-            // Update content visibility
             document.querySelectorAll('.lang-content').forEach(element => {
-                if (element.getAttribute('data-lang') === lang) {
-                    element.classList.add('active');
+                 if (element.parentElement.classList.contains('about-text')) {
+                    element.classList.toggle('active', element.getAttribute('data-lang') === lang);
                 } else {
-                    element.classList.remove('active');
+                    element.classList.toggle('active', element.getAttribute('data-lang') === lang);
                 }
             });
             
-            // Update dynamic content
             updateNavigation();
             updatePortfolio();
             updateServices();
             updateFormPlaceholders();
+            updateAboutSection();
             
-            // Update page title
             if (lang === 'en') {
                 document.title = 'Adam - Navigator of Inner Worlds and Digital Solutions';
             } else {
                 document.title = 'Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań';
             }
             
-            // Re-apply animations to new elements
             applyScrollAnimations();
         }
+        
+        let intersectionObserverInstance;
 
-        // Apply scroll animations
         function applyScrollAnimations() {
+            if (intersectionObserverInstance) {
+                intersectionObserverInstance.disconnect();
+            }
+
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
 
-            const observer = new IntersectionObserver(function(entries) {
+            intersectionObserverInstance = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
-            // Observe portfolio cards and service cards
             document.querySelectorAll('.portfolio-card, .service-card').forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'all 0.6s ease';
-                observer.observe(card);
+                intersectionObserverInstance.observe(card);
             });
         }
 
-        // Initialize on page load
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize content
             initializeContent();
             
-            // Add click handlers to language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     changeLanguage(this.getAttribute('data-lang'));
                 });
             });
             
-            // Smooth scrolling for navigation links
             document.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
+                if (e.target.tagName === 'A' && e.target.getAttribute('href') && e.target.getAttribute('href').startsWith('#')) {
                     e.preventDefault();
-                    const target = document.querySelector(e.target.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
+                    const targetId = e.target.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
                             behavior: 'smooth',
                             block: 'start'
                         });
                     }
+                    const navLinksContainer = document.getElementById('nav-links');
+                    if (navLinksContainer.classList.contains('active-mobile')) {
+                        navLinksContainer.classList.remove('active-mobile');
+                    }
                 }
             });
             
-            // Form submission handler
-            document.getElementById('contact-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const message = content[currentLanguage].form.success;
-                alert(message);
-                this.reset();
-            });
+            // ZMIANA DLA NETLIFY FORMS - OBSŁUGA SUBMIT
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const form = e.target;
+                    const formData = new FormData(form);
+                    const successMessage = content[currentLanguage].form.success;
+                    const errorMessage = content[currentLanguage].form.error;
+
+                    fetch("/", { // Netlify domyślnie oczekuje POST na bieżącą ścieżkę dla AJAX
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: new URLSearchParams(formData).toString()
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert(successMessage);
+                            form.reset();
+                        } else {
+                            // Możesz chcieć obsłużyć różne statusy odpowiedzi HTTP inaczej
+                            response.json().then(data => { // Spróbuj odczytać błąd z odpowiedzi Netlify
+                                if (data.error) {
+                                    alert(`${errorMessage}\nSzczegóły: ${data.error}`);
+                                } else {
+                                    alert(errorMessage);
+                                }
+                            }).catch(() => alert(errorMessage));
+                        }
+                    })
+                    .catch((error) => {
+                        alert(errorMessage);
+                        console.error("Błąd wysyłania formularza Netlify:", error);
+                    });
+                });
+            }
+
+
+            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+            const navLinksContainer = document.getElementById('nav-links');
+
+            if (mobileMenuToggle && navLinksContainer) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinksContainer.classList.toggle('active-mobile');
+                });
+            }
             
-            // Apply animations
             applyScrollAnimations();
         });
 
-        // Add scroll effect to header
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(30, 58, 95, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
-                header.style.backdropFilter = 'none';
+            if (header) {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(30, 58, 95, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
             }
         });
     </script>
