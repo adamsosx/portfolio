@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
+    <title>Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
     <style>
         * {
             margin: 0;
@@ -34,6 +34,79 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .flag {
+            width: 24px;
+            height: 18px;
+            display: inline-block;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flag-pl {
+            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
+        }
+
+        .flag-en {
+            background: #012169;
+            position: relative;
+        }
+
+        .flag-en::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, transparent 40%, white 40%, white 60%, transparent 60%),
+                linear-gradient(to right, transparent 40%, white 40%, white 60%, transparent 60%);
+            background-size: 100% 100%;
+        }
+
+        .flag-en::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to bottom, transparent 30%, #C8102E 30%, #C8102E 70%, transparent 70%),
+                linear-gradient(to right, transparent 30%, #C8102E 30%, #C8102E 70%, transparent 70%);
+            background-size: 100% 100%;
         }
 
         /* Header */
@@ -71,6 +144,12 @@
         .logo h1 {
             font-size: 1.5rem;
             font-weight: 600;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
 
         .nav-links {
@@ -412,10 +491,25 @@
             padding: 30px 0;
         }
 
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
             }
 
             .hero h1 {
@@ -456,6 +550,15 @@
         .fade-in {
             animation: fadeInUp 0.8s ease-out;
         }
+
+        /* Language-specific content */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -463,48 +566,82 @@
         <nav class="container">
             <div class="logo">
                 <img src="images/logo.png" alt="Logo">
-                <h1>Adam</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home">Start</a></li>
-                <li><a href="#about">O mnie</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#services">Usługi</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-links" id="nav-links">
+                    <!-- Navigation links will be inserted by JavaScript -->
+                </ul>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="pl">
+                        <span class="flag flag-pl"></span>
+                        <span>PL</span>
+                    </button>
+                    <button class="lang-btn" data-lang="en">
+                        <span class="flag flag-en"></span>
+                        <span>EN</span>
+                    </button>
+                </div>
+                <button class="mobile-menu-toggle">☰</button>
+            </div>
         </nav>
     </header>
 
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content fade-in">
-                <h1>Nawigator Wewnętrznych Światów<br>i Cyfrowych Rozwiązań</h1>
-                <p class="subtitle">Od Chaosu do Klarowności</p>
-                <p>Łączę głęboką analizę ludzkiej natury z mocą nowoczesnych technologii, aby tworzyć rozwiązania, które naprawdę mają znaczenie. Specjalizuję się w AI, analizie danych i budowaniu mostów między tym, co techniczne, a tym, co ludzkie.</p>
-                <a href="#portfolio" class="cta-button">Zobacz moje projekty</a>
+                <h1 class="lang-content active" data-lang="pl">Nawigator Wewnętrznych Światów<br>i Cyfrowych Rozwiązań</h1>
+                <h1 class="lang-content" data-lang="en">Navigator of Inner Worlds<br>and Digital Solutions</h1>
+                
+                <p class="subtitle lang-content active" data-lang="pl">Od Chaosu do Klarowności</p>
+                <p class="subtitle lang-content" data-lang="en">From Chaos to Clarity</p>
+                
+                <p class="lang-content active" data-lang="pl">Łączę głęboką analizę ludzkiej natury z mocą nowoczesnych technologii, aby tworzyć rozwiązania, które naprawdę mają znaczenie. Specjalizuję się w AI, analizie danych i budowaniu mostów między tym, co techniczne, a tym, co ludzkie.</p>
+                <p class="lang-content" data-lang="en">I combine deep analysis of human nature with the power of modern technologies to create solutions that truly matter. I specialize in AI, data analysis, and building bridges between the technical and the human.</p>
+                
+                <a href="#portfolio" class="cta-button lang-content active" data-lang="pl">Zobacz moje projekty</a>
+                <a href="#portfolio" class="cta-button lang-content" data-lang="en">See my projects</a>
             </div>
         </div>
     </section>
 
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">O mnie</h2>
+            <h2 class="section-title lang-content active" data-lang="pl">O mnie</h2>
+            <h2 class="section-title lang-content" data-lang="en">About me</h2>
+            
             <div class="about-content">
                 <div class="about-image">
                     <img src="images/logo.png" alt="Adam - Logo" class="profile-logo">
                 </div>
                 <div class="about-text">
-                    <h3>Podróż przez technologię i samopoznanie</h3>
-                    <p>Moja fascynacja mechanizmami – zarówno ludzkimi, jak i technologicznymi – zaprowadziła mnie na unikalną ścieżkę łączenia świata AI z głębokim zrozumieniem natury człowieka. Wierzę, że prawdziwe innowacje rodzą się na przecięciu technologii i ludzkiej mądrości.</p>
-                    <p>Przez lata analizy, testowania i eksperymentowania z różnymi rozwiązaniami nauczyłem się, że najważniejsze nie jest to, żeby być idealnym, ale żeby być autentycznym i skutecznym. Moje doświadczenia – również te trudne – przekładają się na unikalne podejście do rozwiązywania problemów.</p>
-                    <p>Dziś oferuję kompleksowe spojrzenie na wyzwania technologiczne, zawsze z uwzględnieniem ludzkiego aspektu każdego rozwiązania.</p>
+                    <div class="lang-content active" data-lang="pl">
+                        <h3>Podróż przez technologię i samopoznanie</h3>
+                        <p>Moja fascynacja mechanizmami – zarówno ludzkimi, jak i technologicznymi – zaprowadziła mnie na unikalną ścieżkę łączenia świata AI z głębokim zrozumieniem natury człowieka. Wierzę, że prawdziwe innowacje rodzą się na przecięciu technologii i ludzkiej mądrości.</p>
+                        <p>Przez lata analizy, testowania i eksperymentowania z różnymi rozwiązaniami nauczyłem się, że najważniejsze nie jest to, żeby być idealnym, ale żeby być autentycznym i skutecznym. Moje doświadczenia – również te trudne – przekładają się na unikalne podejście do rozwiązywania problemów.</p>
+                        <p>Dziś oferuję kompleksowe spojrzenie na wyzwania technologiczne, zawsze z uwzględnieniem ludzkiego aspektu każdego rozwiązania.</p>
+                        
+                        <div class="values">
+                            <span class="value-tag">Autentyczność</span>
+                            <span class="value-tag">Głębia analizy</span>
+                            <span class="value-tag">Dążenie do prawdy</span>
+                            <span class="value-tag">Praktyczne rozwiązania</span>
+                            <span class="value-tag">Ciągły rozwój</span>
+                        </div>
+                    </div>
                     
-                    <div class="values">
-                        <span class="value-tag">Autentyczność</span>
-                        <span class="value-tag">Głębia analizy</span>
-                        <span class="value-tag">Dążenie do prawdy</span>
-                        <span class="value-tag">Praktyczne rozwiązania</span>
-                        <span class="value-tag">Ciągły rozwój</span>
+                    <div class="lang-content" data-lang="en">
+                        <h3>Journey through technology and self-discovery</h3>
+                        <p>My fascination with mechanisms – both human and technological – has led me on a unique path of combining the world of AI with a deep understanding of human nature. I believe that true innovations are born at the intersection of technology and human wisdom.</p>
+                        <p>Through years of analysis, testing, and experimenting with various solutions, I've learned that what matters most is not being perfect, but being authentic and effective. My experiences – including the difficult ones – translate into a unique approach to problem-solving.</p>
+                        <p>Today, I offer a comprehensive perspective on technological challenges, always considering the human aspect of every solution.</p>
+                        
+                        <div class="values">
+                            <span class="value-tag">Authenticity</span>
+                            <span class="value-tag">Depth of analysis</span>
+                            <span class="value-tag">Pursuit of truth</span>
+                            <span class="value-tag">Practical solutions</span>
+                            <span class="value-tag">Continuous growth</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -513,80 +650,22 @@
 
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title">Portfolio projektów</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-card">
-                    <div class="card-icon">🤖</div>
-                    <h3>Systemy AI i Automatyzacja</h3>
-                    <p>Tworzenie inteligentnych botów i systemów automatyzacji procesów biznesowych. Od prostych chatbotów po zaawansowane systemy analizy danych z wykorzystaniem machine learning.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">OpenAI API</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">Automation</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-card">
-                    <div class="card-icon">📊</div>
-                    <h3>Analiza Danych i Wzorców</h3>
-                    <p>Głęboka analiza danych behawioralnych i biznesowych z fokusem na odkrywanie ukrytych wzorców. Specjalizacja w łączeniu analizy ilościowej z jakościowymi wglądami psychologicznymi.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">SQL</span>
-                        <span class="tech-tag">Pandas</span>
-                        <span class="tech-tag">Visualization</span>
-                        <span class="tech-tag">Statistics</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-card">
-                    <div class="card-icon">🧪</div>
-                    <h3>Testowanie i Optymalizacja</h3>
-                    <p>Kompleksowe testowanie aplikacji i systemów z podejściem analitycznym. Identyfikacja problemów, analiza przyczyn źródłowych i proponowanie efektywnych rozwiązań.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">QA Testing</span>
-                        <span class="tech-tag">Process Analysis</span>
-                        <span class="tech-tag">Optimization</span>
-                        <span class="tech-tag">Documentation</span>
-                    </div>
-                </div>
-
-                <div class="portfolio-card">
-                    <div class="card-icon">🧠</div>
-                    <h3>Narzędzia Samopoznania</h3>
-                    <p>Innowacyjne projekty łączące technologię z psychologią. Tworzenie narzędzi wspierających proces samopoznania i rozwoju osobistego w oparciu o Human Design i psychologię jungowską.</p>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Human Design</span>
-                        <span class="tech-tag">Psychology</span>
-                        <span class="tech-tag">Web Apps</span>
-                        <span class="tech-tag">User Experience</span>
-                    </div>
-                </div>
+            <h2 class="section-title lang-content active" data-lang="pl">Portfolio projektów</h2>
+            <h2 class="section-title lang-content" data-lang="en">Project Portfolio</h2>
+            
+            <div class="portfolio-grid" id="portfolio-grid">
+                <!-- Portfolio cards will be inserted by JavaScript -->
             </div>
         </div>
     </section>
 
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">Jak mogę Ci pomóc</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>Konsultacje AI</h3>
-                    <p>Pomogę Ci zidentyfikować możliwości wykorzystania sztucznej inteligencji w Twoim biznesie i zaproponuję konkretne, praktyczne rozwiązania.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">🔍</div>
-                    <h3>Analiza i Testing</h3>
-                    <p>Kompleksowa analiza Twoich systemów, procesów lub danych. Identyfikacja problemów i możliwości optymalizacji z praktycznymi rekomendacjami.</p>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
-                    <h3>Tworzenie Rozwiązań</h3>
-                    <p>Od prostych automatyzacji po zaawansowane systemy – tworzę narzędzia, które rzeczywiście rozwiązują Twoje problemy biznesowe.</p>
-                </div>
+            <h2 class="section-title lang-content active" data-lang="pl">Jak mogę Ci pomóc</h2>
+            <h2 class="section-title lang-content" data-lang="en">How I can help you</h2>
+            
+            <div class="services-grid" id="services-grid">
+                <!-- Service cards will be inserted by JavaScript -->
             </div>
         </div>
     </section>
@@ -594,17 +673,20 @@
     <section id="contact" class="contact">
         <div class="container">
             <div class="contact-content">
-                <h2 class="section-title" style="color: white;">Rozpocznijmy współpracę</h2>
-                <p>Masz projekt, który wymaga połączenia technologii z głębokim zrozumieniem człowieka? Szukasz kogoś, kto spojrzy na Twoje wyzwania z nowej perspektywy? Skontaktuj się ze mną.</p>
+                <h2 class="section-title lang-content active" style="color: white;" data-lang="pl">Rozpocznijmy współpracę</h2>
+                <h2 class="section-title lang-content" style="color: white;" data-lang="en">Let's start working together</h2>
                 
-                <form class="contact-form">
+                <p class="lang-content active" data-lang="pl">Masz projekt, który wymaga połączenia technologii z głębokim zrozumieniem człowieka? Szukasz kogoś, kto spojrzy na Twoje wyzwania z nowej perspektywy? Skontaktuj się ze mną.</p>
+                <p class="lang-content" data-lang="en">Do you have a project that requires combining technology with a deep understanding of humanity? Looking for someone who will look at your challenges from a new perspective? Contact me.</p>
+                
+                <form class="contact-form" id="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Twoje imię" required>
+                        <input type="text" id="name-input" placeholder="Twoje imię" required>
                         <input type="email" placeholder="E-mail" required>
                     </div>
-                    <input type="text" placeholder="Temat wiadomości" required>
-                    <textarea placeholder="Opisz swój projekt lub pytanie..." required></textarea>
-                    <button type="submit" class="submit-btn">Wyślij wiadomość</button>
+                    <input type="text" id="subject-input" placeholder="Temat wiadomości" required>
+                    <textarea id="message-input" placeholder="Opisz swój projekt lub pytanie..." required></textarea>
+                    <button type="submit" class="submit-btn" id="submit-btn">Wyślij wiadomość</button>
                 </form>
             </div>
         </div>
@@ -612,30 +694,307 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
+            <p class="lang-content active" data-lang="pl">&copy; 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
+            <p class="lang-content" data-lang="en">&copy; 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        // Content data
+        const content = {
+            pl: {
+                nav: [
+                    { text: 'Start', href: '#home' },
+                    { text: 'O mnie', href: '#about' },
+                    { text: 'Portfolio', href: '#portfolio' },
+                    { text: 'Usługi', href: '#services' },
+                    { text: 'Kontakt', href: '#contact' }
+                ],
+                portfolio: [
+                    {
+                        icon: '🤖',
+                        title: 'Systemy AI i Automatyzacja',
+                        description: 'Tworzenie inteligentnych botów i systemów automatyzacji procesów biznesowych. Od prostych chatbotów po zaawansowane systemy analizy danych z wykorzystaniem machine learning.',
+                        tags: ['Python', 'OpenAI API', 'TensorFlow', 'Automation']
+                    },
+                    {
+                        icon: '📊',
+                        title: 'Analiza Danych i Wzorców',
+                        description: 'Głęboka analiza danych behawioralnych i biznesowych z fokusem na odkrywanie ukrytych wzorców. Specjalizacja w łączeniu analizy ilościowej z jakościowymi wglądami psychologicznymi.',
+                        tags: ['SQL', 'Pandas', 'Visualization', 'Statistics']
+                    },
+                    {
+                        icon: '🧪',
+                        title: 'Testowanie i Optymalizacja',
+                        description: 'Kompleksowe testowanie aplikacji i systemów z podejściem analitycznym. Identyfikacja problemów, analiza przyczyn źródłowych i proponowanie efektywnych rozwiązań.',
+                        tags: ['QA Testing', 'Process Analysis', 'Optimization', 'Documentation']
+                    },
+                    {
+                        icon: '🧠',
+                        title: 'Narzędzia Samopoznania',
+                        description: 'Innowacyjne projekty łączące technologię z psychologią. Tworzenie narzędzi wspierających proces samopoznania i rozwoju osobistego w oparciu o Human Design i psychologię jungowską.',
+                        tags: ['Human Design', 'Psychology', 'Web Apps', 'User Experience']
+                    }
+                ],
+                services: [
+                    {
+                        icon: '🎯',
+                        title: 'Konsultacje AI',
+                        description: 'Pomogę Ci zidentyfikować możliwości wykorzystania sztucznej inteligencji w Twoim biznesie i zaproponuję konkretne, praktyczne rozwiązania.'
+                    },
+                    {
+                        icon: '🔍',
+                        title: 'Analiza i Testing',
+                        description: 'Kompleksowa analiza Twoich systemów, procesów lub danych. Identyfikacja problemów i możliwości optymalizacji z praktycznymi rekomendacjami.'
+                    },
+                    {
+                        icon: '⚙️',
+                        title: 'Tworzenie Rozwiązań',
+                        description: 'Od prostych automatyzacji po zaawansowane systemy – tworzę narzędzia, które rzeczywiście rozwiązują Twoje problemy biznesowe.'
+                    }
+                ],
+                form: {
+                    name: 'Twoje imię',
+                    subject: 'Temat wiadomości',
+                    message: 'Opisz swój projekt lub pytanie...',
+                    submit: 'Wyślij wiadomość',
+                    success: 'Dziękuję za wiadomość! Skontaktuję się z Tobą wkrótce.'
+                }
+            },
+            en: {
+                nav: [
+                    { text: 'Home', href: '#home' },
+                    { text: 'About', href: '#about' },
+                    { text: 'Portfolio', href: '#portfolio' },
+                    { text: 'Services', href: '#services' },
+                    { text: 'Contact', href: '#contact' }
+                ],
+                portfolio: [
+                    {
+                        icon: '🤖',
+                        title: 'AI Systems and Automation',
+                        description: 'Creating intelligent bots and business process automation systems. From simple chatbots to advanced data analysis systems using machine learning.',
+                        tags: ['Python', 'OpenAI API', 'TensorFlow', 'Automation']
+                    },
+                    {
+                        icon: '📊',
+                        title: 'Data and Pattern Analysis',
+                        description: 'Deep analysis of behavioral and business data with a focus on discovering hidden patterns. Specializing in combining quantitative analysis with qualitative psychological insights.',
+                        tags: ['SQL', 'Pandas', 'Visualization', 'Statistics']
+                    },
+                    {
+                        icon: '🧪',
+                        title: 'Testing and Optimization',
+                        description: 'Comprehensive testing of applications and systems with an analytical approach. Problem identification, root cause analysis, and proposing effective solutions.',
+                        tags: ['QA Testing', 'Process Analysis', 'Optimization', 'Documentation']
+                    },
+                    {
+                        icon: '🧠',
+                        title: 'Self-Discovery Tools',
+                        description: 'Innovative projects combining technology with psychology. Creating tools that support the process of self-discovery and personal development based on Human Design and Jungian psychology.',
+                        tags: ['Human Design', 'Psychology', 'Web Apps', 'User Experience']
+                    }
+                ],
+                services: [
+                    {
+                        icon: '🎯',
+                        title: 'AI Consulting',
+                        description: 'I\'ll help you identify opportunities for using artificial intelligence in your business and propose specific, practical solutions.'
+                    },
+                    {
+                        icon: '🔍',
+                        title: 'Analysis and Testing',
+                        description: 'Comprehensive analysis of your systems, processes, or data. Identification of problems and optimization opportunities with practical recommendations.'
+                    },
+                    {
+                        icon: '⚙️',
+                        title: 'Solution Development',
+                        description: 'From simple automation to advanced systems – I create tools that actually solve your business problems.'
+                    }
+                ],
+                form: {
+                    name: 'Your name',
+                    subject: 'Message subject',
+                    message: 'Describe your project or question...',
+                    submit: 'Send message',
+                    success: 'Thank you for your message! I will contact you soon.'
+                }
+            }
+        };
+
+        // Current language
+        let currentLanguage = 'pl';
+
+        // Initialize content
+        function initializeContent() {
+            updateNavigation();
+            updatePortfolio();
+            updateServices();
+            updateFormPlaceholders();
+        }
+
+        // Update navigation
+        function updateNavigation() {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.innerHTML = '';
+            
+            content[currentLanguage].nav.forEach(item => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = item.href;
+                a.textContent = item.text;
+                li.appendChild(a);
+                navLinks.appendChild(li);
+            });
+        }
+
+        // Update portfolio
+        function updatePortfolio() {
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            portfolioGrid.innerHTML = '';
+            
+            content[currentLanguage].portfolio.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'portfolio-card';
+                card.innerHTML = `
+                    <div class="card-icon">${item.icon}</div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <div class="tech-tags">
+                        ${item.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+                portfolioGrid.appendChild(card);
+            });
+        }
+
+        // Update services
+        function updateServices() {
+            const servicesGrid = document.getElementById('services-grid');
+            servicesGrid.innerHTML = '';
+            
+            content[currentLanguage].services.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.innerHTML = `
+                    <div class="service-icon">${item.icon}</div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                `;
+                servicesGrid.appendChild(card);
+            });
+        }
+
+        // Update form placeholders
+        function updateFormPlaceholders() {
+            const formContent = content[currentLanguage].form;
+            document.getElementById('name-input').placeholder = formContent.name;
+            document.getElementById('subject-input').placeholder = formContent.subject;
+            document.getElementById('message-input').placeholder = formContent.message;
+            document.getElementById('submit-btn').textContent = formContent.submit;
+        }
+
+        // Change language
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
                 }
             });
-        });
+            
+            // Update content visibility
+            document.querySelectorAll('.lang-content').forEach(element => {
+                if (element.getAttribute('data-lang') === lang) {
+                    element.classList.add('active');
+                } else {
+                    element.classList.remove('active');
+                }
+            });
+            
+            // Update dynamic content
+            updateNavigation();
+            updatePortfolio();
+            updateServices();
+            updateFormPlaceholders();
+            
+            // Update page title
+            if (lang === 'en') {
+                document.title = 'Adam - Navigator of Inner Worlds and Digital Solutions';
+            } else {
+                document.title = 'Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań';
+            }
+            
+            // Re-apply animations to new elements
+            applyScrollAnimations();
+        }
 
-        // Form submission handler
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Dziękuję za wiadomość! Skontaktuję się z Tobą wkrótce.');
-            this.reset();
+        // Apply scroll animations
+        function applyScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe portfolio cards and service cards
+            document.querySelectorAll('.portfolio-card, .service-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize content
+            initializeContent();
+            
+            // Add click handlers to language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeLanguage(this.getAttribute('data-lang'));
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            document.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(e.target.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+            
+            // Form submission handler
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const message = content[currentLanguage].form.success;
+                alert(message);
+                this.reset();
+            });
+            
+            // Apply animations
+            applyScrollAnimations();
         });
 
         // Add scroll effect to header
@@ -648,29 +1007,6 @@
                 header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
                 header.style.backdropFilter = 'none';
             }
-        });
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe portfolio cards and service cards
-        document.querySelectorAll('.portfolio-card, .service-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
         });
     </script>
 </body>
