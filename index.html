@@ -722,14 +722,13 @@
                 <p class="lang-content active" data-lang="pl">Masz projekt, który wymaga połączenia technologii z głębokim zrozumieniem człowieka? Szukasz kogoś, kto spojrzy na Twoje wyzwania z nowej perspektywy? Skontaktuj się ze mną.</p>
                 <p class="lang-content" data-lang="en">Do you have a project that requires combining technology with a deep understanding of humanity? Looking for someone who will look at your challenges from a new perspective? Contact me.</p>
                 
-                <!-- ZMIANY DLA NETLIFY FORMS TUTAJ -->
                 <form class="contact-form" id="contact-form" data-netlify="true" data-netlify-honeypot="bot-field" name="contact">
-                    <p class="hidden" style="display:none;"> <!-- Możesz użyć klasy .hidden, którą dodałem w CSS -->
+                    <p class="hidden" style="display:none;">
                         <label>
                             Don’t fill this out if you’re human: <input name="bot-field" />
                         </label>
                     </p>
-                    <input type="hidden" name="form-name" value="contact" /> <!-- Netlify potrzebuje tego, jeśli formularz ma atrybut name -->
+                    <input type="hidden" name="form-name" value="contact" />
 
                     <div class="form-group">
                         <input type="text" id="name-input" name="name" placeholder="Twoje imię" required>
@@ -739,7 +738,6 @@
                     <textarea id="message-input" name="message" placeholder="Opisz swój projekt lub pytanie..." required></textarea>
                     <button type="submit" class="submit-btn" id="submit-btn">Wyślij wiadomość</button>
                 </form>
-                <!-- KONIEC ZMIAN DLA NETLIFY FORMS -->
             </div>
         </div>
     </section>
@@ -807,6 +805,7 @@
                 ],
                 form: {
                     name: 'Twoje imię',
+                    email: 'E-mail', // Dodane dla spójności placeholderów
                     subject: 'Temat wiadomości',
                     message: 'Opisz swój projekt lub pytanie...',
                     submit: 'Wyślij wiadomość',
@@ -814,7 +813,7 @@
                     error: 'Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.'
                 }
             },
-            en: {
+            en: { // POPRAWIONA SEKCJA content.en
                 nav: [
                     { text: 'Home', href: '#home' },
                     { text: 'About', href: '#about' },
@@ -822,12 +821,18 @@
                     { text: 'Services', href: '#services' },
                     { text: 'Contact', href: '#contact' }
                 ],
-                portfolio: [
+                portfolio: [ // POPRAWIONA SEKCJA PORTFOLIO DLA EN - teraz 4 elementy
                     {
                         icon: '🤖',
                         title: 'AI Systems and Automation',
                         description: 'Creating intelligent bots and business process automation systems. From simple chatbots to advanced data analysis systems using machine learning.',
                         tags: ['Python', 'OpenAI API', 'TensorFlow', 'Automation']
+                    },
+                    { // DODANY BRAKUJĄCY PROJEKT
+                        icon: '📊',
+                        title: 'Data and Pattern Analysis',
+                        description: 'Deep analysis of behavioral and business data with a focus on discovering hidden patterns. Specializing in combining quantitative analysis with qualitative psychological insights.',
+                        tags: ['SQL', 'Pandas', 'Visualization', 'Statistics']
                     },
                     {
                         icon: '🧪',
@@ -861,6 +866,7 @@
                 ],
                 form: {
                     name: 'Your name',
+                    email: 'E-mail', // Dodane dla spójności placeholderów
                     subject: 'Message subject',
                     message: 'Describe your project or question...',
                     submit: 'Send message',
@@ -946,7 +952,7 @@
         function updateFormPlaceholders() {
             const formContent = content[currentLanguage].form;
             document.getElementById('name-input').placeholder = formContent.name;
-            document.getElementById('email-input').placeholder = content[currentLanguage].form.email !== undefined ? content[currentLanguage].form.email : 'E-mail'; // Dodatkowe zabezpieczenie dla placeholder email
+            document.getElementById('email-input').placeholder = formContent.email; 
             document.getElementById('subject-input').placeholder = formContent.subject;
             document.getElementById('message-input').placeholder = formContent.message;
             document.getElementById('submit-btn').textContent = formContent.submit;
@@ -1041,7 +1047,6 @@
                 }
             });
             
-            // ZMIANA DLA NETLIFY FORMS - OBSŁUGA SUBMIT
             const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
@@ -1052,7 +1057,7 @@
                     const successMessage = content[currentLanguage].form.success;
                     const errorMessage = content[currentLanguage].form.error;
 
-                    fetch("/", { // Netlify domyślnie oczekuje POST na bieżącą ścieżkę dla AJAX
+                    fetch("/", {
                         method: "POST",
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
                         body: new URLSearchParams(formData).toString()
@@ -1062,8 +1067,7 @@
                             alert(successMessage);
                             form.reset();
                         } else {
-                            // Możesz chcieć obsłużyć różne statusy odpowiedzi HTTP inaczej
-                            response.json().then(data => { // Spróbuj odczytać błąd z odpowiedzi Netlify
+                            response.json().then(data => {
                                 if (data.error) {
                                     alert(`${errorMessage}\nSzczegóły: ${data.error}`);
                                 } else {
