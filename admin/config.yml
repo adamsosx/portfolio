@@ -3,7 +3,7 @@ backend:
   repo: adamosx/portfolio  # Upewnij się, że nazwa użytkownika i repozytorium są poprawne
   branch: main             # Gałąź, której używasz (np. main lub master)
   auth_type: pkce          # Używa bezpośredniej autoryzacji GitHub
-  app_id: 0v231idBUAG3q0053Sde # Poprawny Client ID z Twojej GitHub OAuth App
+  app_id: Ov23lididBUAG3q0053Sde # Poprawny Client ID z Twojej GitHub OAuth App
 
 # Konfiguracja mediów
 # Jeśli masz katalog "images" na głównym poziomie repozytorium:
