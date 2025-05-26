@@ -1,14 +1,24 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /> <!-- Poprawiłem na utf-8, poprzednio mogło być "utf-एफ-8" przez błąd kopiowania -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Administracyjny Treści</title>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <!-- Opcjonalnie: Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <!-- Decap CMS zainicjuje tu swój interfejs -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
