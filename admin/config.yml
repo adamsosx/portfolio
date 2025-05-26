@@ -2,30 +2,5 @@ backend:
   name: github
   repo: adamsosx/portfolio
   branch: main
-  # Usuń auth_type: pkce i app_id dla bezpośredniej autoryzacji
-  # GitHub będzie używał Personal Access Token
-
-# Alternatywnie, jeśli chcesz zachować OAuth:
-# backend:
-#   name: github
-#   repo: adamsosx/portfolio
-#   branch: main
-#   auth_type: pkce
-#   app_id: TWÓJ_CLIENT_ID
-#   # Upewnij się, że w GitHub OAuth App masz:
-#   # Authorization callback URL: https://api.netlify.com/auth/done
-
-media_folder: "images"
-public_folder: "/images"
-
-collections:
-  - name: "blog"
-    label: "Blog Posts"
-    folder: "_posts/blog"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
-      - {label: "Title", name: "title", widget: "string", required: true}
-      - {label: "Publish Date", name: "date", widget: "datetime", required: true}
-      - {label: "Body", name: "body", widget: "markdown", required: true}
+  base_url: https://adamsosx.github.io
+  auth_endpoint: /portfolio/auth
