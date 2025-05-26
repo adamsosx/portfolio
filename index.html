@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-blue: #1e3a5f;
+            --dark-navy: #14293d;
+            --warm-ochre: #d4812a;
+            --rust-orange: #b8651f;
+            --sage-green: #8aa387;
+            --light-beige: #f5f3f0;
+            --medium-gray: #7d8285;
+            --light-gray: #e8e6e3;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-navy);
+            background-color: var(--light-beige);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ----- Ogólne style dla wszystkich flag ----- */
+        .flag {
+            width: 24px;
+            height: 18px;
+            display: inline-block;
+            border-radius: 2px;
+            position: relative;   
+            overflow: hidden;     
+        }
+
+        /* ----- Flaga Polska (PL) ----- */
+        .flag-pl {
+            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
+        }
+        .flag-pl::before, .flag-pl::after {
+            content: none;
+        }
+
+
+        /* ----- Flaga Angielska (EN) - Krzyż Świętego Jerzego ----- */
+        .flag-en {
+            background-color: white;
+        }
+        .flag-en::before {
+            content: none;
+        }
+        .flag-en::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(#C8102E, #C8102E), 
+                linear-gradient(#C8102E, #C8102E); 
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size:
+                100% 22.22%, 
+                16.66% 100%; 
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light-beige);
+            padding: 5px;
+        }
+
+        .logo h1 { 
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--warm-ochre);
+        }
+         .nav-links a.active {
+            color: var(--warm-ochre);
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--sage-green) 100%);
+            color: white;
+            padding: 140px 0 80px; 
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--warm-ochre);
+            font-style: italic;
+        }
+
+        .hero p { /* This targets the main paragraph, not the subtitle */
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px; 
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        /* Specifically exclude subtitle from general hero p if needed, but .lang-content should handle it */
+        .hero p.subtitle {
+            /* Styles for subtitle are already defined above */
+        }
+
+
+        .cta-button {
+            display: inline-block;
+            background: var(--warm-ochre);
+            color: white;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 129, 42, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--rust-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 129, 42, 0.4);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        section#home { 
+             padding: 140px 0 80px;
+        }
+
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--navy-blue);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--warm-ochre);
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-image { /* Renamed from profile-logo for clarity */
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 5px solid var(--light-gray);
+        }
+
+        .about-text h3 {
+            color: var(--navy-blue);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--medium-gray);
+        }
+
+        .values {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .value-tag {
+            background: var(--light-gray);
+            color: var(--navy-blue);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: var(--light-beige);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--warm-ochre);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--navy-blue), var(--sage-green));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .portfolio-card h3 {
+            color: var(--navy-blue);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .portfolio-card p {
+            color: var(--medium-gray);
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tech-tag {
+            background: var(--navy-blue);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        /* Services Section */
+        .services {
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background: var(--light-beige);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--warm-ochre);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+        
+        .service-card h3 {
+            color: var(--navy-blue);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            color: var(--medium-gray);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+
+        /* Contact Section */
+        .contact {
+            background: var(--navy-blue);
+            color: white;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--warm-ochre);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .contact-form textarea {
+            grid-column: 1 / -1;
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--warm-ochre);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            justify-self: center;
+        }
+
+        .submit-btn:hover {
+            background: var(--rust-orange);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-navy);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none; 
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem; 
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; 
+            }
+            .nav-right .language-selector {
+            }
+
+            .mobile-menu-toggle {
+                display: block; 
+            }
+            
+            .nav-links.active-mobile {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 68px; 
+                left: 0;
+                width: 100%;
+                background: var(--dark-navy); 
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                gap: 0; 
+            }
+            .nav-links.active-mobile li {
+                margin-bottom: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links.active-mobile a {
+                font-size: 1.1rem;
+                display: block; 
+                padding: 10px 0;
+            }
+
+
+            .hero h1 {
+                font-size: 2.2rem; 
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-image img.profile-image { 
+                margin-bottom: 30px;
+            }
+
+
+            .form-group {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-image { /* Corrected from profile-logo */
+                width: 200px;
+                height: 200px;
+                margin-bottom: 20px; 
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            /* animation: fadeInUp 0.8s ease-out; -- Applied by JS to allow re-trigger */
+        }
+
+        /* Language-specific content */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+        
+        .cta-button.lang-content.active {
+            display: inline-block; 
+        }
+
+
+        /* Hidden class for Netlify honeypot */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo Adama">
+                <h1 class="lang-content active" data-lang="pl">Adam</h1>
+                <h1 class="lang-content" data-lang="en">Adam</h1>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-links" id="nav-links">
+                    <!-- Navigation links will be inserted by JavaScript -->
+                </ul>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="pl">
+                        <span class="flag flag-pl"></span>
+                        <span>PL</span>
+                    </button>
+                    <button class="lang-btn" data-lang="en">
+                        <span class="flag flag-en"></span>
+                        <span>EN</span>
+                    </button>
+                </div>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="lang-content active" data-lang="pl">Nawigator Wewnętrznych Światów<br>i Cyfrowych Rozwiązań</h1>
+                <h1 class="lang-content" data-lang="en">Navigator of Inner Worlds<br>and Digital Solutions</h1>
+                
+                <p class="subtitle lang-content active" data-lang="pl">Od Chaosu do Klarowności</p>
+                <p class="subtitle lang-content" data-lang="en">From Chaos to Clarity</p>
+                
+                <p class="lang-content active" data-lang="pl">Łączę głęboką analizę ludzkiej natury (m.in. Human Design, psychologia Junga) z mocą nowoczesnych technologii (AI, Blockchain, Kryptowaluty), aby tworzyć rozwiązania, które naprawdę mają znaczenie. Moja podróż to budowanie mostów między tym, co techniczne, a tym, co ludzkie.</p>
+                <p class="lang-content" data-lang="en">I combine deep analysis of human nature (including Human Design, Jungian psychology) with the power of modern technologies (AI, Blockchain, Cryptocurrencies) to create solutions that truly matter. My journey is about building bridges between the technical and the human.</p>
+                
+                <a href="#portfolio" class="cta-button lang-content active" data-lang="pl">Zobacz moje projekty</a>
+                <a href="#portfolio" class="cta-button lang-content" data-lang="en">See my projects</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title lang-content active" data-lang="pl">O mnie</h2>
+            <h2 class="section-title lang-content" data-lang="en">About Me</h2>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/profile.jpg" alt="Adam" class="profile-image">
+                </div>
+                <div class="about-text">
+                    <div class="lang-content active" data-lang="pl">
+                        <h3>Podróż przez Technologię, Psychikę i Rynek</h3>
+                        <p>Moja fascynacja złożonymi systemami – od kodu i algorytmów AI, przez dynamikę rynków kryptowalut, po głębię ludzkiej psychiki (Human Design, Jung) – zaprowadziła mnie na unikalną ścieżkę. Wierzę, że prawdziwe innowacje i rozwiązania rodzą się na styku tych światów, tam gdzie technologia spotyka się z ludzką mądrością i autentycznością.</p>
+                        <p>Lata analiz, testowania, eksperymentowania (i tak, również potknięć!) nauczyły mnie, że kluczem jest nie tyle dążenie do iluzorycznej perfekcji, co do autentycznej skuteczności i zrozumienia przyczyn źródłowych. Moje osobiste doświadczenia transformacyjne przekładają się na unikalne, holistyczne podejście do rozwiązywania problemów.</p>
+                        <p>Dziś oferuję kompleksowe spojrzenie na wyzwania technologiczne i rynkowe, zawsze z uwzględnieniem ludzkiego aspektu i dążeniem do klarowności w chaosie.</p>
+                        
+                        <div class="values">
+                            <!-- Values will be inserted by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="lang-content" data-lang="en">
+                        <h3>Journey through Technology, Psyche, and the Market</h3>
+                        <p>My fascination with complex systems – from code and AI algorithms, through the dynamics of cryptocurrency markets, to the depths of the human psyche (Human Design, Jung) – has led me on a unique path. I believe that true innovations and solutions are born at the intersection of these worlds, where technology meets human wisdom and authenticity.</p>
+                        <p>Years of analysis, testing, experimenting (and yes, stumbling too!) have taught me that the key is not so much striving for illusory perfection, but for authentic effectiveness and understanding root causes. My personal transformative experiences translate into a unique, holistic approach to problem-solving.</p>
+                        <p>Today, I offer a comprehensive perspective on technological and market challenges, always considering the human aspect and striving for clarity amidst chaos.</p>
+                        
+                        <div class="values">
+                            <!-- Values will be inserted by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title lang-content active" data-lang="pl">Portfolio Projektów</h2>
+            <h2 class="section-title lang-content" data-lang="en">Project Portfolio</h2>
+            
+            <div class="portfolio-grid" id="portfolio-grid">
+                <!-- Portfolio cards will be inserted by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title lang-content active" data-lang="pl">Jak Mogę Ci Pomóc</h2>
+            <h2 class="section-title lang-content" data-lang="en">How I Can Help You</h2>
+            
+            <div class="services-grid" id="services-grid">
+                <!-- Service cards will be inserted by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title lang-content active" style="color: white;" data-lang="pl">Rozpocznijmy Współpracę</h2>
+                <h2 class="section-title lang-content" style="color: white;" data-lang="en">Let's Start Collaborating</h2>
+                
+                <p class="lang-content active" data-lang="pl">Masz projekt, który wymaga połączenia technologii, analizy rynku i głębokiego zrozumienia człowieka? Szukasz kogoś, kto spojrzy na Twoje wyzwania z nowej, holistycznej perspektywy? Skontaktuj się ze mną.</p>
+                <p class="lang-content" data-lang="en">Do you have a project that requires a blend of technology, market analysis, and a deep understanding of the human element? Looking for someone to view your challenges from a fresh, holistic perspective? Get in touch.</p>
+                
+                <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                    <p class="hidden">
+                        <label>
+                            Don’t fill this out if you’re human: <input name="bot-field" />
+                        </label>
+                    </p>
+                    <input type="hidden" name="form-name" value="contact" />
+
+                    <div class="form-group">
+                        <input type="text" id="name-input" name="name" required>
+                        <input type="email" id="email-input" name="email" required>
+                    </div>
+                    <input type="text" id="subject-input" name="subject" required>
+                    <textarea id="message-input" name="message" required></textarea>
+                    <button type="submit" class="submit-btn" id="submit-btn">Wyślij Wiadomość</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p class="lang-content active" data-lang="pl">© 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
+            <p class="lang-content" data-lang="en">© 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const content = {
+            pl: {
+                nav: [
+                    { text: 'Start', href: '#home' },
+                    { text: 'O mnie', href: '#about' },
+                    { text: 'Portfolio', href: '#portfolio' },
+                    { text: 'Blog', href: 'blog.html' }, 
+                    { text: 'Usługi', href: '#services' },
+                    { text: 'Kontakt', href: '#contact' }
+                ],
+                aboutValues: ['Autentyczność', 'Głębia Analizy', 'Dążenie do Prawdy', 'Innowacyjne Rozwiązania', 'Ciągły Rozwój'],
+                portfolio: [
+                    { icon: '🤖', title: 'Systemy AI i Automatyzacja', description: 'Tworzenie inteligentnych botów i systemów automatyzacji procesów. Od prostych chatbotów po zaawansowane systemy analizy danych z wykorzystaniem machine learning.', tags: ['Python', 'OpenAI API', 'TensorFlow', 'Automation', 'NLP'] },
+                    { icon: '₿', title: 'Kryptowaluty i Technologia Blockchain', description: 'Analiza rynków kryptowalut, strategie inwestycyjne, zrozumienie technologii blockchain i jej zastosowań (DeFi, NFT). Łączenie analizy technicznej z psychologią rynku.', tags: ['Bitcoin', 'Ethereum', 'Blockchain', 'DeFi', 'Analiza Rynku', 'Trading'] },
+                    { icon: '📊', title: 'Analiza Danych i Wzorców', description: 'Głęboka analiza danych behawioralnych i biznesowych z fokusem na odkrywanie ukrytych wzorców. Specjalizacja w łączeniu analizy ilościowej z jakościowymi wglądami psychologicznymi.', tags: ['SQL', 'Pandas', 'Tableau', 'Statistics', 'Psychologia Danych'] },
+                    { icon: '🧪', title: 'Testowanie i Optymalizacja', description: 'Kompleksowe testowanie aplikacji i systemów z podejściem analitycznym. Identyfikacja problemów, analiza przyczyn źródłowych i proponowanie efektywnych rozwiązań.', tags: ['QA Testing', 'UX', 'Optymalizacja Procesów', 'Dokumentacja'] },
+                    { icon: '🧠', title: 'Narzędzia Samopoznania (AI+HD)', description: 'Innowacyjne projekty łączące technologię AI z systemami takimi jak Human Design czy psychologia Junga, tworząc narzędzia wspierające rozwój osobisty i zrozumienie siebie.', tags: ['Human Design', 'Jung', 'AI', 'NLP', 'Personal Development'] }
+                ],
+                services: [
+                    { icon: '🎯', title: 'Konsultacje AI i Technologiczne', description: 'Pomogę Ci zidentyfikować możliwości wykorzystania AI i nowych technologii w Twoim projekcie lub biznesie, proponując konkretne, praktyczne rozwiązania.' },
+                    { icon: '🔗', title: 'Doradztwo Kryptowalutowe i Blockchain', description: 'Analiza rynku, strategie, bezpieczeństwo oraz potencjał technologii blockchain dla Twoich celów. Wyjaśniam złożoność w przystępny sposób.' },
+                    { icon: '🔍', title: 'Głęboka Analiza i Testowanie', description: 'Kompleksowa analiza Twoich systemów, procesów lub danych. Identyfikacja problemów i możliwości optymalizacji z praktycznymi rekomendacjami.' },
+                    { icon: '💡', title: 'Synergia Technologii i Rozwoju Osobistego', description: 'Unikalne podejście łączące narzędzia analityczne (AI, dane) z głębokim zrozumieniem psychiki (HD, Jung) dla wspierania Twojego rozwoju lub projektu.' }
+                ],
+                form: { name: 'Twoje imię', email: 'E-mail', subject: 'Temat wiadomości', message: 'Opisz swój projekt lub pytanie...', submit: 'Wyślij Wiadomość', success: 'Dziękuję za wiadomość! Skontaktuję się z Tobą wkrótce.', error: 'Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie.'}
+            },
+            en: {
+                nav: [
+                    { text: 'Home', href: '#home' },
+                    { text: 'About', href: '#about' },
+                    { text: 'Portfolio', href: '#portfolio' },
+                    { text: 'Blog', href: 'blog.html' },
+                    { text: 'Services', href: '#services' },
+                    { text: 'Contact', href: '#contact' }
+                ],
+                aboutValues: ['Authenticity', 'Depth of Analysis', 'Pursuit of Truth', 'Innovative Solutions', 'Continuous Growth'],
+                 portfolio: [
+                    { icon: '🤖', title: 'AI Systems and Automation', description: 'Creating intelligent bots and business process automation systems. From simple chatbots to advanced data analysis systems using machine learning.', tags: ['Python', 'OpenAI API', 'TensorFlow', 'Automation', 'NLP'] },
+                    { icon: '₿', title: 'Cryptocurrencies and Blockchain Technology', description: 'Analysis of cryptocurrency markets, investment strategies, understanding blockchain technology and its applications (DeFi, NFTs). Combining technical analysis with market psychology.', tags: ['Bitcoin', 'Ethereum', 'Blockchain', 'DeFi', 'Market Analysis', 'Trading'] },
+                    { icon: '📊', title: 'Data and Pattern Analysis', description: 'Deep analysis of behavioral and business data with a focus on discovering hidden patterns. Specializing in combining quantitative analysis with qualitative psychological insights.', tags: ['SQL', 'Pandas', 'Tableau', 'Statistics', 'Data Psychology'] },
+                    { icon: '🧪', title: 'Testing and Optimization', description: 'Comprehensive testing of applications and systems with an analytical approach. Problem identification, root cause analysis, and proposing effective solutions.', tags: ['QA Testing', 'UX', 'Process Optimization', 'Documentation'] },
+                    { icon: '🧠', title: 'Self-Discovery Tools (AI+HD)', description: 'Innovative projects combining AI technology with systems like Human Design or Jungian psychology, creating tools that support personal development and self-understanding.', tags: ['Human Design', 'Jung', 'AI', 'NLP', 'Personal Development'] }
+                ],
+                services: [
+                    { icon: '🎯', title: 'AI and Tech Consulting', description: 'I\'ll help you identify opportunities for using AI and new technologies in your project or business, proposing specific, practical solutions.' },
+                    { icon: '🔗', title: 'Crypto and Blockchain Advisory', description: 'Market analysis, strategies, security, and the potential of blockchain technology for your goals. I explain complexity in an accessible way.' },
+                    { icon: '🔍', title: 'In-depth Analysis and Testing', description: 'Comprehensive analysis of your systems, processes, or data. Identification of problems and optimization opportunities with practical recommendations.' },
+                    { icon: '💡', title: 'Synergy of Technology and Personal Growth', description: 'A unique approach combining analytical tools (AI, data) with a deep understanding of the psyche (HD, Jung) to support your development or project.' }
+                ],
+                form: { name: 'Your name', email: 'E-mail', subject: 'Message subject', message: 'Describe your project or question...', submit: 'Send Message', success: 'Thank you for your message! I will contact you soon.', error: 'There was an error sending your form. Please try again.' }
+            }
+        };
+
+        let currentLanguage = 'pl';
+
+        function updateAllDynamicText() {
+            // Text for elements directly in HTML that change with language but aren't lists
+            // Hero section text is already in HTML with .lang-content classes
+            // About section text is also in HTML with .lang-content classes
+
+            // Update value tags dynamically
+            const valuesContainerPL = document.querySelector('.about-text div[data-lang="pl"] .values');
+            if (valuesContainerPL) {
+                valuesContainerPL.innerHTML = ''; // Clear previous
+                content.pl.aboutValues.forEach(val => {
+                    const span = document.createElement('span');
+                    span.className = 'value-tag';
+                    span.textContent = val;
+                    valuesContainerPL.appendChild(span);
+                });
+            }
+            const valuesContainerEN = document.querySelector('.about-text div[data-lang="en"] .values');
+            if (valuesContainerEN) {
+                valuesContainerEN.innerHTML = ''; // Clear previous
+                content.en.aboutValues.forEach(val => {
+                    const span = document.createElement('span');
+                    span.className = 'value-tag';
+                    span.textContent = val;
+                    valuesContainerEN.appendChild(span);
+                });
+            }
+        }
+
+        function initializeContent() {
+            updateAllDynamicText();
+            updateNavigation();
+            updatePortfolio();
+            updateServices();
+            updateFormPlaceholders();
+            // Set initial active states for .lang-content based on currentLanguage
+            document.querySelectorAll('.lang-content').forEach(element => {
+                element.classList.toggle('active', element.getAttribute('data-lang') === currentLanguage);
+            });
+        }
+        
+        function updateNavigation() {
+            const navLinksContainer = document.getElementById('nav-links');
+            navLinksContainer.innerHTML = ''; 
+            content[currentLanguage].nav.forEach(item => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = item.href;
+                a.textContent = item.text;
+                // Highlight "Blog" if on blog.html (example for future)
+                if (item.href.includes('blog.html') && window.location.pathname.includes('blog.html')) {
+                    a.classList.add('active');
+                }
+                li.appendChild(a);
+                navLinksContainer.appendChild(li);
+            });
+        }
+
+        function updatePortfolio() {
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            if (!portfolioGrid) return;
+            portfolioGrid.innerHTML = ''; 
+            content[currentLanguage].portfolio.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'portfolio-card fade-in'; // Add fade-in for animation
+                card.innerHTML = `
+                    <div class="card-icon">${item.icon}</div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <div class="tech-tags">
+                        ${item.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                    </div>
+                `;
+                portfolioGrid.appendChild(card);
+            });
+        }
+
+        function updateServices() {
+            const servicesGrid = document.getElementById('services-grid');
+            if (!servicesGrid) return;
+            servicesGrid.innerHTML = '';
+            content[currentLanguage].services.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'service-card fade-in'; // Add fade-in for animation
+                card.innerHTML = `
+                    <div class="service-icon">${item.icon}</div>
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                `;
+                servicesGrid.appendChild(card);
+            });
+        }
+
+        function updateFormPlaceholders() {
+            const formContent = content[currentLanguage].form;
+            const nameInput = document.getElementById('name-input');
+            const emailInput = document.getElementById('email-input');
+            const subjectInput = document.getElementById('subject-input');
+            const messageInput = document.getElementById('message-input');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (nameInput) nameInput.placeholder = formContent.name;
+            if (emailInput) emailInput.placeholder = formContent.email;
+            if (subjectInput) subjectInput.placeholder = formContent.subject;
+            if (messageInput) messageInput.placeholder = formContent.message;
+            if (submitBtn) submitBtn.textContent = formContent.submit;
+        }
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang; 
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            
+            document.querySelectorAll('.lang-content').forEach(element => {
+                element.classList.toggle('active', element.getAttribute('data-lang') === lang);
+            });
+            
+            updateAllDynamicText();
+            updateNavigation();
+            updatePortfolio();
+            updateServices();
+            updateFormPlaceholders();
+            
+            if (lang === 'en') {
+                document.title = 'Adam - Navigator of Inner Worlds and Digital Solutions';
+            } else {
+                document.title = 'Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań';
+            }
+            applyScrollAnimations();
+        }
+        
+        let intersectionObserverInstance;
+        function applyScrollAnimations() {
+            if (intersectionObserverInstance) {
+                intersectionObserverInstance.disconnect();
+            }
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            intersectionObserverInstance = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in, .portfolio-card, .service-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                intersectionObserverInstance.observe(el);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language based on html lang attribute or default to 'pl'
+            currentLanguage = document.documentElement.lang || 'pl';
+            if (currentLanguage !== 'pl' && currentLanguage !== 'en') { // Fallback for invalid lang
+                currentLanguage = 'pl';
+                document.documentElement.lang = 'pl';
+            }
+            
+            initializeContent(); 
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeLanguage(this.getAttribute('data-lang'));
+                });
+            });
+            
+             document.addEventListener('click', function(e) {
+                const link = e.target.closest('a');
+                if (link && link.getAttribute('href') ) {
+                    const href = link.getAttribute('href');
+                    if (href.startsWith('#') || href.includes('#')) {
+                        const targetIdFull = href.substring(href.indexOf('#'));
+                        const targetId = targetIdFull.split('?')[0]; // Remove query params if any from anchor
+                        const targetPage = href.substring(0, href.indexOf('#'));
+
+                        if (!targetPage || targetPage === window.location.pathname.split('/').pop() || targetPage === '.') {
+                             if (targetId.length > 1) {
+                                e.preventDefault();
+                                const targetElement = document.querySelector(targetId);
+                                if (targetElement) {
+                                    const headerHeight = document.querySelector('header').offsetHeight;
+                                    const elementPosition = targetElement.getBoundingClientRect().top;
+                                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                                }
+                            }
+                        }
+                        const navLinksContainer = document.getElementById('nav-links');
+                        if (navLinksContainer.classList.contains('active-mobile')) {
+                            navLinksContainer.classList.remove('active-mobile');
+                        }
+                    }
+                }
+            });
+            
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const form = e.target;
+                    const formData = new FormData(form);
+                    const successMessage = content[currentLanguage].form.success; 
+                    const errorMessage = content[currentLanguage].form.error; 
+                    fetch("/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: new URLSearchParams(formData).toString()
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert(successMessage);
+                            form.reset();
+                        } else {
+                            response.json().then(data => {
+                                if (data.error) {
+                                    alert(`${errorMessage}\nDetails: ${data.error}`);
+                                } else {
+                                    alert(errorMessage);
+                                }
+                            }).catch(() => alert(errorMessage));
+                        }
+                    })
+                    .catch((error) => {
+                        alert(errorMessage);
+                        console.error("Error submitting Netlify form:", error);
+                    });
+                });
+            }
+
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinksContainer = document.getElementById('nav-links');
+
+            if (mobileMenuToggle && navLinksContainer) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinksContainer.classList.toggle('active-mobile');
+                });
+            }
+            applyScrollAnimations();
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (header) { 
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(30, 58, 95, 0.95)'; 
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '660c04457b8b244d89b5a822' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
+</body>
+</html>
