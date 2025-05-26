@@ -1,34 +1,48 @@
 # Konfiguracja backendu - używamy GitHub
 backend:
   name: github
-  repo: adamsosx/portfolio # ZASTĄP!
-  branch: main # lub master, lub inna gałąź, na której pracujesz
-  # Opcjonalnie, jeśli używasz GitHub Pages i własnej domeny:
-  # site_domain: twojadomena.com
-  # base_url: https://api.github.com # Zazwyczaj nie trzeba zmieniać
-  # auth_endpoint: auth # Jeśli używasz zewnętrznego serwera do autoryzacji np. Netlify Identity / GoTrue
+  repo: adamsosx/portfolio # Twoja nazwa użytkownika GitHub / nazwa repozytorium
+  branch: main # Główna gałąź (np. main lub master)
+  # commit_messages: # Opcjonalne, własne komunikaty commitów
+  #   create: 'Create {{collection}} “{{slug}}”'
+  #   update: 'Update {{collection}} “{{slug}}”'
+  #   delete: 'Delete {{collection}} “{{slug}}”'
+  #   uploadMedia: 'Upload “{{path}}”'
+  #   deleteMedia: 'Delete “{{path}}”'
 
 # Gdzie przechowywać pliki multimedialne (np. obrazy)
-media_folder: "static/images" # Ścieżka w repozytorium
-public_folder: "/images"     # Ścieżka publiczna na stronie
+# Dostosuj te ścieżki do struktury Twojego generatora stron statycznych (SSG)
+# Przykład: jeśli twój SSG kopiuje wszystko z folderu 'static' do roota strony
+media_folder: "static/images/uploads" # Ścieżka zapisu w repozytorium
+public_folder: "/images/uploads"     # Ścieżka publiczna na wygenerowanej stronie (jak będzie widoczna w URL)
 
 # Definicje kolekcji (typy treści)
 collections:
-  - name: "blog" # Nazwa techniczna kolekcji
-    label: "Posty Blogowe" # Etykieta widoczna w CMS
-    folder: "_posts" # Folder w repozytorium, gdzie przechowywane są pliki tej kolekcji
-    create: true # Czy można tworzyć nowe elementy
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Jak generować nazwę pliku (i URL)
-    fields: # Pola dla każdego elementu w kolekcji
-      - {label: "Tytuł", name: "title", widget: "string"}
-      - {label: "Data Publikacji", name: "date", widget: "datetime"}
+  - name: "projects" # Nazwa techniczna kolekcji
+    label: "Projekty" # Etykieta widoczna w CMS
+    folder: "_projects" # Folder w repozytorium, gdzie przechowywane są pliki tej kolekcji (np. dla Jekyll, Hugo)
+                     # Dla innych SSG może to być np. "content/projects"
+    create: true # Czy można tworzyć nowe projekty
+    slug: "{{slug}}" # Jak generować nazwę pliku (np. nazwa-projektu.md)
+                    # Możesz użyć {{year}}-{{month}}-{{day}}-{{slug}} jeśli chcesz datę w nazwie
+    fields: # Pola dla każdego projektu
+      - {label: "Tytuł Projektu", name: "title", widget: "string"}
+      - {label: "Data Ukończenia", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Krótki Opis", name: "description", widget: "string", required: false}
       - {label: "Miniaturka", name: "thumbnail", widget: "image", required: false}
-      - {label: "Treść", name: "body", widget: "markdown"}
-  # Możesz dodać więcej kolekcji, np. dla stron, produktów itp.
-  # - name: "pages"
-  #   label: "Strony"
-  #   folder: "_pages" # lub po prostu "pages"
+      - {label: "Technologie (oddzielone przecinkami)", name: "technologies", widget: "list", field: {label: "Technologia", name: "tech", widget: "string"}, required: false}
+      - {label: "Link do projektu (Live)", name: "project_url", widget: "string", required: false}
+      - {label: "Link do repozytorium (GitHub)", name: "repo_url", widget: "string", required: false}
+      - {label: "Pełny Opis Projektu", name: "body", widget: "markdown"}
+
+  # Możesz dodać inne kolekcje, np. dla postów blogowych, jeśli portfolio ma też bloga
+  # - name: "blog"
+  #   label: "Posty Blogowe"
+  #   folder: "_posts"
   #   create: true
+  #   slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
   #   fields:
   #     - {label: "Tytuł", name: "title", widget: "string"}
+  #     - {label: "Data Publikacji", name: "date", widget: "datetime"}
+  #     - {label: "Autor", name: "author", widget: "string", default: "Adam Sosnowski"}
   #     - {label: "Treść", name: "body", widget: "markdown"}
