@@ -1,15 +1,28 @@
+# Konfiguracja backendu - używamy GitHub, ale przez Netlify Identity
 backend:
   name: github
-  repo: adamsosx/portfolio
-  branch: main
+  repo: adamsosx/portfolio # Twoja nazwa użytkownika GitHub / nazwa repozytorium
+  branch: main # Główna gałąź
+  # TA LINIA JEST KLUCZOWA DLA NETLIFY IDENTITY:
+  site_domain: awisniewski.netlify.app
 
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
+# Gdzie przechowywać pliki multimedialne (np. obrazy)
+media_folder: "static/images/uploads" # Ścieżka zapisu w repozytorium
+public_folder: "/images/uploads"     # Ścieżka publiczna na wygenerowanej stronie
 
+# Definicje kolekcji (typy treści)
 collections:
-  - name: "test"
-    label: "Test Collection"
-    folder: "_test"
+  - name: "projects"
+    label: "Projekty"
+    folder: "_projects"
     create: true
+    slug: "{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Tytuł Projektu", name: "title", widget: "string"}
+      - {label: "Data Ukończenia", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Krótki Opis", name: "description", widget: "string", required: false}
+      - {label: "Miniaturka", name: "thumbnail", widget: "image", required: false}
+      - {label: "Technologie (oddzielone przecinkami)", name: "technologies", widget: "list", field: {label: "Technologia", name: "tech", widget: "string"}, required: false}
+      - {label: "Link do projektu (Live)", name: "project_url", widget: "string", required: false}
+      - {label: "Link do repozytorium (GitHub)", name: "repo_url", widget: "string", required: false}
+      - {label: "Pełny Opis Projektu", name: "body", widget: "markdown"}
