@@ -1,0 +1,21 @@
+backend:
+  name: github
+  repo: adamosx/portfolio
+  branch: main # lub master, lub inna gałąź, której używasz
+  # Opcjonalnie, jeśli używasz innego hosta Git
+  # site_domain: twoja-domena.com
+
+media_folder: "static/images" # Lokalizacja przechowywania mediów w repozytorium
+public_folder: "/images"      # Ścieżka publiczna do mediów
+
+collections:
+  - name: "blog" # Nazwa kolekcji
+    label: "Blog" # Etykieta wyświetlana w CMS
+    folder: "_posts/blog" # Folder, w którym przechowywane są posty
+    create: true # Czy można tworzyć nowe wpisy
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Format nazwy pliku
+    fields: # Pola dla tej kolekcji
+      - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Body", name: "body", widget: "markdown"}
