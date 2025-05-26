@@ -3,7 +3,7 @@ backend:
   repo: adamosx/portfolio # Upewnij się, że to jest poprawna nazwa użytkownika/repozytorium
   branch: main
   auth_type: pkce # Dodaj tę linię, aby używać metody PKCE
-  app_id: Ov23lidBUAG3q0053Sde
+  app_id: 0v231idBUAG3q0053Sde
 
 media_folder: static/images # Lub "images", zgodnie z Twoją strukturą
 public_folder: /images      # Lub "/static/images"
