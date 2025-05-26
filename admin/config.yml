@@ -2,8 +2,8 @@ backend:
   name: github
   repo: adamsosx/portfolio  # Potwierdź, że to jest DOKŁADNA nazwa repozytorium
   branch: main             # Potwierdź, że to jest Twoja główna gałąź
-  site_domain: awisniewski.netlify.app
-
+  site_id: awisniewski.netlify.app
+  
 media_folder: "static/images/uploads_test" # Użyj innej nazwy folderu na test, aby uniknąć konfliktów
 public_folder: "/images/uploads_test"
 
