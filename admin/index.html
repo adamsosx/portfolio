@@ -3,24 +3,82 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel Administracyjny Treści - TEST</title>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <title>Panel Administracyjny Treści</title>
+  <!-- WAŻNE: Przenosimy skrypty na koniec body dla lepszej kontroli ładowania -->
 </head>
 <body>
-  <h1>TEST CMS ADMIN PAGE</h1> <!-- Dodaj ten tekst -->
+  <h1>TEST CMS ADMIN PAGE</h1> <!-- Twój tekst testowy - zostaw go na razie -->
   <div id="nc-root"></div>
 
+  <!-- Skrypty ładowane na końcu body -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script> 
+
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
+    // Ustaw flagę, aby zapobiec automatycznej inicjalizacji przez Decap CMS
+    window.CMS_MANUAL_INIT = true;
+
+    // Czekaj, aż DOM będzie gotowy i skrypty (potencjalnie) załadowane
+    document.addEventListener("DOMContentLoaded", function() {
+      // Dodatkowe opóźnienie, aby dać skryptom CMS więcej czasu na załadowanie i zdefiniowanie window.CMS
+      // To jest obejście, idealnie CMS powinien emitować zdarzenie "gotowości"
+      setTimeout(function() {
+        if (window.CMS) {
+          console.log("window.CMS jest dostępne. Próbuję zainicjalizować ręcznie...");
+
+          // Minimalna konfiguracja bezpośrednio w JS
+          var cmsConfigObject = {
+            backend: {
+              name: 'github',
+              repo: 'adamsosx/portfolio', 
+              branch: 'main',          
+              site_domain: 'awisniewski.netlify.app',
+              base_url: 'https://awisniewski.netlify.app', // Dodaj dla pewności
+              auth_endpoint: '.netlify/identity'          // Dodaj dla pewności
+            },
+            media_folder: 'static/images/uploads_manual_js_test', 
+            public_folder: '/images/uploads_manual_js_test',
+            collections: [
+              {
+                name: 'manual_js_test_pages',
+                label: 'Manual JS Test Pages',
+                folder: '_manual_js_test_pages', 
+                create: true,
+                fields: [{ label: 'Title', name: 'title', widget: 'string' }],
+              },
+            ],
+          };
+
+          console.log("Używam konfiguracji:", cmsConfigObject);
+          window.CMS.init({ config: cmsConfigObject }); // Inicjalizuj CMS z obiektem konfiguracyjnym
+          console.log("CMS.init({ config }) zostało wywołane.");
+
+        } else {
+          console.error("window.CMS NIE JEST dostępne po opóźnieniu!");
+          document.getElementById('nc-root').innerHTML = '<p style="color:red;">Błąd: Obiekt CMS nie został załadowany.</p>';
         }
-      });
-    }
+
+        // Inicjalizacja Netlify Identity (jeśli używasz)
+        if (window.netlifyIdentity) {
+          console.log("Netlify Identity jest dostępne. Inicjalizuję...");
+          window.netlifyIdentity.on("init", user => {
+            console.log("Netlify Identity init event, user:", user);
+            if (!user) {
+              window.netlifyIdentity.on("login", () => {
+                console.log("Netlify Identity login event. Przekierowuję...");
+                document.location.href = "/admin/";
+              });
+              // Opcjonalnie: Spróbuj otworzyć widget logowania, jeśli nie ma użytkownika
+              // window.netlifyIdentity.open(); 
+            }
+          });
+          window.netlifyIdentity.on("error", err => console.error("Netlify Identity Error:", err));
+        } else {
+            console.error("Netlify Identity (window.netlifyIdentity) nie jest dostępne!");
+        }
+
+      }, 500); // Opóźnienie 500ms - możesz eksperymentować z tą wartością
+    });
   </script>
 </body>
 </html>
