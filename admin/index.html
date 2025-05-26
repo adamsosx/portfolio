@@ -2,11 +2,28 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>CMS Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Administracyjny Treści</title>
+  <!-- Użyj stabilnego CDN dla Decap CMS -->
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script>
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <div id="nc-root"></div> 
-  <!-- Na razie bez Netlify Identity i bez ręcznej inicjalizacji, pozwólmy CMS spróbować samemu -->
+  <!-- Ten div jest ważny, jeśli CMS go oczekuje, choć często CMS tworzy go sam -->
+  <div id="nc-root"></div>
+
+  <!-- Skrypt inicjalizujący Netlify Identity - umieść na końcu body -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
