@@ -1,41 +1,46 @@
 backend:
   name: github
-  repo: adamsosx/portfolio  # Upewnij się, że nazwa użytkownika i repozytorium są poprawne
-  branch: main             # Gałąź, której używasz (np. main lub master)
-  auth_type: pkce          # Używa bezpośredniej autoryzacji GitHub
-  app_id: Ov23lisayZSxOng4QsNT # Poprawny Client ID z Twojej GitHub OAuth App
- 
+  repo: adamsosx/portfolio
+  branch: main
+  auth_type: pkce
+  app_id: Ov23lisayZSxOng4QsNT
+
 # Konfiguracja mediów
-# Jeśli masz katalog "images" na głównym poziomie repozytorium:
-media_folder: "images"    # Folder, gdzie CMS będzie zapisywał media w repozytorium
-public_folder: "/images"  # Publiczna ścieżka do mediów na Twojej stronie
+media_folder: "images"
+public_folder: "/images"
 
-# Alternatywnie, jeśli chcesz używać "static/images":
-# media_folder: "static/images"
-# public_folder: "/static/images" # lub "/images" jeśli Twój build proces kopiuje static/images do /images
+# Konfiguracja wyświetlania
+display_url: https://adamsosx.github.io/portfolio # Zamień na URL swojej strony
+logo_url: https://adamsosx.github.io/portfolio/images/logo.png # Opcjonalne logo
 
-# Definicje kolekcji (rodzajów treści)
+# Definicje kolekcji
 collections:
-  - name: "blog" # Nazwa techniczna kolekcji
-    label: "Blog" # Etykieta wyświetlana w CMS
-    folder: "_posts/blog" # Folder w repozytorium, gdzie przechowywane są wpisy tej kolekcji
-                          # Upewnij się, że ten folder istnieje (np. _posts/blog/)
-    create: true # Czy można tworzyć nowe wpisy
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Format nazwy pliku dla nowych wpisów
-    fields: # Pola dla każdego wpisu w tej kolekcji
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "_posts/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
       - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Publish Date", name: "date", widget: "datetime"}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Publish Date", name: "date", widget: "datetime", required: true}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
 
-  # Możesz dodać więcej kolekcji tutaj, np. dla projektów portfolio:
-  # - name: "projects"
-  #   label: "Projects"
-  #   folder: "_projects" # Upewnij się, że ten folder istnieje (np. _projects/)
-  #   create: true
-  #   slug: "{{slug}}"
-  #   fields:
-  #     - {label: "Project Title", name: "title", widget: "string"}
-  #     - {label: "Description", name: "description", widget: "markdown"}
-  #     - {label: "Project Image", name: "image", widget: "image"}
-  #     - {label: "Completion Date", name: "date", widget: "date"}
+  - name: "projects"
+    label: "Portfolio Projects"
+    folder: "_projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Project Title", name: "title", widget: "string", required: true}
+      - {label: "Description", name: "description", widget: "markdown", required: true}
+      - {label: "Project Image", name: "image", widget: "image", required: false}
+      - {label: "Gallery", name: "gallery", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
+      - {label: "Technologies", name: "technologies", widget: "list", field: {label: "Technology", name: "tech", widget: "string"}}
+      - {label: "Project URL", name: "url", widget: "string", required: false}
+      - {label: "GitHub URL", name: "github", widget: "string", required: false}
+      - {label: "Completion Date", name: "date", widget: "date", required: true}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
