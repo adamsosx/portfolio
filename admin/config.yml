@@ -2,18 +2,22 @@ backend:
   name: github
   repo: adamsosx/portfolio
   branch: main
-  auth_type: pkce
-  app_id: Ov23lisayZSxOng4QsNT
+  # Usuń auth_type: pkce i app_id dla bezpośredniej autoryzacji
+  # GitHub będzie używał Personal Access Token
 
-# Konfiguracja mediów
+# Alternatywnie, jeśli chcesz zachować OAuth:
+# backend:
+#   name: github
+#   repo: adamsosx/portfolio
+#   branch: main
+#   auth_type: pkce
+#   app_id: TWÓJ_CLIENT_ID
+#   # Upewnij się, że w GitHub OAuth App masz:
+#   # Authorization callback URL: https://api.netlify.com/auth/done
+
 media_folder: "images"
 public_folder: "/images"
 
-# Konfiguracja wyświetlania
-display_url: https://adamsosx.github.io/portfolio # Zamień na URL swojej strony
-logo_url: https://adamsosx.github.io/portfolio/images/logo.png # Opcjonalne logo
-
-# Definicje kolekcji
 collections:
   - name: "blog"
     label: "Blog Posts"
@@ -24,23 +28,4 @@ collections:
       - {label: "Layout", name: "layout", widget: "hidden", default: "blog"}
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Publish Date", name: "date", widget: "datetime", required: true}
-      - {label: "Featured Image", name: "image", widget: "image", required: false}
-      - {label: "Excerpt", name: "excerpt", widget: "text", required: false}
       - {label: "Body", name: "body", widget: "markdown", required: true}
-      - {label: "Published", name: "published", widget: "boolean", default: true}
-
-  - name: "projects"
-    label: "Portfolio Projects"
-    folder: "_projects"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Project Title", name: "title", widget: "string", required: true}
-      - {label: "Description", name: "description", widget: "markdown", required: true}
-      - {label: "Project Image", name: "image", widget: "image", required: false}
-      - {label: "Gallery", name: "gallery", widget: "list", field: {label: "Image", name: "image", widget: "image"}}
-      - {label: "Technologies", name: "technologies", widget: "list", field: {label: "Technology", name: "tech", widget: "string"}}
-      - {label: "Project URL", name: "url", widget: "string", required: false}
-      - {label: "GitHub URL", name: "github", widget: "string", required: false}
-      - {label: "Completion Date", name: "date", widget: "date", required: true}
-      - {label: "Featured", name: "featured", widget: "boolean", default: false}
