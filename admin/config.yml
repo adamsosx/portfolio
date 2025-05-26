@@ -1,9 +1,9 @@
 backend:
   name: github
-  repo: adamosx/portfolio  # Upewnij się, że nazwa użytkownika i repozytorium są poprawne
+  repo: adamsosx/portfolio  # Upewnij się, że nazwa użytkownika i repozytorium są poprawne
   branch: main             # Gałąź, której używasz (np. main lub master)
   auth_type: pkce          # Używa bezpośredniej autoryzacji GitHub
-  app_id: Ov23liEoAkWg6qAksySu # Poprawny Client ID z Twojej GitHub OAuth App
+  app_id: 0v23liEoAkWg6qAksySu # Poprawny Client ID z Twojej GitHub OAuth App
  
 # Konfiguracja mediów
 # Jeśli masz katalog "images" na głównym poziomie repozytorium:
