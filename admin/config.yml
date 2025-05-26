@@ -1,18 +1,16 @@
 backend:
   name: github
-  repo: adamsosx/portfolio # Upewnij się, że to jest DOKŁADNIE Twoje repo
-  branch: main # Lub Twoja główna gałąź
+  repo: adamsosx/portfolio 
+  branch: main 
   site_domain: awisniewski.netlify.app
 
-media_folder: "static/images/uploads" # Ścieżka musi istnieć w repo
+media_folder: "static/images/uploads" 
 public_folder: "/images/uploads"
 
 collections:
-  - name: "pages" # Prosta kolekcja do testu
-    label: "Strony"
-    folder: "_pages" # Utwórz ten folder w repo
+  - name: "test_pages"
+    label: "Test Pages"
+    folder: "_test_pages" # Utwórz ten folder w repozytorium
     create: true
-    slug: "{{slug}}"
     fields:
-      - {label: "Tytuł", name: "title", widget: "string"}
-      - {label: "Treść", name: "body", widget: "markdown"}
+      - {label: "Title", name: "title", widget: "string"}
