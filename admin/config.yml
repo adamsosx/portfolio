@@ -1,43 +1,16 @@
 backend:
   name: github
-  repo: adamosx/portfolio       # Twoja nazwa użytkownika/nazwa repozytorium
-  branch: main                  # Twoja główna gałąź
-  auth_type: pkce               # Używa bezpośredniej autoryzacji GitHub
-  app_id: 0v23lir6xzYLsnBJlaBQ  # Twój nowy Client ID
+  repo: adamosx/portfolio
+  branch: main
+  auth_type: pkce
+  app_id: 0v23lir6xzYLsnBJlaBQ
 
-# Konfiguracja miejsca, gdzie będą przechowywane media (np. obrazki)
-# Opcja 1: Media w głównym katalogu "images" repozytorium
-media_folder: "images"          # Ścieżka w repozytorium, gdzie CMS zapisuje media
-public_folder: "/images"        # Publiczna ścieżka URL do mediów na stronie
+media_folder: "images" # Upewnij się, że folder "images" istnieje na głównym poziomie repozytorium
 
-# Opcja 2: Media w katalogu "static/images" (jeśli preferujesz taką strukturę)
-# media_folder: "static/images"
-# public_folder: "/static/images" # Jeśli pliki są serwowane bezpośrednio z /static/images
-                                # lub "/images" jeśli proces budowy kopiuje static/images do /images
-
-# Definicje kolekcji (rodzajów treści, którymi chcesz zarządzać)
-# Poniżej jest przykładowa kolekcja "blog". Dostosuj ją lub dodaj własne.
 collections:
-  - name: "blog"                               # Nazwa techniczna kolekcji (bez spacji, małe litery)
-    label: "Blog Posts"                        # Etykieta wyświetlana w interfejsie CMS
-    folder: "_posts/blog"                      # Folder w repozytorium, gdzie przechowywane są wpisy
-                                               # UPEWNIJ SIĘ, ŻE TEN FOLDER ISTNIEJE!
-    create: true                               # Czy użytkownicy mogą tworzyć nowe wpisy
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Jak generować nazwę pliku (slug) na podstawie tytułu i daty
-    fields: # Pola dostępne dla każdego wpisu w tej kolekcji
-      - {label: "Layout", name: "layout", widget: "hidden", default: "post"} # Ukryte pole, np. dla szablonu Jekyll
-      - {label: "Title", name: "title", widget: "string"}                     # Pole tekstowe dla tytułu
-      - {label: "Publish Date", name: "date", widget: "datetime"}             # Pole daty i czasu
-      - {label: "Featured Image", name: "thumbnail", widget: "image", required: false} # Opcjonalne pole obrazka
-      - {label: "Body", name: "body", widget: "markdown"}                    # Główne pole treści (Markdown)
-
-  # Możesz dodać inną kolekcję, np. dla stron portfolio:
-  # - name: "portfolio_projects"
-  #   label: "Portfolio Projects"
-  #   folder: "_projects" # UPEWNIJ SIĘ, ŻE TEN FOLDER ISTNIEJE!
-  #   create: true
-  #   fields:
-  #     - {label: "Project Name", name: "title", widget: "string"}
-  #     - {label: "Description", name: "description", widget: "text"}
-  #     - {label: "Project Image", name: "image", widget: "image"}
-  #     - {label: "Link to Project", name: "url", widget: "string", required: false}
+  - name: "test"
+    label: "Test"
+    folder: "_test" # Upewnij się, że folder "_test" istnieje na głównym poziomie repozytorium
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
