@@ -3,7 +3,7 @@ backend:
   repo: adamosx/portfolio       # Twoja nazwa użytkownika/nazwa repozytorium
   branch: main                  # Twoja główna gałąź
   auth_type: pkce               # Używa bezpośredniej autoryzacji GitHub
-  app_id: Ov23lir6xzYLsnBJlaBQ  # Twój nowy Client ID
+  app_id: 0v23lir6xzYLsnBJlaBQ  # Twój nowy Client ID
 
 # Konfiguracja miejsca, gdzie będą przechowywane media (np. obrazki)
 # Opcja 1: Media w głównym katalogu "images" repozytorium
