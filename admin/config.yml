@@ -4,7 +4,7 @@ backend:
   branch: main             # Gałąź, której używasz (np. main lub master)
   auth_type: pkce          # Używa bezpośredniej autoryzacji GitHub
   app_id: Ov23liEoAkWg6qAksySu # Poprawny Client ID z Twojej GitHub OAuth App
-
+ 
 # Konfiguracja mediów
 # Jeśli masz katalog "images" na głównym poziomie repozytorium:
 media_folder: "images"    # Folder, gdzie CMS będzie zapisywał media w repozytorium
