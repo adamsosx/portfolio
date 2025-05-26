@@ -1,28 +1,18 @@
-# Konfiguracja backendu - używamy GitHub, ale przez Netlify Identity
 backend:
   name: github
-  repo: adamsosx/portfolio # Twoja nazwa użytkownika GitHub / nazwa repozytorium
-  branch: main # Główna gałąź
-  # TA LINIA JEST KLUCZOWA DLA NETLIFY IDENTITY:
+  repo: adamsosx/portfolio # Upewnij się, że to jest DOKŁADNIE Twoje repo
+  branch: main # Lub Twoja główna gałąź
   site_domain: awisniewski.netlify.app
 
-# Gdzie przechowywać pliki multimedialne (np. obrazy)
-media_folder: "static/images/uploads" # Ścieżka zapisu w repozytorium
-public_folder: "/images/uploads"     # Ścieżka publiczna na wygenerowanej stronie
+media_folder: "static/images/uploads" # Ścieżka musi istnieć w repo
+public_folder: "/images/uploads"
 
-# Definicje kolekcji (typy treści)
 collections:
-  - name: "projects"
-    label: "Projekty"
-    folder: "_projects"
+  - name: "pages" # Prosta kolekcja do testu
+    label: "Strony"
+    folder: "_pages" # Utwórz ten folder w repo
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Tytuł Projektu", name: "title", widget: "string"}
-      - {label: "Data Ukończenia", name: "date", widget: "date", format: "YYYY-MM-DD"}
-      - {label: "Krótki Opis", name: "description", widget: "string", required: false}
-      - {label: "Miniaturka", name: "thumbnail", widget: "image", required: false}
-      - {label: "Technologie (oddzielone przecinkami)", name: "technologies", widget: "list", field: {label: "Technologia", name: "tech", widget: "string"}, required: false}
-      - {label: "Link do projektu (Live)", name: "project_url", widget: "string", required: false}
-      - {label: "Link do repozytorium (GitHub)", name: "repo_url", widget: "string", required: false}
-      - {label: "Pełny Opis Projektu", name: "body", widget: "markdown"}
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Treść", name: "body", widget: "markdown"}
