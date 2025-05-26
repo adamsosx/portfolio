@@ -4,9 +4,64 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Administracyjny Treści</title>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script> 
+  <!-- Nie ładuj decap-cms.js tutaj, jeśli będziemy go ładować i konfigurować ręcznie w skrypcie -->
 </head>
 <body>
-  <!-- CMS UI will be rendered here -->
+  <div id="nc-root"></div> <!-- Dodaj ten div, jeśli go nie ma -->
+
+  <!-- Załaduj skrypty na końcu body -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script> 
+
+  <script>
+    // Poczekaj, aż DOM będzie gotowy i skrypty załadowane
+    document.addEventListener("DOMContentLoaded", function() {
+      // Zdefiniuj flagę, aby zapobiec automatycznej inicjalizacji
+      window.CMS_MANUAL_INIT = true; 
+
+      // Pobierz konfigurację z config.yml
+      fetch('/admin/config.yml') // Upewnij się, że ścieżka jest poprawna
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then(configYmlText => {
+          // Parsowanie YAML nie jest wbudowane w przeglądarki, więc potrzebujesz biblioteki
+          // lub, jeśli config jest prosty i znasz jego strukturę, możesz go przekształcić w obiekt JS.
+          // Dla bezpieczeństwa i elastyczności, zazwyczaj używa się biblioteki YAML, 
+          // ale na potrzeby szybkiego testu, jeśli config.yml jest generowany dynamicznie jako JS/JSON, 
+          // można by go załadować inaczej.
+          // Na razie załóżmy, że CMS_CONFIG jest obiektem JavaScript.
+          // W praktyce, Decap CMS sam wczytuje i parsuje config.yml, jeśli jest w /admin/config.yml
+          // i nie ma CMS_MANUAL_INIT. Spróbujmy więc najpierw prostszego podejścia:
+
+          // Inicjalizuj CMS. Decap CMS powinien sam znaleźć config.yml w tym samym folderze.
+          // Ta linia powinna być wywołana PO załadowaniu decap-cms.js
+          if (window.CMS) {
+            window.CMS.init(); // Spróbujmy zainicjować po ustawieniu flagi
+          } else {
+            console.error("Decap CMS (window.CMS) not loaded!");
+          }
+
+          // Inicjalizacja Netlify Identity (jeśli używasz)
+          if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+              if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                  document.location.href = "/admin/";
+                });
+              }
+            });
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching or initializing config:', error);
+          // Możesz tu wyświetlić błąd użytkownikowi
+          document.body.innerHTML = '<p style="color:red; text-align:center; margin-top: 50px;">Błąd ładowania konfiguracji CMS. Sprawdź konsolę.</p>';
+        });
+    });
+  </script>
 </body>
 </html>
