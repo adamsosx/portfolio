@@ -1,16 +1,22 @@
 backend:
   name: github
-  repo: adamosx/portfolio
-  branch: main
-  auth_type: pkce
-  app_id: 0v23lir6xzYLsnBJlaBQ
+  repo: adamsosx/decap-test  # Zmień na nazwę Twojego repozytorium testowego (np. adamsosx/sveltia-test)
+  branch: main                  # Twoja główna gałąź
+  auth_type: pkce               # Używa bezpośredniej autoryzacji GitHub
+  app_id: Ov23lisxsANoygB2K3I2  # Twój ostatni Client ID
 
-media_folder: "images" # Upewnij się, że folder "images" istnieje na głównym poziomie repozytorium
+# Konfiguracja miejsca, gdzie będą przechowywane media
+media_folder: "media"             # Folder w repozytorium, gdzie CMS zapisuje media
+                                  # UPEWNIJ SIĘ, ŻE TEN FOLDER ISTNIEJE!
+public_folder: "/media"           # Publiczna ścieżka URL do mediów na stronie
 
+# Definicje kolekcji
 collections:
-  - name: "test"
-    label: "Test"
-    folder: "_test" # Upewnij się, że folder "_test" istnieje na głównym poziomie repozytorium
+  - name: "posts"
+    label: "Posts"
+    folder: "_posts"              # Folder w repozytorium, gdzie przechowywane są wpisy
+                                  # UPEWNIJ SIĘ, ŻE TEN FOLDER ISTNIEJE!
     create: true
     fields:
       - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
