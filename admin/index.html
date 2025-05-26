@@ -3,17 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel Administracyjny Treści</title>
-  <!-- Użyj stabilnego CDN dla Decap CMS -->
+  <title>Panel Administracyjny Treści - TEST</title>
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script>
-  <!-- Netlify Identity Widget -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <!-- Ten div jest ważny, jeśli CMS go oczekuje, choć często CMS tworzy go sam -->
+  <h1>TEST CMS ADMIN PAGE</h1> <!-- Dodaj ten tekst -->
   <div id="nc-root"></div>
 
-  <!-- Skrypt inicjalizujący Netlify Identity - umieść na końcu body -->
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
