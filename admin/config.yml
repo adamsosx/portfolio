@@ -1,5 +1,4 @@
 backend:
-  name: github
   name: git-gateway
 repo: adamsosx/portfolio  # Potwierdź, że to jest DOKŁADNA nazwa repozytorium
 branch: main             # Potwierdź, że to jest Twoja główna gałąź
