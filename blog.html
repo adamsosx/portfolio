@@ -587,6 +587,36 @@
         let currentCategory = 'all';
         let allPosts = [];
 
+        // FUNKCJA FORMATOWANIA DATY
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            
+            // Usuń część z czasem jeśli istnieje (T14:07:57.286Z)
+            const cleanDate = dateString.split('T')[0];
+            
+            // Sprawdź czy data jest w formacie YYYY-MM-DD
+            if (cleanDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                const [year, month, day] = cleanDate.split('-');
+                return `${day}.${month}.${year}`;
+            }
+            
+            // Jeśli data ma inny format, spróbuj sparsować
+            try {
+                const date = new Date(dateString);
+                if (!isNaN(date.getTime())) {
+                    return date.toLocaleDateString('pl-PL', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
+                }
+            } catch (e) {
+                console.error('Błąd formatowania daty:', e);
+            }
+            
+            return cleanDate;
+        }
+
         // POPRAWIONA funkcja ładowania postów Z MAPOWANIEM KATEGORII
         async function loadBlogPosts() {
             console.log('Rozpoczynam ładowanie postów...');
@@ -683,7 +713,7 @@
             return post;
         }
 
-        // POPRAWIONA funkcja wyświetlania Z DEBUGOWANIEM
+        // POPRAWIONA funkcja wyświetlania Z FORMATOWANIEM DATY
         function displayPosts() {
             const postsGrid = document.getElementById('posts-grid');
             const featuredContainer = document.getElementById('featured-post-container');
@@ -709,7 +739,7 @@
                             <h2>${featured.title || 'Bez tytułu'}</h2>
                             <p class="excerpt">${featured.excerpt || featured.body.substring(0, 150) + '...'}</p>
                             <div class="blog-card-meta">
-                                <span>${featured.date || ''}</span>
+                                <span>${formatDate(featured.date)}</span>
                                 <span>${featured.readTime || '5 min'}</span>
                             </div>
                             <a href="post.html?slug=${featured.slug}" class="read-more">
@@ -728,7 +758,7 @@
                         </div>
                         <div class="blog-card-content">
                             <div class="blog-card-meta">
-                                <span>${post.date || ''}</span>
+                                <span>${formatDate(post.date)}</span>
                                 <span>${post.readTime || '5 min'}</span>
                             </div>
                             <h3>${post.title || 'Bez tytułu'}</h3>
