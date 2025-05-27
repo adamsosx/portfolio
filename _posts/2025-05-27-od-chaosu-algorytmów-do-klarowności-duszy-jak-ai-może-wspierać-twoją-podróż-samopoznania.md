@@ -1,6 +1,5 @@
 ---
-title: "Od Chaosu Algorytmów do Klarowności Duszy: Jak AI Może Wspierać Twoją
-  Podróż Samopoznania"
+title: "Od Chaosu Algorytmów do Klarowności Duszy: Jak AI Może Wspierać."
 date: 2025-05-27 22:34
 category: Rozwój osobisty
 categoryId: personal
