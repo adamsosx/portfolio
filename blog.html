@@ -587,7 +587,7 @@
         let currentCategory = 'all';
         let allPosts = [];
 
-        // POPRAWIONA funkcja ładowania postów
+        // POPRAWIONA funkcja ładowania postów Z MAPOWANIEM KATEGORII
         async function loadBlogPosts() {
             console.log('Rozpoczynam ładowanie postów...');
             try {
@@ -602,7 +602,6 @@
                 
                 const posts = [];
                 for (const file of files) {
-                    // POPRAWKA - sprawdź czy to plik .md (nie folder)
                     if (file.name.endsWith('.md') && file.type === 'file') {
                         console.log('Przetwarzam plik:', file.name);
                         try {
@@ -628,11 +627,10 @@
             }
         }
 
-        // POPRAWIONA funkcja parsowania
+        // POPRAWIONA funkcja parsowania Z AUTOMATYCZNYM MAPOWANIEM KATEGORII
         function parseMarkdownPost(content, filename) {
             console.log('Parsowanie pliku:', filename);
             
-            // POPRAWKA - lepsze parsowanie front matter
             const frontMatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
             if (!frontMatterMatch) {
                 console.log('Nie znaleziono front matter w:', filename);
@@ -649,7 +647,6 @@
                     const key = line.substring(0, colonIndex).trim();
                     let value = line.substring(colonIndex + 1).trim();
                     
-                    // POPRAWKA - usuń cudzysłowy
                     if ((value.startsWith('"') && value.endsWith('"')) || 
                         (value.startsWith("'") && value.endsWith("'"))) {
                         value = value.slice(1, -1);
@@ -659,22 +656,47 @@
                 }
             });
             
-            // POPRAWKA - użyj dokładnej nazwy pliku
             post.slug = filename.replace('.md', '');
             
-            console.log('Sparsowany post:', post);
+            // AUTOMATYCZNE MAPOWANIE KATEGORII
+            if (!post.categoryId && post.category) {
+                const categoryLower = post.category.toLowerCase();
+                if (categoryLower.includes('sztuczna') || categoryLower.includes('artificial') || categoryLower.includes('ai')) {
+                    post.categoryId = 'ai';
+                } else if (categoryLower.includes('psycholog')) {
+                    post.categoryId = 'psychology';
+                } else if (categoryLower.includes('technolog')) {
+                    post.categoryId = 'technology';
+                } else if (categoryLower.includes('rozwój') || categoryLower.includes('personal')) {
+                    post.categoryId = 'personal';
+                } else {
+                    post.categoryId = 'technology'; // domyślna kategoria
+                }
+            }
+            
+            // Jeśli nadal brak categoryId, ustaw domyślną
+            if (!post.categoryId) {
+                post.categoryId = 'technology';
+            }
+            
+            console.log('Sparsowany post z categoryId:', post);
             return post;
         }
 
-        // POPRAWIONA funkcja wyświetlania
+        // POPRAWIONA funkcja wyświetlania Z DEBUGOWANIEM
         function displayPosts() {
             const postsGrid = document.getElementById('posts-grid');
             const featuredContainer = document.getElementById('featured-post-container');
             
             let filteredPosts = allPosts;
             if (currentCategory !== 'all') {
-                filteredPosts = allPosts.filter(post => post.categoryId === currentCategory);
+                filteredPosts = allPosts.filter(post => {
+                    console.log(`Filtrowanie: post.categoryId="${post.categoryId}" vs currentCategory="${currentCategory}"`);
+                    return post.categoryId === currentCategory;
+                });
             }
+            
+            console.log(`Wyświetlam ${filteredPosts.length} postów dla kategorii: ${currentCategory}`);
             
             // Featured post (pierwszy post)
             if (filteredPosts.length > 0) {
@@ -719,7 +741,7 @@
                 `).join('');
             } else {
                 featuredContainer.innerHTML = '';
-                postsGrid.innerHTML = '<p>Brak postów do wyświetlenia.</p>';
+                postsGrid.innerHTML = '<p>Brak postów w tej kategorii.</p>';
             }
             
             // Animacje
@@ -731,6 +753,7 @@
         }
 
         function filterByCategory(categoryId) {
+            console.log('Filtrowanie według kategorii:', categoryId);
             currentCategory = categoryId;
             document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`[data-category="${categoryId}"]`).classList.add('active');
