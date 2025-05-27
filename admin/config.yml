@@ -1,16 +1,61 @@
 backend:
-  name: git-gateway
-repo: adamsosx/portfolio  # Potwierdź, że to jest DOKŁADNA nazwa repozytorium
-branch: main             # Potwierdź, że to jest Twoja główna gałąź
-site_id: awisniewski.netlify.app
+  name: git-gateway # <<< TO JEST KLUCZOWA I POPRAWNA WARTOŚĆ
+  # repo: adamsosx/portfolio # Opcjonalne przy git-gateway, Netlify wie które repo
+  # branch: main             # Opcjonalne przy git-gateway, Netlify wie która gałąź
+  # site_domain: awisniewski.netlify.app # Opcjonalne, ale może pomóc widgetowi Identity
 
-media_folder: "static/images/uploads_test" # Użyj innej nazwy folderu na test, aby uniknąć konfliktów
-public_folder: "/images/uploads_test"
+# Opcjonalne, jeśli chcesz, aby CMS wiedział, gdzie jest strona (dla podglądów itp.)
+# display_url: https://awisniewski.netlify.app
+
+# Gdzie przechowywać pliki multimedialne (np. obrazy)
+media_folder: "static/images/uploads" # Ścieżka zapisu w repozytorium
+public_folder: "/images/uploads"     # Publiczna ścieżka na wygenerowanej stronie
+
+# Możesz dodać logo, które będzie widoczne w panelu CMS
+# logo_url: /images/logo-admin.png # Ścieżka do Twojego logo
 
 collections:
-- name: "test_collection"
-label: "Kolekcja Testowa"
-folder: "_test_posts"  # Utwórz ten folder w swoim repozytorium
-create: true
-fields:
-- {label: "Tytuł", name: "title", widget: "string"}
+  - name: "projects"
+    label: "Projekty Portfolio"
+    folder: "_projects" 
+    create: true
+    slug: "{{slug}}" 
+    fields:
+      - {label: "Tytuł Projektu", name: "title", widget: "string"}
+      - {label: "Data Ukończenia", name: "date", widget: "date", format: "YYYY-MM-DD", required: false}
+      - {label: "Krótki Opis (na karcie)", name: "description", widget: "string", required: false}
+      - {label: "Miniaturka (obrazek na karcie)", name: "thumbnail", widget: "image", required: false}
+      - {label: "Technologie (każda w nowej linii)", name: "tags", widget: "list", field: {label: "Technologia", name: "tag", widget: "string"}, required: false}
+      - {label: "Link do projektu (Live URL)", name: "project_url", widget: "string", required: false}
+      - {label: "Link do repozytorium (GitHub URL)", name: "repo_url", widget: "string", required: false}
+      - {label: "Pełny Opis Projektu (Markdown)", name: "body", widget: "markdown"}
+  
+  - name: "blog_pl"
+    label: "Blog (Polski)"
+    folder: "_posts/blog/pl"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Data", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Kategoria (np. Sztuczna Inteligencja)", name: "category", widget: "string"}
+      - {label: "ID Kategorii (np. ai, psychology)", name: "categoryId", widget: "string"}
+      - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
+      - {label: "Zajawka (excerpt)", name: "excerpt", widget: "text"}
+      - {label: "Czas czytania (np. 5 min czytania)", name: "readTime", widget: "string", required: false}
+      - {label: "Treść (Markdown)", name: "body", widget: "markdown"}
+
+  - name: "blog_en"
+    label: "Blog (English)"
+    folder: "_posts/blog/en"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields: # Pola takie same, tylko etykiety mogą być po angielsku w CMS
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD"}
+      - {label: "Category (e.g. Artificial Intelligence)", name: "category", widget: "string"}
+      - {label: "Category ID (e.g. ai)", name: "categoryId", widget: "string"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Read Time (e.g. 5 min read)", name: "readTime", widget: "string", required: false}
+      - {label: "Body (Markdown)", name: "body", widget: "markdown"}
