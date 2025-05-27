@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
-    <!-- Marked.js - biblioteka do parsowania Markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -33,7 +31,7 @@
         }
 
         .container {
-            max-width: 800px; /* Adjusted for single post view */
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -79,15 +77,9 @@
         .flag-pl {
             background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
         }
-         .flag-pl::before, .flag-pl::after { /* Ensure no inherited content */
-            content: none;
-        }
 
         .flag-en {
             background-color: white;
-        }
-         .flag-en::before { /* Ensure no inherited content */
-            content: none;
         }
         .flag-en::after {
             content: "";
@@ -114,11 +106,6 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        header .container { /* Ensure header container takes full width for nav */
-            max-width: 1200px;
-        }
-
 
         nav {
             display: flex;
@@ -176,32 +163,42 @@
         .nav-links a.active {
             color: var(--warm-ochre);
         }
-        
-        /* Post Page Specific Header (Breadcrumbs) */
-        .post-page-breadcrumb-header { 
-            background-color: var(--dark-navy); /* Slightly different for distinction or same as blog-page-header */
+
+        /* Post Page Header */
+        .post-page-header { 
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--sage-green) 100%);
             color: white;
-            padding: 100px 0 20px; /* Adjusted padding for fixed header and less height */
+            padding: 140px 0 80px;
             text-align: center;
             position: relative;
-        }
-        .post-page-breadcrumb-header .container {
-             max-width: 800px; /* Match content width */
+            overflow: hidden;
         }
 
+        .post-page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            opacity: 0.3;
+        }
 
         .breadcrumb-nav {
+            position: relative;
+            z-index: 2;
             display: flex;
-            justify-content: flex-start; /* Align to left for post page */
+            justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             font-size: 0.9rem;
-            opacity: 0.9;
-            flex-wrap: wrap; /* Allow wrapping on small screens */
+            opacity: 0.8;
+            margin-bottom: 20px;
         }
 
         .breadcrumb-nav a {
-            color: var(--light-beige);
+            color: white;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -213,19 +210,10 @@
         .breadcrumb-separator {
             color: rgba(255,255,255,0.6);
         }
-        .breadcrumb-current {
-            color: var(--warm-ochre);
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 300px; /* Limit width of current post title in breadcrumb */
-        }
-
 
         /* Post Content Section */
         .post-content-section { 
-            padding: 40px 0 80px; /* Adjusted padding */
+            padding: 80px 0;
             background: var(--light-beige);
         }
 
@@ -233,17 +221,17 @@
             background: white;
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             margin-bottom: 40px;
         }
 
-        .post-header-content { /* Renamed from post-header to avoid conflict with <header> tag */
+        .post-header {
             padding: 40px 40px 20px;
             text-align: center;
             border-bottom: 1px solid var(--light-gray);
         }
 
-        .post-category-tag { /* Renamed from post-category for clarity */
+        .post-category {
             background: var(--warm-ochre);
             color: white;
             padding: 8px 20px;
@@ -251,18 +239,18 @@
             font-size: 0.9rem;
             font-weight: 500;
             display: inline-block;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        .post-main-title { /* Renamed from post-title */
+        .post-title {
             color: var(--navy-blue);
-            font-size: 2.8rem; /* Slightly larger for emphasis */
+            font-size: 2.5rem;
             margin-bottom: 20px;
             line-height: 1.3;
-            font-weight: 600; /* Bolder */
+            font-weight: 400;
         }
 
-        .post-meta-details { /* Renamed from post-meta */
+        .post-meta {
             display: flex;
             justify-content: center;
             gap: 20px;
@@ -272,96 +260,268 @@
             flex-wrap: wrap;
         }
 
-        .post-featured-image-container { /* Renamed from featured-image */
+        .featured-image {
             text-align: center;
-            margin: 0 0 40px 0; /* No top margin if it's part of header-content */
+            margin: 30px 0;
         }
 
-        .post-featured-image-container img {
+        .featured-image img {
             max-width: 100%;
             height: auto;
-            max-height: 450px; /* Allow larger image */
+            max-height: 400px;
             border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             object-fit: cover;
         }
 
-        .actual-post-content { /* Renamed from post-content */
-            padding: 20px 40px 40px; /* Adjusted padding */
-            font-size: 1.15rem; /* Slightly larger base font for readability */
+        .post-content {
+            padding: 40px;
+            font-size: 1.2rem;
             line-height: 1.8;
             color: var(--dark-navy);
         }
 
-        .actual-post-content h1,
-        .actual-post-content h2,
-        .actual-post-content h3,
-        .actual-post-content h4 {
+        .post-content h1,
+        .post-content h2,
+        .post-content h3,
+        .post-content h4 {
             color: var(--navy-blue);
-            margin-top: 2.5em; /* More space before headings */
-            margin-bottom: 0.8em;
+            margin-top: 30px;
+            margin-bottom: 15px;
             font-weight: 600;
-            line-height: 1.4;
-        }
-        .actual-post-content h1:first-child,
-        .actual-post-content h2:first-child,
-        .actual-post-content h3:first-child,
-        .actual-post-content h4:first-child {
-            margin-top: 0;
         }
 
+        .post-content h1 {
+            font-size: 2rem;
+            border-bottom: 3px solid var(--warm-ochre);
+            padding-bottom: 10px;
+        }
 
-        .actual-post-content h1 { font-size: 2rem; border-bottom: 2px solid var(--warm-ochre); padding-bottom: 0.5em;}
-        .actual-post-content h2 { font-size: 1.7rem; }
-        .actual-post-content h3 { font-size: 1.4rem; }
-        .actual-post-content p { margin-bottom: 1.5em; }
-        .actual-post-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 2em auto; display: block; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
-        .actual-post-content blockquote { background: var(--light-beige); border-left: 4px solid var(--warm-ochre); padding: 1.5em 2em; margin: 2em 0; font-style: italic; border-radius: 0 8px 8px 0; }
-        .actual-post-content ul,
-        .actual-post-content ol { margin: 1.5em 0; padding-left: 30px; }
-        .actual-post-content li { margin-bottom: 0.8em; }
-        .actual-post-content code { background: var(--light-gray); padding: 0.2em 0.4em; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9em; }
-        .actual-post-content pre { background: var(--dark-navy); color: white; padding: 1.5em; border-radius: 10px; overflow-x: auto; margin: 2em 0; font-size: 0.9em; }
-        .actual-post-content pre code { background: none; padding: 0; color: inherit; }
+        .post-content h2 {
+            font-size: 1.6rem;
+        }
+
+        .post-content h3 {
+            font-size: 1.4rem;
+        }
+
+        .post-content p {
+            margin-bottom: 20px;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .post-content blockquote {
+            background: var(--light-beige);
+            border-left: 4px solid var(--warm-ochre);
+            padding: 20px 25px;
+            margin: 25px 0;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .post-content ul,
+        .post-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .post-content li {
+            margin-bottom: 10px;
+        }
+
+        .post-content code {
+            background: var(--light-gray);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .post-content pre {
+            background: var(--dark-navy);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 25px 0;
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
 
         /* Back to Blog Button */
-        .back-to-blog { text-align: center; margin: 40px 0; }
-        .back-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 25px; background: var(--navy-blue); color: white; text-decoration: none; border-radius: 25px; font-weight: 500; transition: all 0.3s ease; }
-        .back-btn:hover { background: var(--warm-ochre); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-
-        /* Newsletter & Footer - Styles can be reused or copied from blog.html if identical */
-        .newsletter { background: var(--navy-blue); color: white; padding: 60px 0; text-align: center; }
-        .newsletter h2 { font-size: 2rem; margin-bottom: 20px; }
-        .newsletter p { margin-bottom: 30px; opacity: 0.9; }
-        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 10px; }
-        .newsletter-form input { flex: 1; padding: 15px 20px; border: none; border-radius: 5px; font-size: 1rem; background: rgba(255,255,255,0.1); color: white; border: 2px solid transparent; }
-        .newsletter-form input::placeholder { color: rgba(255,255,255,0.7); }
-        .newsletter-form input:focus { outline: none; border-color: var(--warm-ochre); background: rgba(255,255,255,0.15); }
-        .newsletter-form button { background: var(--warm-ochre); color: white; border: none; padding: 15px 30px; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
-        .newsletter-form button:hover { background: var(--rust-orange); }
-
-        footer { background: var(--dark-navy); color: white; text-align: center; padding: 30px 0; }
-        .hidden { display: none; }
-        .loading, .error { text-align: center; padding: 60px 20px; color: var(--medium-gray); font-size: 1.1rem; }
-        .error { color: #d32f2f; }
-
-
-        /* Responsive adjustments for post page */
-        @media (max-width: 768px) {
-            .post-page-breadcrumb-header { padding: 120px 0 30px; }
-            .post-main-title { font-size: 2rem; }
-            .post-header-content { padding: 30px 20px 15px; }
-            .actual-post-content { padding: 20px; font-size: 1.1rem; }
-            .post-meta-details { flex-direction: column; gap: 10px; }
-            .newsletter-form { flex-direction: column; }
-            .nav-links {display: none;} /* Hide desktop nav links on mobile */
+        .back-to-blog {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--navy-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .back-btn:hover {
+            background: var(--warm-ochre);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: var(--navy-blue);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--warm-ochre);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .newsletter-form button {
+            background: var(--warm-ochre);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--rust-orange);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-navy);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Loading and Error States */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+        }
+
+        .error {
+            text-align: center;
+            padding: 60px 20px;
+            color: #d32f2f;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { 
+                display: none; 
+            }
+            
+            .post-page-header {
+                padding: 120px 0 60px;
+            }
+            
+            .post-title {
+                font-size: 2rem;
+            }
+            
+            .post-content {
+                padding: 30px 20px;
+            }
+            
+            .post-header {
+                padding: 30px 20px 15px;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        /* Language-specific content */
+        .lang-content { 
+            display: none; 
+        }
+        
+        .lang-content.active { 
+            display: block; 
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -370,24 +530,31 @@
             <div class="logo">
                 <a href="index.html">
                     <img src="images/logo.png" alt="Logo Adama">
-                    <h1 class="lang-content active" data-lang="pl">Adam</h1>
-                    <h1 class="lang-content" data-lang="en">Adam</h1>
+                    <h1>Adam</h1>
                 </a>
             </div>
             <div class="nav-right">
-                <ul class="nav-links" id="nav-links">
-                    <!-- Dynamically populated -->
+                <ul class="nav-links">
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="index.html#about">O mnie</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#services">Usługi</a></li>
+                    <li><a href="index.html#contact">Kontakt</a></li>
                 </ul>
                 <div class="language-selector">
-                    <button class="lang-btn active" data-lang="pl"><span class="flag flag-pl"></span><span>PL</span></button>
-                    <button class="lang-btn" data-lang="en"><span class="flag flag-en"></span><span>EN</span></button>
+                    <button class="lang-btn active" data-lang="pl">
+                        <span class="flag flag-pl"></span><span>PL</span>
+                    </button>
+                    <button class="lang-btn" data-lang="en">
+                        <span class="flag flag-en"></span><span>EN</span>
+                    </button>
                 </div>
-                <!-- Mobile Menu Toggle can be added here if needed for post page -->
             </div>
         </nav>
     </header>
 
-    <section class="post-page-breadcrumb-header">
+    <section class="post-page-header">
         <div class="container">
             <nav class="breadcrumb-nav">
                 <a href="index.html" class="lang-content active" data-lang="pl">Strona główna</a>
@@ -395,20 +562,16 @@
                 <span class="breadcrumb-separator">/</span>
                 <a href="blog.html">Blog</a>
                 <span class="breadcrumb-separator">/</span>
-                <span id="current-post-title" class="breadcrumb-current">Ładowanie tytułu...</span>
+                <span id="current-post-title">Post</span>
             </nav>
         </div>
     </section>
 
     <section class="post-content-section">
         <div class="container">
-            <div id="post-display-area" class="loading">
-                <!-- Content will be loaded here by JavaScript -->
-            </div>
-             <div class="back-to-blog fade-in">
-                <a href="blog.html" class="back-btn" id="back-to-blog-btn">
-                    <!-- Text set by JS -->
-                </a>
+            <div id="post-content" class="loading">
+                <span class="lang-content active" data-lang="pl">Ładowanie postu...</span>
+                <span class="lang-content" data-lang="en">Loading post...</span>
             </div>
         </div>
     </section>
@@ -419,11 +582,10 @@
             <h2 class="lang-content" data-lang="en">Stay Updated</h2>
             <p class="lang-content active" data-lang="pl">Otrzymuj powiadomienia o nowych artykułach i przemyśleniach</p>
             <p class="lang-content" data-lang="en">Get notifications about new articles and insights</p>
-            <form class="newsletter-form" id="newsletter-form" data-netlify="true" name="newsletter-postpage"> <!-- Ensure unique name for Netlify if needed -->
-                <p class="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field-newsletter-post" /></label></p>
-                <input type="hidden" name="form-name" value="newsletter-postpage" />
-                <input type="email" id="newsletter-email" name="email" required>
-                <button type="submit" id="newsletter-submit-btn"></button>
+            <form class="newsletter-form" data-netlify="true" name="newsletter">
+                <input type="hidden" name="form-name" value="newsletter" />
+                <input type="email" name="email" placeholder="Twój e-mail" required>
+                <button type="submit">Zapisz się</button>
             </form>
         </div>
     </section>
@@ -437,270 +599,152 @@
 
     <script>
         let currentLanguage = 'pl';
-        
-        const staticUiContent = { // Renamed to avoid confusion with post content
-            pl: {
-                nav: [
-                    { text: 'Start', href: 'index.html' }, { text: 'O mnie', href: 'index.html#about' },
-                    { text: 'Portfolio', href: 'index.html#portfolio' }, { text: 'Blog', href: 'blog.html', active: true },
-                    { text: 'Usługi', href: 'index.html#services' }, { text: 'Kontakt', href: 'index.html#contact' }
-                ],
-                logoText: 'Adam', breadcrumbHome: 'Strona główna',
-                newsletterTitle: 'Bądź na bieżąco', newsletterText: 'Otrzymuj powiadomienia o nowych artykułach i przemyśleniach',
-                newsletterPlaceholder: 'Twój e-mail', newsletterButton: 'Zapisz się',
-                newsletterSuccess: 'Dziękuję za zapisanie się!', newsletterError: 'Błąd zapisu.',
-                footerText: '© 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.',
-                postLoading: 'Ładowanie postu...', postError: 'Błąd ładowania postu.', postNotFound: 'Nie znaleziono postu.',
-                backToBlog: '← Powrót do bloga'
-            },
-            en: {
-                nav: [
-                    { text: 'Home', href: 'index.html' }, { text: 'About', href: 'index.html#about' },
-                    { text: 'Portfolio', href: 'index.html#portfolio' }, { text: 'Blog', href: 'blog.html', active: true },
-                    { text: 'Services', href: 'index.html#services' }, { text: 'Contact', href: 'index.html#contact' }
-                ],
-                logoText: 'Adam', breadcrumbHome: 'Home',
-                newsletterTitle: 'Stay Updated', newsletterText: 'Get notifications about new articles and insights',
-                newsletterPlaceholder: 'Your e-mail', newsletterButton: 'Subscribe',
-                newsletterSuccess: 'Thank you for subscribing!', newsletterError: 'Subscription error.',
-                footerText: '© 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.',
-                postLoading: 'Loading post...', postError: 'Error loading post.', postNotFound: 'Post not found.',
-                backToBlog: '← Back to blog'
-            }
-        };
-
-        function updateNavigation() {
-            const navLinksContainer = document.querySelector('header .nav-links');
-            const logoH1Elements = document.querySelectorAll('.logo h1.lang-content'); // Select both lang versions
-            if (!navLinksContainer) return;
-
-            navLinksContainer.innerHTML = '';
-            staticUiContent[currentLanguage].nav.forEach(item => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = item.href;
-                a.textContent = item.text;
-                if (item.active && item.href.includes(window.location.pathname.split('/').pop())) {
-                     a.classList.add('active');
-                }
-                li.appendChild(a);
-                navLinksContainer.appendChild(li);
-            });
-            // Logo H1 text is handled by .lang-content visibility
-        }
-        
-        function updateStaticPageTexts() {
-            const breadcrumbHome = document.querySelector('.breadcrumb-nav a[href="index.html"].lang-content[data-lang="' + currentLanguage + '"]');
-            // No, this is wrong. Breadcrumb home should be one element with text changed.
-            const breadcrumbHomeLink = document.querySelector('.breadcrumb-nav a[href="index.html"]');
-             if (breadcrumbHomeLink) { // Assuming only one home link that needs text update
-                breadcrumbHomeLink.textContent = staticUiContent[currentLanguage].breadcrumbHome;
-            }
-
-
-            const newsletterEmailInput = document.getElementById('newsletter-email');
-            const newsletterSubmitButton = document.getElementById('newsletter-submit-btn');
-            if(newsletterEmailInput) newsletterEmailInput.placeholder = staticUiContent[currentLanguage].newsletterPlaceholder;
-            if(newsletterSubmitButton) newsletterSubmitButton.textContent = staticUiContent[currentLanguage].newsletterButton;
-
-            const backToBlogBtn = document.getElementById('back-to-blog-btn');
-            if(backToBlogBtn) backToBlogBtn.textContent = staticUiContent[currentLanguage].backToBlog;
-        }
 
         async function loadPost() {
-            const postDisplayArea = document.getElementById('post-display-area');
-            const currentPostTitleEl = document.getElementById('current-post-title');
-            postDisplayArea.innerHTML = `<div class="loading">${staticUiContent[currentLanguage].postLoading}</div>`;
-
             const urlParams = new URLSearchParams(window.location.search);
             const slug = urlParams.get('slug');
-            // const langParam = urlParams.get('lang') || currentLanguage; // Future use for multi-lang posts
-
+            
+            console.log('Loading post with slug:', slug);
+            
             if (!slug) {
-                postDisplayArea.innerHTML = `<div class="error">${staticUiContent[currentLanguage].postNotFound}</div>`;
-                currentPostTitleEl.textContent = staticUiContent[currentLanguage].postNotFound;
+                document.getElementById('post-content').innerHTML = 
+                    `<div class="error">Brak parametru slug w URL</div>`;
                 return;
             }
 
             try {
-                // For Decap CMS, you'd fetch from a path like /_posts/blog/pl/${slug}.md or /_posts/blog/en/${slug}.md
-                // For now, using a placeholder path. Replace with your actual Decap CMS content path.
-                const postPath = `/_posts/blog/${currentLanguage}/${slug}.md`; // ADJUST THIS PATH
+                const apiUrl = `https://api.github.com/repos/adamsosx/portfolio/contents/_posts/${slug}.md`;
+                console.log('Fetching from:', apiUrl);
                 
-                // SIMULATING FETCH for now, as direct GitHub API fetch has rate limits and is complex for front-end only
-                // In a real setup with Decap CMS and a build process, this file would be locally available
-                // or fetched from a manifest.
-                // For demonstration, let's assume we have a way to get the markdown content:
-                // const markdownContent = await fetchMarkdownForSlug(slug, currentLanguage);
+                const response = await fetch(apiUrl);
+                console.log('Response status:', response.status);
                 
-                // Placeholder: Simulate fetching markdown (replace with actual fetch logic for your setup)
-                // This example assumes a simple structure. You'll need to adapt it.
-                let demoMarkdownContent = '';
-                if (slug === "2025-01-15-kiedy-ai-spotyka-human-design") { // Example slug
-                     demoMarkdownContent = 
-`---
-title: ${currentLanguage === 'pl' ? "Kiedy AI spotyka Human Design: Nowa era samopoznania" : "When AI Meets Human Design: A New Era of Self-Discovery"}
-date: ${currentLanguage === 'pl' ? "15 stycznia 2025" : "January 15, 2025"}
-category: ${currentLanguage === 'pl' ? "Sztuczna Inteligencja" : "Artificial Intelligence"}
-categoryId: ai
-image: /images/blog/featured_placeholder.jpg 
-readTime: ${currentLanguage === 'pl' ? "8 min czytania" : "8 min read"}
-excerpt: ${currentLanguage === 'pl' ? "Jak połączenie sztucznej inteligencji z wiedzą o ludzkiej naturze może zrewolucjonizować sposób, w jaki poznajemy samych siebie?" : "How can the combination of artificial intelligence with knowledge of human nature revolutionize the way we know ourselves?"}
----
-
-## Wstęp
-
-To jest treść posta o AI i Human Design...
-
-### Podrozdział
-
-Więcej detali tutaj.
-`;
-                } else {
-                    throw new Error("Post not found in demo data");
+                if (!response.ok) {
+                    throw new Error(`Plik nie znaleziony: ${response.status}`);
                 }
-
-
-                const frontMatterMatch = demoMarkdownContent.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-                if (!frontMatterMatch) throw new Error('Invalid Markdown format: No front matter found');
                 
-                const frontMatterText = frontMatterMatch[1];
-                const bodyMarkdown = frontMatterMatch[2];
+                const file = await response.json();
+                const contentResponse = await fetch(file.download_url);
+                const rawContent = await contentResponse.text();
                 
-                const postData = {};
+                console.log('Raw content preview:', rawContent.substring(0, 200));
+                
+                // Proste parsowanie front matter
+                const parts = rawContent.split('---');
+                if (parts.length < 3) {
+                    throw new Error('Niepoprawny format pliku - brak front matter');
+                }
+                
+                const frontMatterText = parts[1].trim();
+                const bodyText = parts.slice(2).join('---').trim();
+                
+                console.log('Front matter:', frontMatterText);
+                console.log('Body preview:', bodyText.substring(0, 100));
+                
+                // Parsowanie front matter
+                const post = {};
                 frontMatterText.split('\n').forEach(line => {
                     const colonIndex = line.indexOf(':');
                     if (colonIndex > 0) {
                         const key = line.substring(0, colonIndex).trim();
-                        const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
-                        postData[key] = value;
+                        let value = line.substring(colonIndex + 1).trim();
+                        // Usuń cudzysłowy jeśli są
+                        if ((value.startsWith('"') && value.endsWith('"')) || 
+                            (value.startsWith("'") && value.endsWith("'"))) {
+                            value = value.slice(1, -1);
+                        }
+                        post[key] = value;
                     }
                 });
-
-                document.title = postData.title + ' - Blog';
-                currentPostTitleEl.textContent = postData.title;
                 
-                const htmlBody = marked.parse(bodyMarkdown); // Using Marked.js
-
-                postDisplayArea.innerHTML = `
+                post.body = bodyText;
+                
+                console.log('Parsed post:', post);
+                
+                // Update page
+                document.title = (post.title || 'Post') + ' - Blog';
+                document.getElementById('current-post-title').textContent = post.title || 'Post';
+                
+                // Proste formatowanie Markdown
+                let htmlContent = post.body
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/^- (.*$)/gim, '<li>$1</li>')
+                    .split('\n\n')
+                    .map(paragraph => {
+                        if (paragraph.trim()) {
+                            if (paragraph.startsWith('<h') || paragraph.startsWith('<li>')) {
+                                return paragraph;
+                            }
+                            return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
+                        }
+                        return '';
+                    })
+                    .join('');
+                
+                document.getElementById('post-content').innerHTML = `
                     <article class="post-article fade-in">
-                        <header class="post-header-content">
-                            ${postData.category ? `<span class="post-category-tag">${postData.category}</span>` : ''}
-                            <h1 class="post-main-title">${postData.title}</h1>
-                            <div class="post-meta-details">
-                                ${postData.date ? `<span>📅 ${postData.date}</span>` : ''}
-                                ${postData.readTime ? `<span>⏱️ ${postData.readTime}</span>` : ''}
+                        <header class="post-header">
+                            ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
+                            <h1 class="post-title">${post.title || 'Bez tytułu'}</h1>
+                            <div class="post-meta">
+                                ${post.date ? `<span>📅 ${post.date}</span>` : ''}
+                                ${post.readTime ? `<span>⏱️ ${post.readTime}</span>` : ''}
+                                ${post.category ? `<span>📂 ${post.category}</span>` : ''}
                             </div>
-                            ${postData.image ? `
-                                <div class="post-featured-image-container">
-                                    <img src="${postData.image}" alt="${postData.title}">
+                            ${post.image ? `
+                                <div class="featured-image">
+                                    <img src="${post.image}" alt="${post.title}">
                                 </div>
                             ` : ''}
                         </header>
-                        <div class="actual-post-content">
-                            ${htmlBody}
+                        
+                        <div class="post-content">
+                            ${htmlContent}
                         </div>
-                    </article>`;
+                    </article>
+                    
+                    <div class="back-to-blog fade-in">
+                        <a href="blog.html" class="back-btn">← Powrót do bloga</a>
+                    </div>
+                `;
                 
+                // Animacje
                 setTimeout(() => {
-                    postDisplayArea.querySelector('.fade-in')?.classList.add('visible');
-                }, 50);
-
+                    document.querySelectorAll('.fade-in').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }, 100);
+                
             } catch (error) {
                 console.error('Error loading post:', error);
-                postDisplayArea.innerHTML = `<div class="error">${staticUiContent[currentLanguage].error}: ${error.message}</div>`;
-                currentPostTitleEl.textContent = staticUiContent[currentLanguage].postError;
+                document.getElementById('post-content').innerHTML = 
+                    `<div class="error">Błąd ładowania postu: ${error.message}</div>`;
             }
         }
 
         function changeLanguage(lang) {
             currentLanguage = lang;
-            document.documentElement.lang = lang; 
-
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
             document.querySelectorAll('.lang-content').forEach(element => {
                 element.classList.toggle('active', element.getAttribute('data-lang') === lang);
             });
-
-            updateNavigation(); 
-            updateStaticPageTexts();
-            loadPost(); // Reload post content for correct labels if any depend on language
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const initialLang = document.documentElement.lang || 'pl';
-            if (initialLang !== 'pl' && initialLang !== 'en') {
-                currentLanguage = 'pl';
-                document.documentElement.lang = 'pl';
-            } else {
-                currentLanguage = initialLang;
-            }
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLanguage);
-            });
-            document.querySelectorAll('.lang-content').forEach(element => {
-                element.classList.toggle('active', element.getAttribute('data-lang') === currentLanguage);
-            });
-
-            updateNavigation();
-            updateStaticPageTexts();
             loadPost();
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() { changeLanguage(this.getAttribute('data-lang')); });
-            });
             
-            const newsletterForm = document.getElementById('newsletter-form');
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', function(e) {
-                    e.preventDefault(); /* ... Netlify form submission logic ... */
-                    const form = e.target;
-                    const formData = new FormData(form);
-                    const successMessage = staticUiContent[currentLanguage].newsletterSuccess;
-                    const errorMessage = staticUiContent[currentLanguage].newsletterError;
-
-                    fetch("/", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: new URLSearchParams(formData).toString()
-                    })
-                    .then(response => {
-                        if (response.ok) { alert(successMessage); form.reset(); } 
-                        else { alert(errorMessage); }
-                    })
-                    .catch(() => alert(errorMessage));
+            // Language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeLanguage(this.getAttribute('data-lang'));
                 });
-            }
-        });
-
-        window.addEventListener('scroll', function() { /* Header scroll effect */
-            const header = document.querySelector('header');
-            if (header) {
-                if (window.scrollY > 100) {
-                    header.style.background = 'rgba(30, 58, 95, 0.95)';
-                    header.style.backdropFilter = 'blur(10px)';
-                } else {
-                    header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
-                    header.style.backdropFilter = 'none';
-                }
-            }
-        });
-    </script>
-     <script type="text/javascript"> /* Voiceflow Widget */
-      (function(d, t) {
-          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-          v.onload = function() {
-            window.voiceflow.chat.load({
-              verify: { projectID: '660c04457b8b244d89b5a822' },
-              url: 'https://general-runtime.voiceflow.com',
-              versionID: 'production'
             });
-          }
-          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-      })(document, 'script');
+        });
     </script>
 </body>
 </html>
