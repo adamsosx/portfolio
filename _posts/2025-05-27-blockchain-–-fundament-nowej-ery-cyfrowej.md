@@ -9,21 +9,21 @@ excerpt: Blockchain to zdecentralizowana, rozproszona baza danych, w której
   (ang. chain)
 published: true
 ---
-**1. Czym jest blockchain?**
+**Czym jest blockchain?**
 
 Definicja w skrócie: Blockchain to zdecentralizowana, rozproszona baza danych, w której informacje zapisywane są w blokach, połączonych ze sobą w formie łańcucha (ang. chain). Każdy nowy blok zawiera skrót (hash) poprzedniego, co czyni system niezwykle trudnym do sfałszowania.
 
-Jak to działa – krok po kroku:
+**Jak to działa – krok po kroku:**
 
-* Użytkownik inicjuje transakcję (np. przesłanie kryptowaluty).
-* Transakcja trafia do sieci jako tzw. pending transaction.
-* Górnicy/węzły (nodes) walidują transakcję przy pomocy algorytmów konsensusu (np. Proof of Work lub Proof of Stake).
-* Zweryfikowana transakcja trafia do nowego bloku.
-* Blok zostaje dodany do łańcucha i zapisany w całej sieci.
+1. Użytkownik inicjuje transakcję (np. przesłanie kryptowaluty).
+2. Transakcja trafia do sieci jako tzw. pending transaction.
+3. Górnicy/węzły (nodes) walidują transakcję przy pomocy algorytmów konsensusu (np. Proof of Work lub Proof of Stake).
+4. Zweryfikowana transakcja trafia do nowego bloku.
+5. Blok zostaje dodany do łańcucha i zapisany w całej sieci.
 
 *📌 Ciekawostka: Blockchainy publiczne (np. Bitcoin, Ethereum) to tylko 1 z typów – istnieją też blockchainy prywatne i konsorcjalne (np. Hyperledger Fabric – wykorzystywany przez IBM).*
 
-**2. DeFi – Zdecentralizowane Finanse**
+**DeFi – Zdecentralizowane Finanse**
 
 Definicja: DeFi (Decentralized Finance) to sektor aplikacji finansowych działających na blockchainie, bez pośredników (banków, instytucji).
 
@@ -34,32 +34,31 @@ Najważniejsze zastosowania:
 * Staking i farming – pasywny dochód przez „zamrażanie” tokenów
 * Stablecoiny – np. DAI, USDC
 
-*🛠 Jak to działa: Użytkownicy wpłacają środki do tzw. smart contractów – programów działających autonomicznie. Kod decyduje o pożyczkach, oprocentowaniu i zabezpieczeniach.*
+🛠 Jak to działa: Użytkownicy wpłacają środki do tzw. smart contractów – programów działających autonomicznie. Kod decyduje o pożyczkach, oprocentowaniu i zabezpieczeniach.
 
 *⚠️ Nieznany fakt: DeFi często opiera się na tzw. flash loans – błyskawicznych pożyczkach z zerowym zabezpieczeniem, które trzeba spłacić w tym samym bloku. Potężne narzędzie, ale też źródło ataków.*
 
-**3. NFT – Niewymienialne Tokeny**
+**NFT – Niewymienialne Tokeny**
 
 NFT (Non-Fungible Token) to unikalny zasób cyfrowy zapisany na blockchainie, reprezentujący własność czegokolwiek – od sztuki, przez muzykę, po... nieruchomości.
 
-Najczęstsze zastosowania:
+**Najczęstsze zastosowania:**
 
-* Cyfrowa sztuka (OpenSea, Foundation)
-* Przedmioty w grach (Axie Infinity, Decentraland)
-* Kolekcje sportowe (NBA Top Shot)
-* Bilety na wydarzenia (POAP – proof of attendance protocol)
+* **Cyfrowa sztuka (OpenSea, Foundation)**
+* **Przedmioty w grach (Axie Infinity, Decentraland)**
+* **Kolekcje sportowe (NBA Top Shot)**
+* **Bilety na wydarzenia (POAP – proof of attendance protocol)**
 
-*📌 Nieznane zastosowania:*
+**Nieznane zastosowania:**
 
-*Tożsamość cyfrowa – np. NFT jako paszport na Web3.*
+* **Tożsamość cyfrowa – np. NFT jako paszport na Web3.**
+* **Licencje i certyfikaty – np. NFT jako potwierdzenie kursu ukończonego online.**
 
-*Licencje i certyfikaty – np. NFT jako potwierdzenie kursu ukończonego online.*
+🧠 Co ciekawe: Wiele osób nie wie, że grafika NFT nie jest zapisana na blockchainie, lecz najczęściej przechowywana jest w systemach typu IPFS – blockchain zawiera jedynie jej odnośnik.
 
-*🧠 Co ciekawe: Wiele osób nie wie, że grafika NFT nie jest zapisana na blockchainie, lecz najczęściej przechowywana jest w systemach typu IPFS – blockchain zawiera jedynie jej odnośnik.*
+**Inne zastosowania blockchaina**
 
-**4. Inne zastosowania blockchaina**
-
-a) Supply Chain & logistyka
+**a**) Supply Chain & logistyka
 
 Transparentność i śledzenie produktów (IBM + Walmart)
 
@@ -85,9 +84,7 @@ e) Zarządzanie dokumentami
 
 Notariusze i zapisy własności mogą działać na blockchainie (np. rejestry gruntów w Gruzji)
 
-**5. Przyszłość i wyzwania**
-
-Wyzwania:
+**Przyszłość i wyzwania**
 
 Skalowalność (Ethereum vs. Layer 2: Arbitrum, Optimism)
 
@@ -95,7 +92,7 @@ Zużycie energii (choć Proof of Stake już to mocno ogranicza)
 
 Prawo i regulacje (np. MiCA w UE)
 
-Nowe kierunki:
+**Nowe kierunki:**
 
 RWA – Real World Assets: tokenizacja fizycznych aktywów jak nieruchomości, akcje, złoto
 
