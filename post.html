@@ -279,6 +279,8 @@
             font-size: 1.2rem;
             line-height: 1.8;
             color: var(--dark-navy);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .post-content h1,
@@ -307,6 +309,7 @@
 
         .post-content p {
             margin-bottom: 20px;
+            word-break: break-word;
         }
 
         .post-content img {
@@ -343,6 +346,7 @@
             border-radius: 4px;
             font-family: 'Courier New', monospace;
             font-size: 0.9em;
+            word-break: break-all;
         }
 
         .post-content pre {
@@ -352,6 +356,7 @@
             border-radius: 10px;
             overflow-x: auto;
             margin: 25px 0;
+            word-wrap: normal;
         }
 
         .post-content pre code {
@@ -486,6 +491,7 @@
             
             .post-content {
                 padding: 30px 20px;
+                font-size: 1.1rem;
             }
             
             .post-header {
@@ -627,102 +633,144 @@
                 const contentResponse = await fetch(file.download_url);
                 const rawContent = await contentResponse.text();
                 
-                console.log('Raw content preview:', rawContent.substring(0, 200));
+                console.log('Raw content preview:', rawContent.substring(0, 300));
                 
-                // Proste parsowanie front matter
-                const parts = rawContent.split('---');
-                if (parts.length < 3) {
-                    throw new Error('Niepoprawny format pliku - brak front matter');
+                // POPRAWIONE parsowanie front matter z lepszą obsługą błędów
+                const frontMatterRegex = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
+                const match = rawContent.match(frontMatterRegex);
+                
+                if (!match) {
+                    console.error('Nie znaleziono front matter, próbuję alternatywne parsowanie...');
+                    // Fallback - jeśli nie ma front matter, użyj całej zawartości jako body
+                    const post = {
+                        title: slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' '),
+                        date: slug.substring(0, 10),
+                        category: 'Blog',
+                        body: rawContent
+                    };
+                    renderPost(post);
+                    return;
                 }
                 
-                const frontMatterText = parts[1].trim();
-                const bodyText = parts.slice(2).join('---').trim();
+                const frontMatterText = match[1].trim();
+                const bodyText = match[2].trim();
                 
                 console.log('Front matter:', frontMatterText);
                 console.log('Body preview:', bodyText.substring(0, 100));
                 
-                // Parsowanie front matter
-                const post = {};
-                frontMatterText.split('\n').forEach(line => {
+                // Parsowanie front matter z lepszą obsługą błędów
+                const post = { body: bodyText };
+                
+                frontMatterText.split(/\r?\n/).forEach(line => {
                     const colonIndex = line.indexOf(':');
                     if (colonIndex > 0) {
                         const key = line.substring(0, colonIndex).trim();
                         let value = line.substring(colonIndex + 1).trim();
                         // Usuń cudzysłowy jeśli są
-                        if ((value.startsWith('"') && value.endsWith('"')) || 
-                            (value.startsWith("'") && value.endsWith("'"))) {
-                            value = value.slice(1, -1);
-                        }
+                        value = value.replace(/^["']|["']$/g, '');
                         post[key] = value;
                     }
                 });
                 
-                post.body = bodyText;
-                
                 console.log('Parsed post:', post);
-                
-                // Update page
-                document.title = (post.title || 'Post') + ' - Blog';
-                document.getElementById('current-post-title').textContent = post.title || 'Post';
-                
-                // Proste formatowanie Markdown
-                let htmlContent = post.body
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                    .replace(/^- (.*$)/gim, '<li>$1</li>')
-                    .split('\n\n')
-                    .map(paragraph => {
-                        if (paragraph.trim()) {
-                            if (paragraph.startsWith('<h') || paragraph.startsWith('<li>')) {
-                                return paragraph;
-                            }
-                            return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
-                        }
-                        return '';
-                    })
-                    .join('');
-                
-                document.getElementById('post-content').innerHTML = `
-                    <article class="post-article fade-in">
-                        <header class="post-header">
-                            ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
-                            <h1 class="post-title">${post.title || 'Bez tytułu'}</h1>
-                            <div class="post-meta">
-                                ${post.date ? `<span>📅 ${post.date}</span>` : ''}
-                                ${post.readTime ? `<span>⏱️ ${post.readTime}</span>` : ''}
-                                ${post.category ? `<span>📂 ${post.category}</span>` : ''}
-                            </div>
-                            ${post.image ? `
-                                <div class="featured-image">
-                                    <img src="${post.image}" alt="${post.title}">
-                                </div>
-                            ` : ''}
-                        </header>
-                        
-                        <div class="post-content">
-                            ${htmlContent}
-                        </div>
-                    </article>
-                    
-                    <div class="back-to-blog fade-in">
-                        <a href="blog.html" class="back-btn">← Powrót do bloga</a>
-                    </div>
-                `;
-                
-                // Animacje
-                setTimeout(() => {
-                    document.querySelectorAll('.fade-in').forEach(el => {
-                        el.classList.add('visible');
-                    });
-                }, 100);
+                renderPost(post);
                 
             } catch (error) {
                 console.error('Error loading post:', error);
                 document.getElementById('post-content').innerHTML = 
                     `<div class="error">Błąd ładowania postu: ${error.message}</div>`;
             }
+        }
+
+        function renderPost(post) {
+            // Update page
+            document.title = (post.title || 'Post') + ' - Blog';
+            document.getElementById('current-post-title').textContent = post.title || 'Post';
+            
+            // ULEPSZONE formatowanie treści z obsługą długich słów
+            let htmlContent = post.body;
+            
+            // Jeśli treść to długi ciąg bez spacji (jak JEDNEJEDNEJEDNE), podziel go
+            if (htmlContent && htmlContent.length > 50 && !htmlContent.includes(' ') && !htmlContent.includes('\n')) {
+                // Podziel długi tekst na mniejsze fragmenty
+                htmlContent = htmlContent.match(/.{1,20}/g).join(' ');
+            }
+            
+            // Podstawowe formatowanie Markdown
+            htmlContent = htmlContent
+                // Nagłówki
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                // Pogrubienie i kursywa
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                // Listy
+                .replace(/^\* (.*$)/gim, '<li>$1</li>')
+                .replace(/^- (.*$)/gim, '<li>$1</li>')
+                // Linki
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+                // Kod inline
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                // Podziały na akapity
+                .split(/\n\s*\n/)
+                .map(paragraph => {
+                    paragraph = paragraph.trim();
+                    if (!paragraph) return '';
+                    
+                    // Jeśli to już HTML tag, zostaw bez zmian
+                    if (paragraph.match(/^<(h[1-6]|li|ul|ol|blockquote)/)) {
+                        return paragraph;
+                    }
+                    
+                    // Jeśli zawiera <li>, owinij w <ul>
+                    if (paragraph.includes('<li>')) {
+                        return '<ul>' + paragraph + '</ul>';
+                    }
+                    
+                    // Zwykły akapit z obsługą długich słów
+                    return `<p style="word-break: break-word; overflow-wrap: break-word;">${paragraph.replace(/\n/g, '<br>')}</p>`;
+                })
+                .join('\n');
+            
+            // Jeśli nadal brak formatowania, po prostu owinij w akapit
+            if (!htmlContent.includes('<p>') && !htmlContent.includes('<h')) {
+                htmlContent = `<p style="word-break: break-word; overflow-wrap: break-word;">${htmlContent}</p>`;
+            }
+            
+            document.getElementById('post-content').innerHTML = `
+                <article class="post-article fade-in">
+                    <header class="post-header">
+                        ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
+                        <h1 class="post-title">${post.title || 'Bez tytułu'}</h1>
+                        <div class="post-meta">
+                            ${post.date ? `<span>📅 ${post.date}</span>` : ''}
+                            ${post.readTime ? `<span>⏱️ ${post.readTime}</span>` : ''}
+                            ${post.category ? `<span>📂 ${post.category}</span>` : ''}
+                        </div>
+                        ${post.image ? `
+                            <div class="featured-image">
+                                <img src="${post.image}" alt="${post.title}">
+                            </div>
+                        ` : ''}
+                    </header>
+                    
+                    <div class="post-content">
+                        ${htmlContent}
+                    </div>
+                </article>
+                
+                <div class="back-to-blog fade-in">
+                    <a href="blog.html" class="back-btn">← Powrót do bloga</a>
+                </div>
+            `;
+            
+            // Animacje
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 100);
         }
 
         function changeLanguage(lang) {
