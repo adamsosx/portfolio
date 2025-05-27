@@ -587,28 +587,38 @@
         let currentCategory = 'all';
         let allPosts = [];
 
-        // GitHub API funkcje (zachowane z działającego kodu)
+        // POPRAWIONA funkcja ładowania postów
         async function loadBlogPosts() {
+            console.log('Rozpoczynam ładowanie postów...');
             try {
                 const response = await fetch('https://api.github.com/repos/adamsosx/portfolio/contents/_posts');
+                
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 
                 const files = await response.json();
-                const posts = [];
+                console.log('Pliki z _posts:', files);
                 
+                const posts = [];
                 for (const file of files) {
-                    if (file.name.endsWith('.md')) {
-                        const fileResponse = await fetch(file.download_url);
-                        const content = await fileResponse.text();
-                        const post = parseMarkdownPost(content, file.name);
-                        if (post && post.published !== 'false') {
-                            posts.push(post);
+                    // POPRAWKA - sprawdź czy to plik .md (nie folder)
+                    if (file.name.endsWith('.md') && file.type === 'file') {
+                        console.log('Przetwarzam plik:', file.name);
+                        try {
+                            const fileResponse = await fetch(file.download_url);
+                            const content = await fileResponse.text();
+                            const post = parseMarkdownPost(content, file.name);
+                            if (post && post.published !== 'false') {
+                                posts.push(post);
+                            }
+                        } catch (fileError) {
+                            console.error('Błąd ładowania pliku:', file.name, fileError);
                         }
                     }
                 }
                 
+                console.log('Znalezione posty:', posts);
                 allPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
                 displayPosts();
             } catch (error) {
@@ -618,27 +628,45 @@
             }
         }
 
+        // POPRAWIONA funkcja parsowania
         function parseMarkdownPost(content, filename) {
-            const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-            if (!frontMatterMatch) return null;
+            console.log('Parsowanie pliku:', filename);
+            
+            // POPRAWKA - lepsze parsowanie front matter
+            const frontMatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+            if (!frontMatterMatch) {
+                console.log('Nie znaleziono front matter w:', filename);
+                return null;
+            }
             
             const frontMatter = frontMatterMatch[1];
             const body = frontMatterMatch[2];
             
             const post = { body };
-            frontMatter.split('\n').forEach(line => {
+            frontMatter.split(/\r?\n/).forEach(line => {
                 const colonIndex = line.indexOf(':');
                 if (colonIndex > 0) {
                     const key = line.substring(0, colonIndex).trim();
-                    const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+                    let value = line.substring(colonIndex + 1).trim();
+                    
+                    // POPRAWKA - usuń cudzysłowy
+                    if ((value.startsWith('"') && value.endsWith('"')) || 
+                        (value.startsWith("'") && value.endsWith("'"))) {
+                        value = value.slice(1, -1);
+                    }
+                    
                     post[key] = value;
                 }
             });
             
+            // POPRAWKA - użyj dokładnej nazwy pliku
             post.slug = filename.replace('.md', '');
+            
+            console.log('Sparsowany post:', post);
             return post;
         }
 
+        // POPRAWIONA funkcja wyświetlania
         function displayPosts() {
             const postsGrid = document.getElementById('posts-grid');
             const featuredContainer = document.getElementById('featured-post-container');
@@ -653,16 +681,16 @@
                 const featured = filteredPosts[0];
                 featuredContainer.innerHTML = `
                     <div class="featured-post fade-in">
-                        <div class="featured-image" style="background-image: url('${featured.image || 'images/blog/default.jpg'}');"></div>
+                        <div class="featured-image" style="background-image: url('${featured.image || ''}');"></div>
                         <div class="featured-content">
                             <span class="featured-tag">${featured.category || 'Blog'}</span>
-                            <h2>${featured.title}</h2>
+                            <h2>${featured.title || 'Bez tytułu'}</h2>
                             <p class="excerpt">${featured.excerpt || featured.body.substring(0, 150) + '...'}</p>
                             <div class="blog-card-meta">
-                                <span>${featured.date}</span>
+                                <span>${featured.date || ''}</span>
                                 <span>${featured.readTime || '5 min'}</span>
                             </div>
-                            <a href="/post.html?slug=${featured.slug}" class="read-more">
+                            <a href="post.html?slug=${featured.slug}" class="read-more">
                                 ${currentLanguage === 'pl' ? 'Czytaj więcej →' : 'Read more →'}
                             </a>
                         </div>
@@ -673,17 +701,17 @@
                 const remainingPosts = filteredPosts.slice(1);
                 postsGrid.innerHTML = remainingPosts.map(post => `
                     <div class="blog-card fade-in">
-                        <div class="blog-card-image" style="background-image: url('${post.image || 'images/blog/default.jpg'}');">
+                        <div class="blog-card-image" style="background-image: url('${post.image || ''}');">
                             <span class="category-tag">${post.category || 'Blog'}</span>
                         </div>
                         <div class="blog-card-content">
                             <div class="blog-card-meta">
-                                <span>${post.date}</span>
+                                <span>${post.date || ''}</span>
                                 <span>${post.readTime || '5 min'}</span>
                             </div>
-                            <h3>${post.title}</h3>
+                            <h3>${post.title || 'Bez tytułu'}</h3>
                             <p class="excerpt">${post.excerpt || post.body.substring(0, 120) + '...'}</p>
-                            <a href="/post.html?slug=${post.slug}" class="read-more">
+                            <a href="post.html?slug=${post.slug}" class="read-more">
                                 ${currentLanguage === 'pl' ? 'Czytaj więcej →' : 'Read more →'}
                             </a>
                         </div>
