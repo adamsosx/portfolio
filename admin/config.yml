@@ -1,10 +1,10 @@
 backend:
   name: git-gateway
+  branch: main
 
 site_url: https://awisniewski.netlify.app
 display_url: https://awisniewski.netlify.app
 
-# Poprawiona ścieżka - bez "static" na początku
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
@@ -16,27 +16,5 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Tytuł", name: "title", widget: "string"}
-      - {label: "Data", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
-      - {label: "Język", name: "lang", widget: "select", options: ["pl", "en"], default: "pl"}
-      - {label: "Kategoria", name: "category", widget: "string"}
-      - {label: "ID Kategorii", name: "categoryId", widget: "string"}
-      - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
-      - {label: "Zajawka", name: "excerpt", widget: "text"}
-      - {label: "Czas czytania", name: "readTime", widget: "string", required: false}
-      - {label: "Opublikowany", name: "published", widget: "boolean", default: true}
+      - {label: "Data", name: "date", widget: "datetime"}
       - {label: "Treść", name: "body", widget: "markdown"}
-
-  - name: "projects"
-    label: "Projekty Portfolio"
-    folder: "_projects"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Tytuł Projektu", name: "title", widget: "string"}
-      - {label: "Data Ukończenia", name: "date", widget: "date", format: "YYYY-MM-DD", required: false}
-      - {label: "Krótki Opis", name: "description", widget: "string", required: false}
-      - {label: "Miniaturka", name: "thumbnail", widget: "image", required: false}
-      - {label: "Technologie", name: "tags", widget: "list", field: {label: "Technologia", name: "tag", widget: "string"}, required: false}
-      - {label: "Link do projektu", name: "project_url", widget: "string", required: false}
-      - {label: "Link do repozytorium", name: "repo_url", widget: "string", required: false}
-      - {label: "Pełny Opis Projektu", name: "body", widget: "markdown"}
