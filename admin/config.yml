@@ -1,18 +1,17 @@
 backend:
-  name: git-gateway # Kluczowe dla Netlify
+  name: github
+  name: git-gateway
+repo: adamsosx/portfolio  # Potwierdź, że to jest DOKŁADNA nazwa repozytorium
+branch: main             # Potwierdź, że to jest Twoja główna gałąź
+site_id: awisniewski.netlify.app
 
-# Nie dodawaj na razie repo, branch, site_domain, ani base_url, ani auth_endpoint.
-# Decap CMS z backendem git-gateway powinien próbować uzyskać te informacje
-# z integracji Netlify Identity / Git Gateway.
-
-# media_folder i public_folder są wymagane, nawet jeśli puste lub testowe
-media_folder: "static/images/cms_uploads" # Upewnij się, że ten folder istnieje w repo lub CMS go utworzy
-public_folder: "/images/cms_uploads"
+media_folder: "static/images/uploads_test" # Użyj innej nazwy folderu na test, aby uniknąć konfliktów
+public_folder: "/images/uploads_test"
 
 collections:
-  - name: "test"
-    label: "Test Collection - Minimal"
-    folder: "_test_minimal" # Utwórz ten folder w repozytorium
-    create: true
-    fields:
-      - {label: "Title", name: "title", widget: "string"}
+- name: "test_collection"
+label: "Kolekcja Testowa"
+folder: "_test_posts"  # Utwórz ten folder w swoim repozytorium
+create: true
+fields:
+- {label: "Tytuł", name: "title", widget: "string"}
