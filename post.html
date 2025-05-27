@@ -1,184 +1,881 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Post - Blog</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
-    .post-header h1 {
-      font-size: 2.5em;
-      margin-bottom: 15px;
-      line-height: 1.2;
-    }
-    .post-meta {
-      color: #666;
-      font-size: 0.9em;
-      margin-bottom: 30px;
-    }
-    .featured-image {
-      text-align: center;
-      margin: 30px 0;
-    }
-    .featured-image img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    }
-    .post-content {
-      font-size: 1.1em;
-      line-height: 1.8;
-      margin-bottom: 40px;
-    }
-    .post-content h2 {
-      margin-top: 40px;
-      margin-bottom: 20px;
-      font-size: 1.8em;
-    }
-    .post-content h3 {
-      margin-top: 30px;
-      margin-bottom: 15px;
-      font-size: 1.4em;
-    }
-    .post-content p {
-      margin-bottom: 20px;
-    }
-    .post-content img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin: 25px 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .back-to-blog {
-      text-align: center;
-      margin: 30px 0;
-    }
-    .back-to-blog a {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #0066cc;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 500;
-      transition: background 0.3s ease;
-    }
-    .back-to-blog a:hover {
-      background: #0052a3;
-    }
-    .loading {
-      text-align: center;
-      padding: 40px;
-      color: #666;
-    }
-    .error {
-      text-align: center;
-      padding: 40px;
-      color: #d32f2f;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
+    <!-- Marked.js - biblioteka do parsowania Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- js-yaml - biblioteka do parsowania YAML (frontmatter) -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy-blue: #1e3a5f;
+            --dark-navy: #14293d;
+            --warm-ochre: #d4812a;
+            --rust-orange: #b8651f;
+            --sage-green: #8aa387;
+            --light-beige: #f5f3f0;
+            --medium-gray: #7d8285;
+            --light-gray: #e8e6e3;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: var(--dark-navy);
+            background-color: var(--light-beige);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .flag {
+            width: 24px;
+            height: 18px;
+            display: inline-block;
+            border-radius: 2px;
+            position: relative;   
+            overflow: hidden;     
+        }
+
+        .flag-pl {
+            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
+        }
+
+        .flag-en {
+            background-color: white;
+        }
+        .flag-en::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(#C8102E, #C8102E), 
+                linear-gradient(#C8102E, #C8102E); 
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size:
+                100% 22.22%, 
+                16.66% 100%; 
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light-beige);
+            padding: 5px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--warm-ochre);
+        }
+
+        /* Breadcrumbs */
+        .breadcrumbs {
+            background: white;
+            padding: 20px 0;
+            margin-top: 70px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        .breadcrumb-nav a {
+            color: var(--navy-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-nav a:hover {
+            color: var(--warm-ochre);
+        }
+
+        .breadcrumb-separator {
+            color: var(--medium-gray);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            margin: 0 20px;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .post-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Post Header */
+        .post-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .post-category {
+            background: var(--warm-ochre);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .post-title {
+            font-size: 2.8rem;
+            font-weight: 300;
+            line-height: 1.2;
+            color: var(--navy-blue);
+            margin-bottom: 20px;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: var(--medium-gray);
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .featured-image {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .featured-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Post Content */
+        .post-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--dark-navy);
+        }
+
+        .post-content h1,
+        .post-content h2,
+        .post-content h3,
+        .post-content h4 {
+            color: var(--navy-blue);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .post-content h1 {
+            font-size: 2.2rem;
+            border-bottom: 3px solid var(--warm-ochre);
+            padding-bottom: 10px;
+        }
+
+        .post-content h2 {
+            font-size: 1.8rem;
+        }
+
+        .post-content h3 {
+            font-size: 1.5rem;
+        }
+
+        .post-content p {
+            margin-bottom: 25px;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .post-content blockquote {
+            background: var(--light-beige);
+            border-left: 5px solid var(--warm-ochre);
+            padding: 25px 30px;
+            margin: 30px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .post-content ul,
+        .post-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .post-content li {
+            margin-bottom: 10px;
+        }
+
+        .post-content code {
+            background: var(--light-gray);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .post-content pre {
+            background: var(--dark-navy);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 25px 0;
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Post Navigation */
+        .post-navigation {
+            margin: 60px 0;
+            padding: 40px 0;
+            border-top: 2px solid var(--light-gray);
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .nav-links-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 25px;
+            background: var(--light-beige);
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--dark-navy);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-link:hover {
+            background: white;
+            border-color: var(--warm-ochre);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .nav-link.next {
+            text-align: right;
+        }
+
+        .nav-subtitle {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .nav-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Back to Blog */
+        .back-to-blog {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: var(--navy-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--warm-ochre);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Related Posts */
+        .related-posts {
+            background: var(--light-beige);
+            padding: 50px 0;
+            margin: 60px -40px 0;
+        }
+
+        .related-posts h3 {
+            text-align: center;
+            color: var(--navy-blue);
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .related-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .related-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, var(--sage-green), var(--navy-blue));
+            background-size: cover;
+            background-position: center;
+        }
+
+        .related-content {
+            padding: 20px;
+        }
+
+        .related-content h4 {
+            color: var(--navy-blue);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .related-content a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .related-meta {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Loading and Error States */
+        .loading {
+            text-align: center;
+            padding: 100px 20px;
+            color: var(--medium-gray);
+            font-size: 1.2rem;
+        }
+
+        .error {
+            text-align: center;
+            padding: 100px 20px;
+            color: #d32f2f;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-navy);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            
+            .main-content {
+                margin: 0 10px;
+                border-radius: 15px 15px 0 0;
+            }
+            
+            .post-container {
+                padding: 40px 20px;
+            }
+            
+            .post-title {
+                font-size: 2.2rem;
+            }
+            
+            .post-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-links-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .nav-link.next {
+                text-align: left;
+            }
+            
+            .related-posts {
+                margin: 40px -20px 0;
+                padding: 40px 20px;
+            }
+            
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Language-specific content */
+        .lang-content { display: none; }
+        .lang-content.active { display: block; }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-  <div id="post-content" class="loading">Ładowanie postu...</div>
-  
-  <div class="back-to-blog">
-    <a href="/blog.html">← Powrót do bloga</a>
-  </div>
-
-  <script>
-    async function loadPost() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const slug = urlParams.get('slug');
-      
-      console.log('Ładowanie postu:', slug);
-      
-      if (!slug) {
-        document.getElementById('post-content').innerHTML = '<div class="error">Nie znaleziono parametru slug w URL.</div>';
-        return;
-      }
-
-      try {
-        console.log('Pobieranie pliku:', `https://api.github.com/repos/adamsosx/portfolio/contents/_posts/${slug}.md`);
-        
-        const response = await fetch(`https://api.github.com/repos/adamsosx/portfolio/contents/_posts/${slug}.md`);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const file = await response.json();
-        console.log('Plik pobrany:', file);
-        
-        const contentResponse = await fetch(file.download_url);
-        const content = await contentResponse.text();
-        console.log('Zawartość pliku:', content);
-        
-        const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-        if (!frontMatterMatch) {
-          throw new Error('Nie znaleziono front matter w pliku');
-        }
-        
-        const frontMatter = frontMatterMatch[1];
-        const body = frontMatterMatch[2];
-        
-        const post = { body };
-        frontMatter.split('\n').forEach(line => {
-          const colonIndex = line.indexOf(':');
-          if (colonIndex > 0) {
-            const key = line.substring(0, colonIndex).trim();
-            const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
-            post[key] = value;
-          }
-        });
-        
-        console.log('Sparsowany post:', post);
-        
-        // Konwertuj podstawowy Markdown na HTML
-        const htmlBody = post.body
-          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\*(.*?)\*/g, '<em>$1</em>')
-          .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-          .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-          .replace(/^- (.*$)/gim, '<li>$1</li>')
-          .replace(/\n\n/g, '</p><p>')
-          .replace(/^(.)/gm, '<p>$1')
-          .replace(/(.)\n$/gm, '$1</p>');
-        
-        document.title = post.title + ' - Blog';
-        document.getElementById('post-content').innerHTML = `
-          <article>
-            <header class="post-header">
-              <h1>${post.title || 'Bez tytułu'}</h1>
-              <div class="post-meta">
-                ${post.date || ''} • ${post.category || ''} • ${post.readTime || ''}
-              </div>
-              ${post.image ? `
-                <div class="featured-image">
-                  <img src="${post.image}" alt="${post.title}">
-                </div>
-              ` : ''}
-            </header>
-            <div class="post-content">
-              ${htmlBody}
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Logo Adama">
+                    <h1>Adam</h1>
+                </a>
             </div>
-          </article>
-        `;
-      } catch (error) {
-        console.error('Błąd ładowania postu:', error);
-        document.getElementById('post-content').innerHTML = `<div class="error">Błąd ładowania postu: ${error.message}</div>`;
-      }
-    }
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="index.html#about">O mnie</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="index.html#services">Usługi</a></li>
+                    <li><a href="index.html#contact">Kontakt</a></li>
+                </ul>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="pl">
+                        <span class="flag flag-pl"></span><span>PL</span>
+                    </button>
+                    <button class="lang-btn" data-lang="en">
+                        <span class="flag flag-en"></span><span>EN</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    document.addEventListener('DOMContentLoaded', loadPost);
-  </script>
+    <section class="breadcrumbs">
+        <div class="container">
+            <nav class="breadcrumb-nav">
+                <a href="index.html" class="lang-content active" data-lang="pl">Strona główna</a>
+                <a href="index.html" class="lang-content" data-lang="en">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="blog.html">Blog</a>
+                <span class="breadcrumb-separator">/</span>
+                <span id="current-post-title">Post</span>
+            </nav>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <div class="post-container">
+            <div id="post-content" class="loading">
+                <span class="lang-content active" data-lang="pl">Ładowanie postu...</span>
+                <span class="lang-content" data-lang="en">Loading post...</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p class="lang-content active" data-lang="pl">© 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
+            <p class="lang-content" data-lang="en">© 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLanguage = 'pl';
+        
+        const staticContent = {
+            pl: {
+                loading: 'Ładowanie postu...',
+                error: 'Błąd ładowania postu',
+                notFound: 'Nie znaleziono postu',
+                readTime: 'min czytania',
+                previousPost: '← Poprzedni post',
+                nextPost: 'Następny post →',
+                backToBlog: '← Powrót do bloga',
+                relatedPosts: 'Powiązane artykuły'
+            },
+            en: {
+                loading: 'Loading post...',
+                error: 'Error loading post',
+                notFound: 'Post not found',
+                readTime: 'min read',
+                previousPost: '← Previous post',
+                nextPost: 'Next post →',
+                backToBlog: '← Back to blog',
+                relatedPosts: 'Related articles'
+            }
+        };
+
+        async function loadPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            if (!slug) {
+                document.getElementById('post-content').innerHTML = 
+                    `<div class="error">${staticContent[currentLanguage].notFound}</div>`;
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api.github.com/repos/adamsosx/portfolio/contents/_posts/${slug}.md`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const file = await response.json();
+                const contentResponse = await fetch(file.download_url);
+                const content = await contentResponse.text();
+                
+                const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+                if (!frontMatterMatch) {
+                    throw new Error('No front matter found');
+                }
+                
+                const frontMatter = frontMatterMatch[1];
+                const body = frontMatterMatch[2];
+                
+                const post = { body };
+                frontMatter.split('\n').forEach(line => {
+                    const colonIndex = line.indexOf(':');
+                    if (colonIndex > 0) {
+                        const key = line.substring(0, colonIndex).trim();
+                        const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+                        post[key] = value;
+                    }
+                });
+                
+                // Update page title and breadcrumb
+                document.title = post.title + ' - Blog';
+                document.getElementById('current-post-title').textContent = post.title;
+                
+                // Convert Markdown to HTML
+                const htmlContent = marked.parse(post.body);
+                
+                document.getElementById('post-content').innerHTML = `
+                    <article class="fade-in">
+                        <header class="post-header">
+                            ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
+                            <h1 class="post-title">${post.title}</h1>
+                            <div class="post-meta">
+                                ${post.date ? `<span class="meta-item">📅 ${post.date}</span>` : ''}
+                                ${post.readTime ? `<span class="meta-item">⏱️ ${post.readTime}</span>` : ''}
+                                ${post.category ? `<span class="meta-item">📂 ${post.category}</span>` : ''}
+                            </div>
+                            ${post.image ? `
+                                <div class="featured-image">
+                                    <img src="${post.image}" alt="${post.title}">
+                                </div>
+                            ` : ''}
+                        </header>
+                        
+                        <div class="post-content">
+                            ${htmlContent}
+                        </div>
+                        
+                        <nav class="post-navigation">
+                            <div class="nav-links-container" id="post-nav-links">
+                                <!-- Navigation will be populated by loadPostNavigation -->
+                            </div>
+                        </nav>
+                        
+                        <div class="back-to-blog">
+                            <a href="blog.html" class="back-btn">
+                                ${staticContent[currentLanguage].backToBlog}
+                            </a>
+                        </div>
+                        
+                        <section class="related-posts">
+                            <h3>${staticContent[currentLanguage].relatedPosts}</h3>
+                            <div class="related-grid" id="related-posts-grid">
+                                <!-- Related posts will be populated -->
+                            </div>
+                        </section>
+                    </article>
+                `;
+                
+                // Apply animations
+                setTimeout(() => {
+                    document.querySelectorAll('.fade-in').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }, 100);
+                
+                // Load navigation and related posts
+                loadPostNavigation(slug);
+                loadRelatedPosts(post.categoryId || 'all');
+                
+            } catch (error) {
+                console.error('Error loading post:', error);
+                document.getElementById('post-content').innerHTML = 
+                    `<div class="error">${staticContent[currentLanguage].error}: ${error.message}</div>`;
+            }
+        }
+
+        async function loadPostNavigation(currentSlug) {
+            try {
+                const response = await fetch('https://api.github.com/repos/adamsosx/portfolio/contents/_posts');
+                const files = await response.json();
+                
+                const posts = [];
+                for (const file of files) {
+                    if (file.name.endsWith('.md')) {
+                        const slug = file.name.replace('.md', '');
+                        posts.push({ slug, name: file.name });
+                    }
+                }
+                
+                posts.sort((a, b) => b.name.localeCompare(a.name)); // Sort by date (newest first)
+                
+                const currentIndex = posts.findIndex(p => p.slug === currentSlug);
+                const prevPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+                const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+                
+                let navHTML = '';
+                
+                if (prevPost) {
+                    navHTML += `
+                        <a href="/post.html?slug=${prevPost.slug}" class="nav-link prev">
+                            <div class="nav-subtitle">${staticContent[currentLanguage].previousPost}</div>
+                            <div class="nav-title">${prevPost.slug.replace(/-/g, ' ')}</div>
+                        </a>
+                    `;
+                }
+                
+                if (nextPost) {
+                    navHTML += `
+                        <a href="/post.html?slug=${nextPost.slug}" class="nav-link next">
+                            <div class="nav-subtitle">${staticContent[currentLanguage].nextPost}</div>
+                            <div class="nav-title">${nextPost.slug.replace(/-/g, ' ')}</div>
+                        </a>
+                    `;
+                }
+                
+                document.getElementById('post-nav-links').innerHTML = navHTML;
+                
+            } catch (error) {
+                console.error('Error loading post navigation:', error);
+            }
+        }
+
+        async function loadRelatedPosts(categoryId) {
+            try {
+                const response = await fetch('https://api.github.com/repos/adamsosx/portfolio/contents/_posts');
+                const files = await response.json();
+                
+                const relatedPosts = [];
+                for (const file of files.slice(0, 3)) { // Limit to 3 related posts
+                    if (file.name.endsWith('.md')) {
+                        const slug = file.name.replace('.md', '');
+                        relatedPosts.push({
+                            slug,
+                            title: slug.replace(/-/g, ' ').replace(/^\d{4}-\d{2}-\d{2}-/, ''),
+                            image: 'images/blog/default-post.jpg'
+                        });
+                    }
+                }
+                
+                const relatedHTML = relatedPosts.map(post => `
+                    <div class="related-card">
+                        <div class="related-image" style="background-image: url('${post.image}');"></div>
+                        <div class="related-content">
+                            <h4><a href="/post.html?slug=${post.slug}">${post.title}</a></h4>
+                            <div class="related-meta">5 ${staticContent[currentLanguage].readTime}</div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('related-posts-grid').innerHTML = relatedHTML;
+                
+            } catch (error) {
+                console.error('Error loading related posts:', error);
+            }
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            document.querySelectorAll('.lang-content').forEach(element => {
+                element.classList.toggle('active', element.getAttribute('data-lang') === lang);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPost();
+            
+            // Language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeLanguage(this.getAttribute('data-lang'));
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (header) {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(30, 58, 95, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
