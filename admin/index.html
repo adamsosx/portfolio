@@ -1,17 +1,67 @@
 <!doctype html>
-<html>
+<html lang="pl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CMS Test - Super Minimal</title>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script>
+  <title>Test Ładowania CMS - Krok 1</title>
+  <script>
+    console.log("Krok 1: HTML Head załadowany.");
+  </script>
 </head>
 <body>
-  <!-- Decap CMS sam powinien stworzyć #nc-root, jeśli go nie ma -->
+  <h1>TEST - Strona Admina Się Ładuje</h1>
+  <p>Jeśli widzisz ten tekst, podstawowy HTML działa.</p>
+
+  <div id="nc-root"></div>
+
   <script>
-    // Nie rób NIC więcej, pozwól Decap CMS spróbować się zainicjować
-    // i załadować /admin/config.yml automatycznie.
-    console.log("Minimal admin/index.html loaded. Decap CMS should auto-init.");
+    console.log("Krok 2: Skrypty przed CMS i Identity.");
+  </script>
+
+  <!-- Netlify Identity Widget -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" onload="console.log('Krok 3: Netlify Identity Widget ZAŁADOWANY.');" onerror="console.error('BŁĄD ładowania Netlify Identity Widget!');"></script>
+  
+  <!-- Decap CMS -->
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js" onload="console.log('Krok 4: Decap CMS script ZAŁADOWANY.');" onerror="console.error('BŁĄD ładowania Decap CMS script!');"></script>
+
+  <script>
+    console.log("Krok 5: Skrypty PO CMS i Identity.");
+
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log("Krok 6: DOMContentLoaded wystąpił.");
+
+      // Sprawdzenie dostępności obiektów globalnych
+      if (window.netlifyIdentity) {
+        console.log("Netlify Identity (window.netlifyIdentity) jest dostępne.");
+        window.netlifyIdentity.on("init", user => {
+          console.log("Netlify Identity: init event, user:", user);
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              console.log("Netlify Identity: login event, redirecting.");
+              document.location.href = "/admin/";
+            });
+            // Możesz spróbować wywołać widget logowania, jeśli nie ma użytkownika
+            // console.log("Próba otwarcia widgetu Netlify Identity...");
+            // window.netlifyIdentity.open(); 
+          }
+        });
+        window.netlifyIdentity.on("error", err => console.error("Netlify Identity Error:", err));
+        window.netlifyIdentity.on("open", () => console.log("Netlify Identity: widget opened"));
+        window.netlifyIdentity.on("close", () => console.log("Netlify Identity: widget closed"));
+      } else {
+        console.error("Netlify Identity (window.netlifyIdentity) NIE JEST dostępne po DOMContentLoaded!");
+      }
+
+      if (window.CMS) {
+        console.log("Decap CMS (window.CMS) jest dostępne.");
+        // Na razie nie inicjalizujemy CMS, tylko sprawdzamy, czy obiekt istnieje
+        // window.CMS_MANUAL_INIT = true; // Można to ustawić, jeśli chcemy później zainicjować ręcznie
+        // console.log("window.CMS_MANUAL_INIT ustawione na true.");
+        // CMS.init({ config: {} }); // Minimalna pusta konfiguracja do testu, czy init nie rzuca błędem od razu
+      } else {
+        console.error("Decap CMS (window.CMS) NIE JEST dostępne po DOMContentLoaded!");
+      }
+    });
   </script>
 </body>
 </html>
