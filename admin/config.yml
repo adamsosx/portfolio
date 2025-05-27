@@ -17,8 +17,8 @@ collections:
     fields:
       - {label: "Tytuł", name: "title", widget: "string"}
       - {label: "Data", name: "date", widget: "datetime"}
-      - {label: "Kategoria", name: "category", widget: "string"}
-      - {label: "ID Kategorii", name: "categoryId", widget: "string"}
+      - {label: "Kategoria", name: "category", widget: "select", options: ["Sztuczna Inteligencja", "Psychologia", "Technologia", "Rozwój osobisty"]}
+      - {label: "ID Kategorii", name: "categoryId", widget: "select", options: ["ai", "psychology", "technology", "personal"]}
       - {label: "Obrazek wyróżniający", name: "image", widget: "image", required: false}
       - {label: "Zajawka", name: "excerpt", widget: "text"}
       - {label: "Czas czytania", name: "readTime", widget: "string", required: false}
