@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Przemyślenia o technologii</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+    }
+    .post {
+      border-bottom: 1px solid #eee;
+      padding: 20px 0;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .post h2 {
+      margin-bottom: 10px;
+    }
+    .post-meta {
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+    }
+    .post-excerpt {
+      margin-bottom: 15px;
+    }
+    .read-more {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    .post-thumbnail {
+      flex-shrink: 0;
+      width: 200px;
+    }
+    .post-thumbnail img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .post-content {
+      flex: 1;
+    }
+    @media (max-width: 768px) {
+      .post {
+        flex-direction: column;
+      }
+      .post-thumbnail {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Blog</h1>
+    <p>Przemyślenia o technologii, rozwoju i ludzkiej naturze</p>
+  </header>
+
+  <main>
+    <div id="blog-posts" class="loading">
+      Ładowanie postów...
+    </div>
+  </main>
+
+  <script>
+    async function loadBlogPosts() {
+      try {
+        const response = await fetch('https://api.github.com/repos/adamsosx/portfolio/contents/_posts');
+        const files = await response.json();
+        
+        const posts = [];
+        for (const file of files) {
+          if (file.name.endsWith('.md')) {
+            const fileResponse = await fetch(file.download_url);
+            const content = await fileResponse.text();
+            const post = parseMarkdownPost(content, file.name);
+            if (post) posts.push(post);
+          }
+        }
+        
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        displayPosts(posts);
+      } catch (error) {
+        console.error('Błąd ładowania postów:', error);
+        document.getElementById('blog-posts').innerHTML = 
+          '<p>Nie udało się załadować postów. Spróbuj ponownie później.</p>';
+      }
+    }
+
+    function parseMarkdownPost(content, filename) {
+      const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      if (!frontMatterMatch) return null;
+      
+      const frontMatter = frontMatterMatch[1];
+      const body = frontMatterMatch[2];
+      
+      const post = { body };
+      frontMatter.split('\n').forEach(line => {
+        const colonIndex = line.indexOf(':');
+        if (colonIndex > 0) {
+          const key = line.substring(0, colonIndex).trim();
+          const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+          post[key] = value;
+        }
+      });
+      
+      post.slug = filename.replace('.md', '');
+      return post;
+    }
+
+    function displayPosts(posts) {
+      const container = document.getElementById('blog-posts');
+      
+      if (posts.length === 0) {
+        container.innerHTML = '<p>Brak postów do wyświetlenia.</p>';
+        return;
+      }
+
+      const postsHTML = posts.map(post => `
+        <article class="post">
+          ${post.image ? `
+            <div class="post-thumbnail">
+              <img src="${post.image}" alt="${post.title}">
+            </div>
+          ` : ''}
+          <div class="post-content">
+            <h2>${post.title}</h2>
+            <div class="post-meta">
+              ${post.date} • ${post.category || ''} • ${post.readTime || ''}
+            </div>
+            <div class="post-excerpt">
+              ${post.excerpt || post.body.substring(0, 150) + '...'}
+            </div>
+            <a href="/post.html?slug=${post.slug}" class="read-more">Czytaj więcej →</a>
+          </div>
+        </article>
+      `).join('');
+
+      container.innerHTML = postsHTML;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+  </script>
+</body>
+</html>
