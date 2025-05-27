@@ -36,66 +36,7 @@
             padding: 0 20px;
         }
 
-        /* Language Selector */
-        .language-selector {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .flag {
-            width: 24px;
-            height: 18px;
-            display: inline-block;
-            border-radius: 2px;
-            position: relative;   
-            overflow: hidden;     
-        }
-
-        .flag-pl {
-            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
-        }
-
-        .flag-en {
-            background-color: white;
-        }
-        .flag-en::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image:
-                linear-gradient(#C8102E, #C8102E), 
-                linear-gradient(#C8102E, #C8102E); 
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size:
-                100% 22.22%, 
-                16.66% 100%; 
-        }
-
-        /* Header */
+        /* Header - IDENTYCZNY JAK W INDEX.HTML */
         header {
             background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%);
             color: white;
@@ -164,19 +105,70 @@
             color: var(--warm-ochre);
         }
 
-        /* Hamburger Menu */
+        /* Language Selector - IDENTYCZNY JAK W INDEX.HTML */
+        .language-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .flag {
+            width: 20px;
+            height: 15px;
+            display: inline-block;
+            border-radius: 2px;
+        }
+
+        .flag-pl {
+            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
+        }
+
+        .flag-en {
+            background: linear-gradient(45deg, #012169 25%, transparent 25%), 
+                        linear-gradient(-45deg, #012169 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #012169 75%), 
+                        linear-gradient(-45deg, transparent 75%, #012169 75%),
+                        linear-gradient(to right, #c8102e, #c8102e);
+            background-size: 6px 6px, 6px 6px, 6px 6px, 6px 6px, 100% 100%;
+            background-position: 0 0, 0 3px, 3px -3px, -3px 0px, 0 0;
+        }
+
+        /* Hamburger Menu - IDENTYCZNY JAK W INDEX.HTML */
         .hamburger {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
+            z-index: 1001;
         }
 
         .hamburger span {
             width: 25px;
             height: 3px;
             background: white;
-            margin: 3px 0;
+            margin: 2px 0;
             transition: 0.3s;
             border-radius: 2px;
         }
@@ -193,17 +185,18 @@
             transform: rotate(45deg) translate(-5px, -6px);
         }
 
-        /* Mobile Menu */
+        /* Mobile Menu - IDENTYCZNY JAK W INDEX.HTML */
         .mobile-menu {
             position: fixed;
-            top: 70px;
+            top: 0;
             left: -100%;
             width: 100%;
-            height: calc(100vh - 70px);
+            height: 100vh;
             background: var(--dark-navy);
             transition: left 0.3s ease;
-            z-index: 999;
-            padding: 20px;
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            overflow-y: auto;
         }
 
         .mobile-menu.active {
@@ -213,10 +206,12 @@
         .mobile-menu ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .mobile-menu ul li {
-            margin: 20px 0;
+            margin: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .mobile-menu ul li a {
@@ -225,8 +220,8 @@
             font-size: 1.2rem;
             font-weight: 500;
             display: block;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 15px 0;
+            transition: color 0.3s ease;
         }
 
         .mobile-menu ul li a:hover,
@@ -722,13 +717,14 @@
     <script>
         let currentLanguage = 'pl';
 
-        // HAMBURGER MENU FUNCTIONALITY
+        // HAMBURGER MENU FUNCTIONALITY - IDENTYCZNY JAK W INDEX.HTML
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobile-menu');
 
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         });
 
         // Close mobile menu when clicking on a link
@@ -736,7 +732,17 @@
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
 
         // FUNKCJA FORMATOWANIA DATY
@@ -760,49 +766,4 @@
                     });
                 }
             } catch (e) {
-                console.error('Błąd formatowania daty:', e);
-            }
-            
-            return cleanDate;
-        }
-
-        async function loadPost() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const slug = urlParams.get('slug');
-            
-            console.log('Loading post with slug:', slug);
-            
-            if (!slug) {
-                document.getElementById('post-content').innerHTML = 
-                    `<div class="error">Brak parametru slug w URL</div>`;
-                return;
-            }
-
-            try {
-                const apiUrl = `https://api.github.com/repos/adamsosx/portfolio/contents/_posts/${slug}.md`;
-                console.log('Fetching from:', apiUrl);
-                
-                const response = await fetch(apiUrl);
-                console.log('Response status:', response.status);
-                
-                if (!response.ok) {
-                    throw new Error(`Plik nie znaleziony: ${response.status}`);
-                }
-                
-                const file = await response.json();
-                const contentResponse = await fetch(file.download_url);
-                const rawContent = await contentResponse.text();
-                
-                console.log('Raw content preview:', rawContent.substring(0, 300));
-                
-                const frontMatterRegex = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
-                const match = rawContent.match(frontMatterRegex);
-                
-                if (!match) {
-                    console.error('Nie znaleziono front matter, próbuję alternatywne parsowanie...');
-                    const post = {
-                        title: slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' '),
-                        date: slug.substring(0, 10),
-                        category: 'Blog',
-                        body: rawContent
-                    };
+                console
