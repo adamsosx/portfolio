@@ -3,521 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
+    <title>Post - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* CSS - SKOPIUJ WSZYSTKIE STYLE Z SEKCJI <style> TWOJEGO PLIKU index.html */
+        /* ... (tutaj wklej CAŁĄ zawartość tagu <style> z index.html) ... */
+        /* DODATKOWE/ZMODYFIKOWANE STYLE SPECYFICZNE DLA post.html (jeśli są, np. dla .post-page-header) */
+        /* Poniżej są style, które już miałeś w post.html, dostosowane lub uzupełnione */
 
-        :root {
-            --navy-blue: #1e3a5f;
-            --dark-navy: #14293d;
-            --warm-ochre: #d4812a;
-            --rust-orange: #b8651f;
-            --sage-green: #8aa387;
-            --light-beige: #f5f3f0;
-            --medium-gray: #7d8285;
-            --light-gray: #e8e6e3;
-        }
+        /* Skopiuj tutaj style z poprzedniego pliku blog.html, które są potrzebne, */
+        /* np. .language-selector, .lang-btn, .flag, header, nav, .logo, .nav-right, .nav-links, .mobile-menu-toggle */
+        /* ORAZ style specyficzne dla strony postu, które już miałeś: */
+        /* .post-page-header, .breadcrumb-nav, .post-category, .post-meta, .post-content-section, .post-article, etc. */
+        /* Poniżej jest to co było w Twoim `post.html` plus dodane style dla menu i języków */
 
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            line-height: 1.6;
-            color: var(--dark-navy);
-            background-color: var(--light-beige);
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --navy-blue: #1e3a5f; --dark-navy: #14293d; --warm-ochre: #d4812a; --rust-orange: #b8651f; --sage-green: #8aa387; --light-beige: #f5f3f0; --medium-gray: #7d8285; --light-gray: #e8e6e3; }
+        body { font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; color: var(--dark-navy); background-color: var(--light-beige); scroll-behavior: smooth; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        /* Language Selector & Flags - jak w blog.html */
+        .language-selector { display: flex; gap: 10px; align-items: center; }
+        .lang-btn { background: none; border: none; cursor: pointer; padding: 5px; border-radius: 5px; transition: all 0.3s ease; display: flex; align-items: center; gap: 5px; color: white; font-size: 0.9rem; }
+        .lang-btn:hover { background: rgba(255, 255, 255, 0.1); }
+        .lang-btn.active { background: rgba(255, 255, 255, 0.2); }
+        .flag { width: 24px; height: 18px; display: inline-block; border-radius: 2px; position: relative; overflow: hidden; }
+        .flag-pl { background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%); }
+        .flag-pl::before, .flag-pl::after { content: none; }
+        .flag-en { background-color: white; }
+        .flag-en::before { content: none; }
+        .flag-en::after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: linear-gradient(#C8102E, #C8102E), linear-gradient(#C8102E, #C8102E); background-repeat: no-repeat; background-position: center center; background-size: 100% 22.22%, 16.66% 100%; }
 
-        /* Language Selector */
-        .language-selector {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+        /* Header - jak w blog.html */
+        header { background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%); color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; }
+        .logo a.logo-link-wrapper { display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit; }
+        .logo a.logo-link-wrapper img { width: 50px; height: 50px; border-radius: 50%; background: var(--light-beige); padding: 5px; }
+        .logo a.logo-link-wrapper h1 { font-size: 1.5rem; font-weight: 600; margin: 0; }
+        .nav-right { display: flex; align-items: center; gap: 30px; }
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { color: white; text-decoration: none; transition: color 0.3s ease; font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: var(--warm-ochre); }
+        .mobile-menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; padding: 5px; }
 
-        .lang-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .flag {
-            width: 24px;
-            height: 18px;
-            display: inline-block;
-            border-radius: 2px;
-            position: relative;   
-            overflow: hidden;     
-        }
-
-        .flag-pl {
-            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
-        }
-
-        .flag-en {
-            background-color: white;
-        }
-        .flag-en::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image:
-                linear-gradient(#C8102E, #C8102E), 
-                linear-gradient(#C8102E, #C8102E); 
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size:
-                100% 22.22%, 
-                16.66% 100%; 
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo a {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--light-beige);
-            padding: 5px;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--warm-ochre);
-        }
-
-        /* Blog Header Section */
-        .blog-page-header { 
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--sage-green) 100%);
-            color: white;
-            padding: 140px 0 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .blog-page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            opacity: 0.3;
-        }
-
-        .blog-page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 300;
-            line-height: 1.2;
-            position: relative;
-            z-index: 2;
-        }
-
-        .blog-page-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Categories Section */
-        .categories-section { 
-            background: white;
-            padding: 40px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .category-list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            background: var(--light-gray);
-            color: var(--navy-blue);
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .category-btn:hover {
-            background: var(--navy-blue);
-            color: white;
-        }
-
-        .category-btn.active {
-            background: var(--warm-ochre);
-            color: white;
-        }
-
-        /* Blog Posts Grid Section */
-        .blog-posts-section { 
-            padding: 80px 0;
-            background: var(--light-beige);
-        }
-
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        /* Blog Post Card */
-        .blog-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column; 
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .blog-card-image {
-            width: 100%;
-            height: 200px;
-            background-size: cover; 
-            background-position: center; 
-            position: relative;
-            overflow: hidden;
-            background-image: linear-gradient(135deg, var(--sage-green), var(--navy-blue));
-        }
-
-        .blog-card-image .category-tag {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: var(--warm-ochre);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .blog-card-content {
-            padding: 30px;
-            flex-grow: 1; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card-meta {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-        }
-
-        .blog-card h3 {
-            color: var(--navy-blue);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .blog-card p.excerpt { 
-            color: var(--medium-gray);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1; 
-        }
-
-        .read-more {
-            color: var(--warm-ochre);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: gap 0.3s ease;
-            margin-top: auto; 
-        }
-
-        .read-more:hover {
-            gap: 10px;
-        }
-
-        /* Featured Post */
-        .featured-post-container { 
-            margin-bottom: 60px;
-        }
-        .featured-post {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 400px;
-        }
-
-        .featured-image {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            background-image: linear-gradient(135deg, var(--navy-blue), var(--sage-green));
-        }
-
-        .featured-content {
-            padding: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .featured-tag {
-            background: var(--warm-ochre);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block; 
-            margin-bottom: 20px;
-            align-self: flex-start; 
-        }
-
-        .featured-content h2 {
-            color: var(--navy-blue);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .featured-content p.excerpt { 
-            color: var(--medium-gray);
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        /* Newsletter */
-        .newsletter {
-            background: var(--navy-blue);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .newsletter h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .newsletter p {
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .newsletter-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-            gap: 10px;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 2px solid transparent;
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: var(--warm-ochre);
-            background: rgba(255,255,255,0.15);
-        }
-
-        .newsletter-form button {
-            background: var(--warm-ochre);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-form button:hover {
-            background: var(--rust-orange);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-navy);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-
-        /* Loading state */
-        .loading {
-            text-align: center;
-            padding: 60px;
-            color: var(--medium-gray);
-            font-size: 1.1em;
-        }
-
-        /* Responsive */
+        /* Style specyficzne dla post.html które już miałeś */
+        .post-page-header { background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--sage-green) 100%); color: white; padding: 140px 0 80px; text-align: center; position: relative; overflow: hidden; }
+        .post-page-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat; opacity: 0.3; }
+        .breadcrumb-nav { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 0.9rem; opacity: 0.9; margin-bottom: 30px; color: rgba(255, 255, 255, 0.8); }
+        .breadcrumb-nav a { color: white; text-decoration: none; transition: color 0.3s ease; }
+        .breadcrumb-nav a:hover { color: var(--warm-ochre); }
+        .breadcrumb-separator { color: rgba(255,255,255,0.6); }
+        .post-page-header .post-category { background: var(--warm-ochre); color: white; padding: 8px 20px; border-radius: 25px; font-size: 0.9rem; font-weight: 500; display: inline-block; margin-bottom: 20px; }
+        .post-page-header h1 { color: white; font-size: 2.8rem; margin-bottom: 20px; line-height: 1.3; font-weight: 300; text-shadow: 0 2px 4px rgba(0,0,0,0.3); position: relative; z-index: 2; }
+        .post-page-header .post-meta { color: rgba(255, 255, 255, 0.8); font-size: 1rem; margin-bottom: 0; position: relative; z-index: 2; }
+        .post-page-header .post-meta span { margin: 0 10px; }
+        .post-content-section { padding: 40px 0; background: var(--light-beige); }
+        .post-article { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 40px; }
+        .post-featured-image { text-align: center; margin: 0; padding: 15px 40px 15px; }
+        .post-featured-image img { max-width: 100%; height: auto; max-height: 400px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); object-fit: cover; }
+        .post-content { padding: 15px 40px 40px; font-size: 1.1rem; line-height: 1.7; color: var(--dark-navy); word-wrap: break-word; overflow-wrap: break-word; text-align: left !important; }
+        .post-content h1, .post-content h2, .post-content h3, .post-content h4 { color: var(--navy-blue); margin-top: 25px; margin-bottom: 12px; font-weight: 600; text-align: left !important; }
+        .post-content h1 { font-size: 1.8rem; border-bottom: 3px solid var(--warm-ochre); padding-bottom: 8px; }
+        .post-content h2 { font-size: 1.5rem; }
+        .post-content h3 { font-size: 1.3rem; }
+        .post-content p { margin-bottom: 18px; word-break: break-word; text-align: left !important; }
+        .post-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 20px auto; display: block; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+        .post-content blockquote { background: var(--light-beige); border-left: 4px solid var(--warm-ochre); padding: 18px 22px; margin: 20px 0; font-style: italic; border-radius: 0 8px 8px 0; text-align: left !important; }
+        .post-content ul, .post-content ol { margin: 18px 0; padding-left: 28px; text-align: left !important; }
+        .post-content li { margin-bottom: 8px; text-align: left !important; }
+        .post-content code { background: var(--light-gray); padding: 3px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.9em; word-break: break-all; }
+        .post-content pre { background: var(--dark-navy); color: white; padding: 20px; border-radius: 10px; overflow-x: auto; margin: 20px 0; word-wrap: normal; text-align: left !important; }
+        .post-content pre code { background: none; padding: 0; color: inherit; }
+        .post-content em { color: var(--warm-ochre); font-weight: 500; }
+        .back-to-blog { text-align: center; margin-bottom: 40px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: var(--navy-blue); color: white; text-decoration: none; border-radius: 30px; font-weight: 600; transition: all 0.3s ease; }
+        .back-btn:hover { background: var(--warm-ochre); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
+        .newsletter { background: var(--navy-blue); color: white; padding: 60px 0; text-align: center; }
+        .newsletter h2 { font-size: 2rem; margin-bottom: 20px; }
+        .newsletter p { margin-bottom: 30px; opacity: 0.9; }
+        .newsletter-form { display: flex; max-width: 500px; margin: 0 auto; gap: 10px; }
+        .newsletter-form input { flex: 1; padding: 15px 20px; border: none; border-radius: 5px; font-size: 1rem; background: rgba(255,255,255,0.1); color: white; border: 2px solid transparent; }
+        .newsletter-form input::placeholder { color: rgba(255,255,255,0.7); }
+        .newsletter-form input:focus { outline: none; border-color: var(--warm-ochre); background: rgba(255,255,255,0.15); }
+        .newsletter-form button { background: var(--warm-ochre); color: white; border: none; padding: 15px 30px; border-radius: 5px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+        .newsletter-form button:hover { background: var(--rust-orange); }
+        footer { background: var(--dark-navy); color: white; text-align: center; padding: 30px 0; }
+        .loading { text-align: center; padding: 60px 20px; color: var(--medium-gray); font-size: 1.1rem; }
+        .error { text-align: center; padding: 60px 20px; color: #d32f2f; font-size: 1.1rem; }
+        
+        /* Responsive - DODAJ STYLE DLA MOBILNEGO MENU Z INDEX.HTML */
         @media (max-width: 768px) {
-            .blog-page-header h1 { font-size: 2.2rem; }
-            .blog-page-header p { font-size: 1.1rem; }
-            .posts-grid { grid-template-columns: 1fr; }
-            .featured-post { grid-template-columns: 1fr; }
-            .featured-image { min-height: 250px; }
-            .featured-content { padding: 40px; }
-            .featured-content h2 { font-size: 1.5rem; }
-            .newsletter-form { flex-direction: column; }
-            .category-list { padding: 0 20px; }
             .nav-links { display: none; }
+            .mobile-menu-toggle { display: block; } /* Pokaż hamburger */
+            .nav-links.active-mobile {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 68px; /* Dopasuj do wysokości headera */
+                left: 0;
+                width: 100%;
+                background: var(--dark-navy); 
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                gap: 0; 
+            }
+            .nav-links.active-mobile li { margin-bottom: 15px; width: 100%; text-align: center; }
+            .nav-links.active-mobile a { font-size: 1.1rem; display: block; padding: 10px 0; }
+
+            /* Reszta twoich styli responsywnych dla post.html */
+            .post-page-header { padding: 120px 0 60px; }
+            .post-page-header h1 { font-size: 2.2rem; }
+            .post-content-section { padding: 30px 0; }
+            .post-content { padding: 15px 20px 30px; font-size: 1rem; text-align: left !important; }
+            .post-featured-image { padding: 10px 20px 10px; }
+            .newsletter-form { flex-direction: column; }
         }
 
-        /* Language-specific content */
+        /* Language-specific content - SKOPIOWANE Z INDEX.HTML */
         .lang-content { display: none; }
         .lang-content.active { display: block; }
 
-        /* Animations */
-        @keyframes fadeInUp { 
-            from { opacity: 0; transform: translateY(30px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        
-        .fade-in {
+        /* Animations - ZMODYFIKOWANE z index.html */
+         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
             <div class="logo">
-                <a href="index.html">
+                 <a href="index.html" class="logo-link-wrapper">
                     <img src="images/logo.png" alt="Logo Adama">
-                    <h1>Adam</h1>
+                    <h1 class="lang-content active" data-lang="pl">Adam</h1>
+                    <h1 class="lang-content" data-lang="en">Adam</h1>
                 </a>
             </div>
             <div class="nav-right">
-                <ul class="nav-links">
-                    <li><a href="index.html">Start</a></li>
-                    <li><a href="index.html#about">O mnie</a></li>
-                    <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="blog.html" class="active">Blog</a></li>
-                    <li><a href="index.html#services">Usługi</a></li>
-                    <li><a href="index.html#contact">Kontakt</a></li>
+                <ul class="nav-links" id="nav-links-post">
+                    <!-- Linki nawigacyjne będą dynamicznie wstawiane przez JS -->
                 </ul>
                 <div class="language-selector">
                     <button class="lang-btn active" data-lang="pl">
@@ -527,36 +158,24 @@
                         <span class="flag flag-en"></span><span>EN</span>
                     </button>
                 </div>
+                 <button class="mobile-menu-toggle" id="mobile-menu-toggle-post" aria-label="Toggle menu">☰</button>
             </div>
         </nav>
     </header>
 
-    <section class="blog-page-header">
-        <div class="container">
-            <h1 class="lang-content active" data-lang="pl">Blog</h1>
-            <h1 class="lang-content" data-lang="en">Blog</h1>
-            <p class="lang-content active" data-lang="pl">Przemyślenia o technologii, rozwoju i ludzkiej naturze</p>
-            <p class="lang-content" data-lang="en">Thoughts on technology, development and human nature</p>
+    <section class="post-page-header">
+        <div class="container" id="post-header-content">
+            <!-- Breadcrumbs, tytuł i meta będą wstawione przez JavaScript -->
+             <div class="loading lang-content active" data-lang="pl">Ładowanie nagłówka...</div>
+             <div class="loading lang-content" data-lang="en">Loading header...</div>
         </div>
     </section>
 
-    <section class="categories-section">
+    <section class="post-content-section">
         <div class="container">
-            <div class="category-list" id="category-list">
-                <button class="category-btn active" data-category="all">Wszystkie</button>
-                <button class="category-btn" data-category="ai">Sztuczna Inteligencja</button>
-                <button class="category-btn" data-category="psychology">Psychologia</button>
-                <button class="category-btn" data-category="technology">Technologia</button>
-                <button class="category-btn" data-category="personal">Rozwój osobisty</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="blog-posts-section">
-        <div class="container">
-            <div class="featured-post-container" id="featured-post-container"></div>
-            <div class="posts-grid" id="posts-grid">
-                <div class="loading">Ładowanie postów...</div>
+            <div id="post-content-main" class="loading"> <!-- Zmienione ID dla unikalności -->
+                <span class="lang-content active" data-lang="pl">Ładowanie treści postu...</span>
+                <span class="lang-content" data-lang="en">Loading post content...</span>
             </div>
         </div>
     </section>
@@ -567,10 +186,10 @@
             <h2 class="lang-content" data-lang="en">Stay Updated</h2>
             <p class="lang-content active" data-lang="pl">Otrzymuj powiadomienia o nowych artykułach i przemyśleniach</p>
             <p class="lang-content" data-lang="en">Get notifications about new articles and insights</p>
-            <form class="newsletter-form" data-netlify="true" name="newsletter">
-                <input type="hidden" name="form-name" value="newsletter" />
-                <input type="email" name="email" placeholder="Twój e-mail" required>
-                <button type="submit">Zapisz się</button>
+            <form class="newsletter-form" data-netlify="true" name="newsletter-post"> <!-- Inna nazwa formularza dla Netlify -->
+                <input type="hidden" name="form-name" value="newsletter-post" />
+                <input type="email" name="email" id="newsletter-email-post" required>
+                <button type="submit" id="newsletter-submit-post">Zapisz się</button>
             </form>
         </div>
     </section>
@@ -583,267 +202,350 @@
     </footer>
 
     <script>
-        let currentLanguage = 'pl';
-        let currentCategory = 'all';
-        let allPosts = [];
+        // SKOPIUJ CAŁY KOD JAVASCRIPT Z PLIKU index.html (ten dotyczący `content`, języków, menu mobilnego, animacji)
+        // ... (tutaj wklej CAŁY skrypt z index.html, który dostarczyłeś wcześniej) ...
+        // PONIŻEJ ZNAJDUJE SIĘ PRZYKŁAD, JAK POWINIEN WYGLĄDAĆ TEN SKRYPT DLA post.html
+        // ZAŁOŻENIE: struktura `content` i funkcje pomocnicze są takie same
+        // Musisz dostosować ID elementów, jeśli są inne
 
-        // FUNKCJA FORMATOWANIA DATY
+        const content = { // Ta sama struktura content co w index.html
+             pl: {
+                nav: [ /* Zaktualizuj linki, aby poprawnie wskazywały z post.html do index.html#sekcja i blog.html */
+                    { text: 'Start', href: 'index.html#home' },
+                    { text: 'O mnie', href: 'index.html#about' },
+                    { text: 'Portfolio', href: 'index.html#portfolio' },
+                    { text: 'Blog', href: 'blog.html' }, 
+                    { text: 'Usługi', href: 'index.html#services' },
+                    { text: 'Kontakt', href: 'index.html#contact' }
+                ],
+                postPage: {
+                    breadcrumbHome: "Strona główna",
+                    breadcrumbBlog: "Blog",
+                    loadingHeader: "Ładowanie nagłówka...",
+                    loadingContent: "Ładowanie treści postu...",
+                    errorLoading: "Błąd ładowania postu:",
+                    backToBlog: "← Powrót do bloga"
+                },
+                 newsletter: {
+                    emailPlaceholder: "Twój e-mail",
+                    submitButton: "Zapisz się"
+                }
+                // ... (inne teksty dla post.html jeśli potrzebne)
+            },
+            en: {
+                nav: [
+                    { text: 'Home', href: 'index.html#home' },
+                    { text: 'About', href: 'index.html#about' },
+                    { text: 'Portfolio', href: 'index.html#portfolio' },
+                    { text: 'Blog', href: 'blog.html' },
+                    { text: 'Services', href: 'index.html#services' },
+                    { text: 'Contact', href: 'index.html#contact' }
+                ],
+                postPage: {
+                    breadcrumbHome: "Home",
+                    breadcrumbBlog: "Blog",
+                    loadingHeader: "Loading header...",
+                    loadingContent: "Loading post content...",
+                    errorLoading: "Error loading post:",
+                    backToBlog: "← Back to blog"
+                },
+                 newsletter: {
+                    emailPlaceholder: "Your e-mail",
+                    submitButton: "Subscribe"
+                }
+                // ... (inne teksty dla post.html jeśli potrzebne)
+            }
+        };
+        
+        let currentLanguage = 'pl';
+
         function formatDate(dateString) {
             if (!dateString) return '';
-            
-            // Usuń część z czasem jeśli istnieje (T14:07:57.286Z)
             const cleanDate = dateString.split('T')[0];
-            
-            // Sprawdź czy data jest w formacie YYYY-MM-DD
             if (cleanDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
                 const [year, month, day] = cleanDate.split('-');
                 return `${day}.${month}.${year}`;
             }
-            
-            // Jeśli data ma inny format, spróbuj sparsować
             try {
                 const date = new Date(dateString);
                 if (!isNaN(date.getTime())) {
-                    return date.toLocaleDateString('pl-PL', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit'
+                    return date.toLocaleDateString(currentLanguage === 'pl' ? 'pl-PL' : 'en-US', {
+                        year: 'numeric', month: '2-digit', day: '2-digit'
                     });
                 }
-            } catch (e) {
-                console.error('Błąd formatowania daty:', e);
-            }
-            
+            } catch (e) { console.error('Błąd formatowania daty:', e); }
             return cleanDate;
         }
 
-        // POPRAWIONA funkcja ładowania postów Z MAPOWANIEM KATEGORII
-        async function loadBlogPosts() {
-            console.log('Rozpoczynam ładowanie postów...');
+        // --- FUNKCJE Z TWOJEGO `post.html` do ładowania i renderowania posta ---
+        async function loadPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            const postHeaderEl = document.getElementById('post-header-content');
+            const postContentEl = document.getElementById('post-content-main');
+
+            if (postHeaderEl) postHeaderEl.querySelector('.loading').textContent = content[currentLanguage].postPage.loadingHeader;
+            if (postContentEl) postContentEl.querySelector('.loading').textContent = content[currentLanguage].postPage.loadingContent;
+            
+            if (!slug) {
+                if (postContentEl) postContentEl.innerHTML = `<div class="error">Brak parametru slug w URL</div>`;
+                if (postHeaderEl) postHeaderEl.innerHTML = '';
+                return;
+            }
+
             try {
-                const response = await fetch('https://api.github.com/repos/adamsosx/portfolio/contents/_posts');
+                const apiUrl = `https://api.github.com/repos/adamsosx/portfolio/contents/_posts/${slug}.md`;
+                const response = await fetch(apiUrl);
+                if (!response.ok) { throw new Error(`Plik nie znaleziony: ${response.status}`); }
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                const file = await response.json();
+                const contentResponse = await fetch(file.download_url);
+                const rawContent = await contentResponse.text();
                 
-                const files = await response.json();
-                console.log('Pliki z _posts:', files);
+                const frontMatterRegex = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
+                const match = rawContent.match(frontMatterRegex);
                 
-                const posts = [];
-                for (const file of files) {
-                    if (file.name.endsWith('.md') && file.type === 'file') {
-                        console.log('Przetwarzam plik:', file.name);
-                        try {
-                            const fileResponse = await fetch(file.download_url);
-                            const content = await fileResponse.text();
-                            const post = parseMarkdownPost(content, file.name);
-                            if (post && post.published !== 'false') {
-                                posts.push(post);
-                            }
-                        } catch (fileError) {
-                            console.error('Błąd ładowania pliku:', file.name, fileError);
+                const post = { body: match ? match[2].trim() : rawContent }; // Fallback if no frontmatter
+                
+                if (match) {
+                    const frontMatterText = match[1].trim();
+                    frontMatterText.split(/\r?\n/).forEach(line => {
+                        const colonIndex = line.indexOf(':');
+                        if (colonIndex > 0) {
+                            const key = line.substring(0, colonIndex).trim();
+                            let value = line.substring(colonIndex + 1).trim();
+                            value = value.replace(/^["']|["']$/g, '');
+                            post[key] = value;
                         }
-                    }
-                }
-                
-                console.log('Znalezione posty:', posts);
-                allPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-                displayPosts();
-            } catch (error) {
-                console.error('Błąd ładowania postów:', error);
-                document.getElementById('posts-grid').innerHTML = 
-                    `<p>Błąd ładowania postów: ${error.message}</p>`;
-            }
-        }
-
-        // POPRAWIONA funkcja parsowania Z AUTOMATYCZNYM MAPOWANIEM KATEGORII
-        function parseMarkdownPost(content, filename) {
-            console.log('Parsowanie pliku:', filename);
-            
-            const frontMatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-            if (!frontMatterMatch) {
-                console.log('Nie znaleziono front matter w:', filename);
-                return null;
-            }
-            
-            const frontMatter = frontMatterMatch[1];
-            const body = frontMatterMatch[2];
-            
-            const post = { body };
-            frontMatter.split(/\r?\n/).forEach(line => {
-                const colonIndex = line.indexOf(':');
-                if (colonIndex > 0) {
-                    const key = line.substring(0, colonIndex).trim();
-                    let value = line.substring(colonIndex + 1).trim();
-                    
-                    if ((value.startsWith('"') && value.endsWith('"')) || 
-                        (value.startsWith("'") && value.endsWith("'"))) {
-                        value = value.slice(1, -1);
-                    }
-                    
-                    post[key] = value;
-                }
-            });
-            
-            post.slug = filename.replace('.md', '');
-            
-            // AUTOMATYCZNE MAPOWANIE KATEGORII
-            if (!post.categoryId && post.category) {
-                const categoryLower = post.category.toLowerCase();
-                if (categoryLower.includes('sztuczna') || categoryLower.includes('artificial') || categoryLower.includes('ai')) {
-                    post.categoryId = 'ai';
-                } else if (categoryLower.includes('psycholog')) {
-                    post.categoryId = 'psychology';
-                } else if (categoryLower.includes('technolog')) {
-                    post.categoryId = 'technology';
-                } else if (categoryLower.includes('rozwój') || categoryLower.includes('personal')) {
-                    post.categoryId = 'personal';
+                    });
                 } else {
-                    post.categoryId = 'technology'; // domyślna kategoria
+                    // Attempt to derive some meta if no frontmatter
+                    post.title = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ');
+                    post.date = slug.substring(0, 10);
+                    post.category = 'Blog'; // Default
                 }
+                renderPost(post);
+            } catch (error) {
+                console.error('Error loading post:', error);
+                 const errorText = content[currentLanguage].postPage.errorLoading;
+                if (postContentEl) postContentEl.innerHTML = `<div class="error">${errorText} ${error.message}</div>`;
+                if (postHeaderEl) postHeaderEl.innerHTML = '';
             }
-            
-            // Jeśli nadal brak categoryId, ustaw domyślną
-            if (!post.categoryId) {
-                post.categoryId = 'technology';
-            }
-            
-            console.log('Sparsowany post z categoryId:', post);
-            return post;
         }
 
-        // POPRAWIONA funkcja wyświetlania Z FORMATOWANIEM DATY
-        function displayPosts() {
-            const postsGrid = document.getElementById('posts-grid');
-            const featuredContainer = document.getElementById('featured-post-container');
+        function renderPost(post) {
+            document.title = (post.title || 'Post') + (currentLanguage === 'pl' ? ' - Blog' : ' - Blog');
             
-            let filteredPosts = allPosts;
-            if (currentCategory !== 'all') {
-                filteredPosts = allPosts.filter(post => {
-                    console.log(`Filtrowanie: post.categoryId="${post.categoryId}" vs currentCategory="${currentCategory}"`);
-                    return post.categoryId === currentCategory;
-                });
-            }
+            const headerContent = document.getElementById('post-header-content');
+            const breadcrumbHomeText = content[currentLanguage].postPage.breadcrumbHome;
+            const breadcrumbBlogText = content[currentLanguage].postPage.breadcrumbBlog;
+
+            headerContent.innerHTML = `
+                <nav class="breadcrumb-nav">
+                    <a href="index.html">${breadcrumbHomeText}</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <a href="blog.html">${breadcrumbBlogText}</a>
+                    <span class="breadcrumb-separator">/</span>
+                    <span>${post.title || 'Post'}</span>
+                </nav>
+                ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
+                <h1>${post.title || (currentLanguage === 'pl' ? 'Bez tytułu' : 'Untitled')}</h1>
+                <div class="post-meta">
+                    ${post.date ? `<span>📅 ${formatDate(post.date)}</span>` : ''}
+                    ${post.readTime ? `<span>⏱️ ${post.readTime}</span>` : ''}
+                </div>
+            `;
             
-            console.log(`Wyświetlam ${filteredPosts.length} postów dla kategorii: ${currentCategory}`);
-            
-            // Featured post (pierwszy post)
-            if (filteredPosts.length > 0) {
-                const featured = filteredPosts[0];
-                featuredContainer.innerHTML = `
-                    <div class="featured-post fade-in">
-                        <div class="featured-image" style="background-image: url('${featured.image || ''}');"></div>
-                        <div class="featured-content">
-                            <span class="featured-tag">${featured.category || 'Blog'}</span>
-                            <h2>${featured.title || 'Bez tytułu'}</h2>
-                            <p class="excerpt">${featured.excerpt || featured.body.substring(0, 150) + '...'}</p>
-                            <div class="blog-card-meta">
-                                <span>${formatDate(featured.date)}</span>
-                                <span>${featured.readTime || '5 min'}</span>
-                            </div>
-                            <a href="post.html?slug=${featured.slug}" class="read-more">
-                                ${currentLanguage === 'pl' ? 'Czytaj więcej →' : 'Read more →'}
-                            </a>
-                        </div>
+            let htmlContent = post.body;
+            // Proste parsowanie Markdown (można rozbudować lub użyć biblioteki)
+             htmlContent = htmlContent
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/^[\-\*]\s+(.*$)/gim, '<li>$1</li>') // Ulepszone dla list
+                .replace(/(\<li\>.*\<\/li\>)/gim, '<ul>$1</ul>') // Owijanie w ul
+                .replace(/\<\/ul\>\n\<ul\>/gim, '') // Łączenie sąsiednich list
+                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/```([\s\S]*?)```/g, (match, p1) => `<pre><code>${p1.trim().replace(/</g, "<").replace(/>/g, ">")}</code></pre>`)
+                .split(/\n\s*\n/).map(p => p.trim() ? (p.startsWith('<') ? p : `<p>${p.replace(/\n/g, '<br>')}</p>`) : '').join('');
+
+            const postContentEl = document.getElementById('post-content-main');
+            postContentEl.innerHTML = `
+                <article class="post-article fade-in">
+                    ${post.image ? `
+                        <div class="post-featured-image">
+                            <img src="${post.image}" alt="${post.title || 'Featured Image'}">
+                        </div>` : ''}
+                    <div class="post-content">
+                        ${htmlContent}
                     </div>
-                `;
-                
-                // Pozostałe posty
-                const remainingPosts = filteredPosts.slice(1);
-                postsGrid.innerHTML = remainingPosts.map(post => `
-                    <div class="blog-card fade-in">
-                        <div class="blog-card-image" style="background-image: url('${post.image || ''}');">
-                            <span class="category-tag">${post.category || 'Blog'}</span>
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-meta">
-                                <span>${formatDate(post.date)}</span>
-                                <span>${post.readTime || '5 min'}</span>
-                            </div>
-                            <h3>${post.title || 'Bez tytułu'}</h3>
-                            <p class="excerpt">${post.excerpt || post.body.substring(0, 120) + '...'}</p>
-                            <a href="post.html?slug=${post.slug}" class="read-more">
-                                ${currentLanguage === 'pl' ? 'Czytaj więcej →' : 'Read more →'}
-                            </a>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                featuredContainer.innerHTML = '';
-                postsGrid.innerHTML = '<p>Brak postów w tej kategorii.</p>';
-            }
-            
-            // Animacje
-            setTimeout(() => {
-                document.querySelectorAll('.fade-in').forEach(el => {
-                    el.classList.add('visible');
-                });
-            }, 100);
+                </article>
+                <div class="back-to-blog fade-in">
+                    <a href="blog.html" class="back-btn">${content[currentLanguage].postPage.backToBlog}</a>
+                </div>
+            `;
+             applyFadeInAnimationForPost();
+        }
+        // --- KONIEC FUNKCJI Z TWOJEGO `post.html` ---
+
+
+        // --- FUNKCJE Z `index.html` DO OBSŁUGI JĘZYKA I MENU MOBILNEGO ---
+        function updateNavigation() {
+            const navLinksContainer = document.getElementById('nav-links-post'); // Użyj nowego ID dla posta
+            if (!navLinksContainer) return;
+            navLinksContainer.innerHTML = ''; 
+            content[currentLanguage].nav.forEach(item => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = item.href;
+                a.textContent = item.text;
+                if (item.href.includes('blog.html') && window.location.pathname.includes('post.html')) { // Blog aktywny gdy jesteśmy na poście
+                    // Jeśli chcemy by "Blog" był aktywny na stronie postu
+                    const blogLink = content[currentLanguage].nav.find(navItem => navItem.href.includes('blog.html'));
+                    if (blogLink && item.text === blogLink.text) {
+                         a.classList.add('active');
+                    }
+                }
+                li.appendChild(a);
+                navLinksContainer.appendChild(li);
+            });
         }
 
-        function filterByCategory(categoryId) {
-            console.log('Filtrowanie według kategorii:', categoryId);
-            currentCategory = categoryId;
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`[data-category="${categoryId}"]`).classList.add('active');
-            displayPosts();
+        function updateNewsletterPlaceholders() {
+            const emailInput = document.getElementById('newsletter-email-post');
+            const submitBtn = document.getElementById('newsletter-submit-post');
+            if(emailInput) emailInput.placeholder = content[currentLanguage].newsletter.emailPlaceholder;
+            if(submitBtn) submitBtn.textContent = content[currentLanguage].newsletter.submitButton;
         }
-
+        
         function changeLanguage(lang) {
             currentLanguage = lang;
+            document.documentElement.lang = lang; 
+            
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
+            
             document.querySelectorAll('.lang-content').forEach(element => {
                 element.classList.toggle('active', element.getAttribute('data-lang') === lang);
             });
             
-            // Aktualizuj kategorie
-            const categories = {
-                pl: [
-                    { id: 'all', text: 'Wszystkie' },
-                    { id: 'ai', text: 'Sztuczna Inteligencja' },
-                    { id: 'psychology', text: 'Psychologia' },
-                    { id: 'technology', text: 'Technologia' },
-                    { id: 'personal', text: 'Rozwój osobisty' }
-                ],
-                en: [
-                    { id: 'all', text: 'All' },
-                    { id: 'ai', text: 'Artificial Intelligence' },
-                    { id: 'psychology', text: 'Psychology' },
-                    { id: 'technology', text: 'Technology' },
-                    { id: 'personal', text: 'Personal Development' }
-                ]
-            };
+            updateNavigation();
+            updateNewsletterPlaceholders();
+            loadPost(); // Przeładuj treść posta w nowym języku (jeśli masz tłumaczenia)
+                       // Jeśli nie masz tłumaczeń postów, ta linia może być niepotrzebna, 
+                       // ale przyciski "Powrót do bloga" itp. się zaktualizują.
             
-            const categoryList = document.getElementById('category-list');
-            categoryList.innerHTML = categories[lang].map(cat => 
-                `<button class="category-btn ${cat.id === currentCategory ? 'active' : ''}" 
-                         data-category="${cat.id}">${cat.text}</button>`
-            ).join('');
-            
-            displayPosts();
+            // Aktualizacja tytułu strony
+             const postTitleElement = document.querySelector('.post-page-header h1');
+             const baseTitle = (currentLanguage === 'pl' ? ' - Blog - Adam - Nawigator...' : ' - Blog - Adam - Navigator...');
+             if (postTitleElement && postTitleElement.textContent !== (content[currentLanguage].postPage.loadingHeader)) {
+                document.title = postTitleElement.textContent + baseTitle;
+             } else {
+                document.title = (currentLanguage === 'pl' ? 'Post' : 'Post') + baseTitle;
+             }
+        }
+        
+        let intersectionObserverInstancePost;
+        function applyFadeInAnimationForPost() {
+            if (intersectionObserverInstancePost) {
+                intersectionObserverInstancePost.disconnect();
+            }
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            intersectionObserverInstancePost = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = '0'; 
+                el.style.transform = 'translateY(30px)';
+                intersectionObserverInstancePost.observe(el);
+            });
         }
 
-        // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            loadBlogPosts();
+            currentLanguage = document.documentElement.lang || 'pl';
+             if (currentLanguage !== 'pl' && currentLanguage !== 'en') {
+                currentLanguage = 'pl';
+                document.documentElement.lang = 'pl';
+            }
             
-            // Language buttons
+            loadPost();
+            updateNavigation();
+            updateNewsletterPlaceholders();
+            
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     changeLanguage(this.getAttribute('data-lang'));
                 });
             });
+
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle-post');
+            const navLinksContainer = document.getElementById('nav-links-post');
+
+            if (mobileMenuToggle && navLinksContainer) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinksContainer.classList.toggle('active-mobile');
+                });
+            }
             
-            // Category buttons
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('category-btn')) {
-                    filterByCategory(e.target.getAttribute('data-category'));
+            // Smooth scroll dla linków wewnętrznych (jeśli będą na stronie posta)
+             document.addEventListener('click', function(e) {
+                const link = e.target.closest('a');
+                if (link && link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
+                     e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    // Upewnij się, że element docelowy jest na tej samej stronie
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                    }
+                    if (navLinksContainer && navLinksContainer.classList.contains('active-mobile')) {
+                        navLinksContainer.classList.remove('active-mobile');
+                    }
                 }
             });
+            applyFadeInAnimationForPost();
         });
+
+        window.addEventListener('scroll', function() { // Efekt zmiany tła nagłówka
+            const header = document.querySelector('header');
+             if (header) {
+                if (window.scrollY > 100) {
+                    header.style.background = 'rgba(30, 58, 95, 0.95)'; 
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
+                    header.style.backdropFilter = 'none';
+                }
+            }
+        });
+    </script>
+     <!-- Skrypt Voiceflow (jeśli chcesz go też na stronie posta) -->
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '660c04457b8b244d89b5a822' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
     </script>
 </body>
 </html>
