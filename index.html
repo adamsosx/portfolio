@@ -747,13 +747,13 @@
                 <p class="lang-content" data-lang="en">Do you have a project that requires a blend of technology, market analysis, and a deep understanding of the human element? Looking for someone to view your challenges from a fresh, holistic perspective? Get in touch.</p>
                 
                 <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-                    <!-- The following hidden field is important for Netlify when submitting via JavaScript -->
-                    <input type="hidden" name="form-name" value="contact" />
                     <p class="hidden">
                         <label>
                             Don’t fill this out if you’re human: <input name="bot-field" />
                         </label>
                     </p>
+                    <input type="hidden" name="form-name" value="contact" />
+
                     <div class="form-group">
                         <input type="text" id="name-input" name="name" required>
                         <input type="email" id="email-input" name="email" required>
@@ -829,9 +829,14 @@
         let currentLanguage = 'pl';
 
         function updateAllDynamicText() {
+            // Text for elements directly in HTML that change with language but aren't lists
+            // Hero section text is already in HTML with .lang-content classes
+            // About section text is also in HTML with .lang-content classes
+
+            // Update value tags dynamically
             const valuesContainerPL = document.querySelector('.about-text div[data-lang="pl"] .values');
             if (valuesContainerPL) {
-                valuesContainerPL.innerHTML = ''; 
+                valuesContainerPL.innerHTML = ''; // Clear previous
                 content.pl.aboutValues.forEach(val => {
                     const span = document.createElement('span');
                     span.className = 'value-tag';
@@ -841,7 +846,7 @@
             }
             const valuesContainerEN = document.querySelector('.about-text div[data-lang="en"] .values');
             if (valuesContainerEN) {
-                valuesContainerEN.innerHTML = '';
+                valuesContainerEN.innerHTML = ''; // Clear previous
                 content.en.aboutValues.forEach(val => {
                     const span = document.createElement('span');
                     span.className = 'value-tag';
@@ -857,6 +862,7 @@
             updatePortfolio();
             updateServices();
             updateFormPlaceholders();
+            // Set initial active states for .lang-content based on currentLanguage
             document.querySelectorAll('.lang-content').forEach(element => {
                 element.classList.toggle('active', element.getAttribute('data-lang') === currentLanguage);
             });
@@ -870,6 +876,7 @@
                 const a = document.createElement('a');
                 a.href = item.href;
                 a.textContent = item.text;
+                // Highlight "Blog" if on blog.html (example for future)
                 if (item.href.includes('blog.html') && window.location.pathname.includes('blog.html')) {
                     a.classList.add('active');
                 }
@@ -884,7 +891,7 @@
             portfolioGrid.innerHTML = ''; 
             content[currentLanguage].portfolio.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'portfolio-card fade-in';
+                card.className = 'portfolio-card fade-in'; // Add fade-in for animation
                 card.innerHTML = `
                     <div class="card-icon">${item.icon}</div>
                     <h3>${item.title}</h3>
@@ -903,7 +910,7 @@
             servicesGrid.innerHTML = '';
             content[currentLanguage].services.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'service-card fade-in';
+                card.className = 'service-card fade-in'; // Add fade-in for animation
                 card.innerHTML = `
                     <div class="service-icon">${item.icon}</div>
                     <h3>${item.title}</h3>
@@ -979,8 +986,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language based on html lang attribute or default to 'pl'
             currentLanguage = document.documentElement.lang || 'pl';
-            if (currentLanguage !== 'pl' && currentLanguage !== 'en') {
+            if (currentLanguage !== 'pl' && currentLanguage !== 'en') { // Fallback for invalid lang
                 currentLanguage = 'pl';
                 document.documentElement.lang = 'pl';
             }
@@ -999,7 +1007,7 @@
                     const href = link.getAttribute('href');
                     if (href.startsWith('#') || href.includes('#')) {
                         const targetIdFull = href.substring(href.indexOf('#'));
-                        const targetId = targetIdFull.split('?')[0]; 
+                        const targetId = targetIdFull.split('?')[0]; // Remove query params if any from anchor
                         const targetPage = href.substring(0, href.indexOf('#'));
 
                         if (!targetPage || targetPage === window.location.pathname.split('/').pop() || targetPage === '.') {
@@ -1030,14 +1038,16 @@
                     const formData = new FormData(form);
                     const successMessage = content[currentLanguage].form.success; 
                     const errorMessage = content[currentLanguage].form.error; 
-
-                    // Append form-name to FormData. Netlify needs this for AJAX submissions.
-                    formData.append('form-name', form.getAttribute('name'));
                     
+                    // Netlify AJAX form submission requires the form-name to be part of the payload.
+                    // The hidden input <input type="hidden" name="form-name" value="contact" /> handles this.
+                    // If you were constructing formData manually without that hidden field, you would do:
+                    // formData.append('form-name', form.getAttribute('name'));
+
                     fetch("/", { // Or the path to the page where the form is if not root
                         method: "POST",
-                        // headers: { "Content-Type": "application/x-www-form-urlencoded" }, // Not needed when using FormData with fetch
-                        body: new URLSearchParams(formData).toString() // FormData needs to be encoded for Netlify
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: new URLSearchParams(formData).toString()
                     })
                     .then(response => {
                         if (response.ok) {
