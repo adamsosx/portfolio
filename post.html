@@ -601,6 +601,36 @@
     <script>
         let currentLanguage = 'pl';
 
+        // FUNKCJA FORMATOWANIA DATY
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            
+            // Usuń część z czasem jeśli istnieje (T14:07:57.286Z)
+            const cleanDate = dateString.split('T')[0];
+            
+            // Sprawdź czy data jest w formacie YYYY-MM-DD
+            if (cleanDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                const [year, month, day] = cleanDate.split('-');
+                return `${day}.${month}.${year}`;
+            }
+            
+            // Jeśli data ma inny format, spróbuj sparsować
+            try {
+                const date = new Date(dateString);
+                if (!isNaN(date.getTime())) {
+                    return date.toLocaleDateString('pl-PL', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit'
+                    });
+                }
+            } catch (e) {
+                console.error('Błąd formatowania daty:', e);
+            }
+            
+            return cleanDate;
+        }
+
         async function loadPost() {
             const urlParams = new URLSearchParams(window.location.search);
             const slug = urlParams.get('slug');
@@ -679,7 +709,7 @@
             // Update page title
             document.title = (post.title || 'Post') + ' - Blog';
             
-            // DODAJ TYTUŁ I META DO GRANATOWEJ SEKCJI
+            // DODAJ TYTUŁ I META DO GRANATOWEJ SEKCJI Z FORMATOWANIEM DATY
             const headerContent = document.getElementById('post-header-content');
             headerContent.innerHTML = `
                 <nav class="breadcrumb-nav">
@@ -696,7 +726,7 @@
                 <h1>${post.title || 'Bez tytułu'}</h1>
                 
                 <div class="post-meta">
-                    ${post.date ? `<span>📅 ${post.date}</span>` : ''}
+                    ${post.date ? `<span>📅 ${formatDate(post.date)}</span>` : ''}
                     ${post.readTime ? `<span>⏱️ ${post.readTime}</span>` : ''}
                 </div>
             `;
