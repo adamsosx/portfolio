@@ -747,13 +747,13 @@
                 <p class="lang-content" data-lang="en">Do you have a project that requires a blend of technology, market analysis, and a deep understanding of the human element? Looking for someone to view your challenges from a fresh, holistic perspective? Get in touch.</p>
                 
                 <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+                    <!-- The following hidden field is important for Netlify when submitting via JavaScript -->
+                    <input type="hidden" name="form-name" value="contact" />
                     <p class="hidden">
                         <label>
                             Don’t fill this out if you’re human: <input name="bot-field" />
                         </label>
                     </p>
-                    <input type="hidden" name="form-name" value="contact" />
-
                     <div class="form-group">
                         <input type="text" id="name-input" name="name" required>
                         <input type="email" id="email-input" name="email" required>
@@ -817,9 +817,9 @@
                     { icon: '🧠', title: 'Self-Discovery Tools (AI+HD)', description: 'Innovative projects combining AI technology with systems like Human Design or Jungian psychology, creating tools that support personal development and self-understanding.', tags: ['Human Design', 'Jung', 'AI', 'NLP', 'Personal Development'] }
                 ],
                 services: [
-                    { icon: '🎯', title: 'Strategic AI Consulting and Tech Innovations', description: 'Have an idea but unsure how technology can enhance it? Want to optimize your business processes? I&apos;ll help you identify AI potential, develop an implementation strategy, select the right technologies (Voiceflow, OpenAI API, n8n, no-code/low-code), and assess risks and opportunities.' },
+                    { icon: '🎯', title: 'Strategic AI Consulting and Tech Innovations', description: 'Have an idea but unsure how technology can enhance it? Want to optimize your business processes? I'll help you identify AI potential, develop an implementation strategy, select the right technologies (Voiceflow, OpenAI API, n8n, no-code/low-code), and assess risks and opportunities.' },
                     { icon: '🔗', title: 'Crypto and Blockchain Advisory', description: 'The crypto market and blockchain technology seem complex? I will help you understand their fundamentals and potential through market and trend analysis, support in building informed investment strategies, key principles of digital asset security, and explaining the potential of Blockchain, DeFi, NFTs, and Web3.' },
-                    { icon: '🔍', title: 'Precise Diagnostics and Optimization', description: 'Your system isn it performing optimally? Have data but don&apos;t know what it says? I offer in-depth software testing (QA, UX), behavioral and business data analysis with a unique psychological perspective, and process auditing and optimization with concrete recommendations.' },
+                    { icon: '🔍', title: 'Precise Diagnostics and Optimization', description: 'Your system isn it performing optimally? Have data but don't know what it says? I offer in-depth software testing (QA, UX), behavioral and business data analysis with a unique psychological perspective, and process auditing and optimization with concrete recommendations.' },
                     { icon: '💡', title: 'Synergy of Technology and Personal Growth', description: 'Seeking deeper self-understanding or want to create a project that supports personal growth? I offer AI tool concept and prototyping for self-discovery (Human Design, Jung), consultations for creators and therapists, and, in the future, potential individual analytical sessions combining HD, Jung, and data.' }
                 ],
                 form: { name: 'Your name', email: 'E-mail', subject: 'Message subject', message: 'Describe your project or question...', submit: 'Send Message', success: 'Thank you for your message! I will contact you soon.', error: 'There was an error sending your form. Please try again.' }
@@ -829,14 +829,9 @@
         let currentLanguage = 'pl';
 
         function updateAllDynamicText() {
-            // Text for elements directly in HTML that change with language but aren't lists
-            // Hero section text is already in HTML with .lang-content classes
-            // About section text is also in HTML with .lang-content classes
-
-            // Update value tags dynamically
             const valuesContainerPL = document.querySelector('.about-text div[data-lang="pl"] .values');
             if (valuesContainerPL) {
-                valuesContainerPL.innerHTML = ''; // Clear previous
+                valuesContainerPL.innerHTML = ''; 
                 content.pl.aboutValues.forEach(val => {
                     const span = document.createElement('span');
                     span.className = 'value-tag';
@@ -846,7 +841,7 @@
             }
             const valuesContainerEN = document.querySelector('.about-text div[data-lang="en"] .values');
             if (valuesContainerEN) {
-                valuesContainerEN.innerHTML = ''; // Clear previous
+                valuesContainerEN.innerHTML = '';
                 content.en.aboutValues.forEach(val => {
                     const span = document.createElement('span');
                     span.className = 'value-tag';
@@ -862,7 +857,6 @@
             updatePortfolio();
             updateServices();
             updateFormPlaceholders();
-            // Set initial active states for .lang-content based on currentLanguage
             document.querySelectorAll('.lang-content').forEach(element => {
                 element.classList.toggle('active', element.getAttribute('data-lang') === currentLanguage);
             });
@@ -876,7 +870,6 @@
                 const a = document.createElement('a');
                 a.href = item.href;
                 a.textContent = item.text;
-                // Highlight "Blog" if on blog.html (example for future)
                 if (item.href.includes('blog.html') && window.location.pathname.includes('blog.html')) {
                     a.classList.add('active');
                 }
@@ -891,7 +884,7 @@
             portfolioGrid.innerHTML = ''; 
             content[currentLanguage].portfolio.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'portfolio-card fade-in'; // Add fade-in for animation
+                card.className = 'portfolio-card fade-in';
                 card.innerHTML = `
                     <div class="card-icon">${item.icon}</div>
                     <h3>${item.title}</h3>
@@ -910,7 +903,7 @@
             servicesGrid.innerHTML = '';
             content[currentLanguage].services.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'service-card fade-in'; // Add fade-in for animation
+                card.className = 'service-card fade-in';
                 card.innerHTML = `
                     <div class="service-icon">${item.icon}</div>
                     <h3>${item.title}</h3>
@@ -986,9 +979,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Set initial language based on html lang attribute or default to 'pl'
             currentLanguage = document.documentElement.lang || 'pl';
-            if (currentLanguage !== 'pl' && currentLanguage !== 'en') { // Fallback for invalid lang
+            if (currentLanguage !== 'pl' && currentLanguage !== 'en') {
                 currentLanguage = 'pl';
                 document.documentElement.lang = 'pl';
             }
@@ -1007,7 +999,7 @@
                     const href = link.getAttribute('href');
                     if (href.startsWith('#') || href.includes('#')) {
                         const targetIdFull = href.substring(href.indexOf('#'));
-                        const targetId = targetIdFull.split('?')[0]; // Remove query params if any from anchor
+                        const targetId = targetIdFull.split('?')[0]; 
                         const targetPage = href.substring(0, href.indexOf('#'));
 
                         if (!targetPage || targetPage === window.location.pathname.split('/').pop() || targetPage === '.') {
@@ -1038,10 +1030,14 @@
                     const formData = new FormData(form);
                     const successMessage = content[currentLanguage].form.success; 
                     const errorMessage = content[currentLanguage].form.error; 
-                    fetch("/", {
+
+                    // Append form-name to FormData. Netlify needs this for AJAX submissions.
+                    formData.append('form-name', form.getAttribute('name'));
+                    
+                    fetch("/", { // Or the path to the page where the form is if not root
                         method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: new URLSearchParams(formData).toString()
+                        // headers: { "Content-Type": "application/x-www-form-urlencoded" }, // Not needed when using FormData with fetch
+                        body: new URLSearchParams(formData).toString() // FormData needs to be encoded for Netlify
                     })
                     .then(response => {
                         if (response.ok) {
