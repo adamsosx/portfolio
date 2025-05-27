@@ -4,6 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel - Decap CMS</title>
+  <style>
+    /* Poprawki dla lepszego wyświetlania tekstu w Decap CMS */
+    .nc-textControl-input,
+    .nc-textareaControl-input {
+      min-height: 40px !important;
+      height: auto !important;
+      padding: 8px 12px !important;
+      line-height: 1.4 !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+    
+    /* Zwiększ wysokość textarea */
+    .nc-textareaControl-input {
+      min-height: 120px !important;
+      resize: vertical !important;
+    }
+    
+    /* Popraw wyświetlanie długich tekstów */
+    .nc-entryEditor-editor {
+      max-width: none !important;
+    }
+    
+    /* Zwiększ szerokość pól formularza */
+    .nc-controlPane-widget {
+      max-width: 100% !important;
+    }
+    
+    /* Popraw wyświetlanie w trybie listy */
+    .nc-collectionPage-card {
+      min-height: 120px !important;
+    }
+    
+    .nc-collectionPage-cardBody {
+      height: auto !important;
+      overflow: visible !important;
+    }
+  </style>
 </head>
 <body>
   <!-- Kontener dla Decap CMS -->
