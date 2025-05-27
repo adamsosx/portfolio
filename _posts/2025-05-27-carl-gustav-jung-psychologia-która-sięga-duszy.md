@@ -10,7 +10,7 @@ published: true
 ---
 W świecie pełnym zewnętrznych bodźców i natychmiastowej gratyfikacji, podejście Carla Gustava Junga jest niczym powrót do korzeni – do wnętrza. Jego psychologia analityczna to nie tylko zestaw pojęć – to mapa prowadząca w głąb siebie, do tego, co nieświadome, pierwotne, często wyparte… ale właśnie tam leży źródło prawdziwej przemiany.
 
-\
+
 **Kim był Jung?**
 
 **Carl Gustav Jung (1875–1961)** był szwajcarskim psychiatrą i psychoanalitykiem, który wywodził się z tradycji Freuda, ale dość szybko poszedł własną drogą. Odrzucił redukcjonistyczne podejście Freuda, twierdząc, że człowiek to nie tylko popęd i seksualność, ale istota duchowa, symboliczna, żyjąca w relacji z tajemnicą.
