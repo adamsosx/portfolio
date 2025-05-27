@@ -3,34 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel Administracyjny Treści</title>
-
-  <!-- Skrypt Netlify Identity Widget - powinien być załadowany jako jeden z pierwszych -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-  <!-- Skrypt Decap CMS -->
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <!-- Możesz użyć bardziej specyficznej wersji, np. @3.1.2, jeśli wiesz, że działa stabilnie -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script> -->
-
+  <title>CMS Test - Super Minimal</title>
+  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script>
 </head>
 <body>
-  <!-- Element, w którym Decap CMS wyrenderuje swój interfejs -->
-  <div id="nc-root"></div>
-
-  <!-- Skrypt inicjalizujący Netlify Identity Widget -->
-  <!-- Umieszczenie go na końcu body zapewnia, że widget JS jest już załadowany -->
+  <!-- Decap CMS sam powinien stworzyć #nc-root, jeśli go nie ma -->
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            // Przekieruj użytkownika z powrotem do panelu admina po zalogowaniu
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
+    // Nie rób NIC więcej, pozwól Decap CMS spróbować się zainicjować
+    // i załadować /admin/config.yml automatycznie.
+    console.log("Minimal admin/index.html loaded. Decap CMS should auto-init.");
   </script>
 </body>
 </html>
