@@ -99,7 +99,7 @@ Sztuczna inteligencja nie zastąpi terapeuty, duchowego nauczyciela ani głębok
 
 * Lustrzanym odbiciem Twoich myśli
 * Trenerem pytającym Cię bez oceny
-* Kreatorem pytań, które sam sobie nigdy nie zadasz
+* Kreatorem pytań, których sam sobie nigdy nie zadasz
 * Narzędziem do budowy wewnętrznej mapy „ja”
 
 A przede wszystkim: może być codziennym wsparciem w praktyce samoświadomości – bez potrzeby tłumaczenia wszystkiego od początku.
