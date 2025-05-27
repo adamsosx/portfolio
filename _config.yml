@@ -1,0 +1,17 @@
+title: "Portfolio - Adam Wiśniewski"
+description: "Przemyślenia o technologii, rozwoju i ludzkiej naturze"
+baseurl: ""
+url: "https://awisniewski.netlify.app"
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
