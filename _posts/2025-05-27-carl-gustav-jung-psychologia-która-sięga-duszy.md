@@ -8,7 +8,9 @@ excerpt: W świecie pełnym zewnętrznych bodźców i natychmiastowej gratyfikac
   podejście Carla Gustava Junga...
 published: true
 ---
-W świecie pełnym zewnętrznych bodźców i natychmiastowej gratyfikacji, podejście Carla Gustava Junga jest niczym powrót do korzeni – do wnętrza. Jego psychologia analityczna to nie tylko zestaw pojęć – to mapa prowadząca w głąb siebie, do tego, co nieświadome, pierwotne, często wyparte… ale właśnie tam leży źródło prawdziwej przemiany.\
+W świecie pełnym zewnętrznych bodźców i natychmiastowej gratyfikacji, podejście Carla Gustava Junga jest niczym powrót do korzeni – do wnętrza. Jego psychologia analityczna to nie tylko zestaw pojęć – to mapa prowadząca w głąb siebie, do tego, co nieświadome, pierwotne, często wyparte… ale właśnie tam leży źródło prawdziwej przemiany.
+
+\
 \
 **Kim był Jung?**
 
