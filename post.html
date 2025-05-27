@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
         * {
             margin: 0;
@@ -492,11 +491,50 @@
             font-size: 1.1rem;
         }
 
+        /* --- START: Hamburger Menu CSS --- */
+        .mobile-menu-toggle {
+            display: none; 
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem; 
+            cursor: pointer;
+            padding: 5px;
+        }
+        /* --- END: Hamburger Menu CSS --- */
+
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links { 
-                display: none; 
+             /* --- START: Hamburger Menu CSS - Responsive --- */
+            .nav-links {
+                display: none; /* Ukrywa listę linków na mobilkach domyślnie */
             }
+            .mobile-menu-toggle {
+                display: block; /* Pokazuje przycisk hamburgera na mobilkach */
+            }
+            .nav-links.active-mobile { /* Styl dla aktywnego (widocznego) menu mobilnego */
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 68px; /* Ustawione na podstawie wysokości nagłówka, dostosuj w razie potrzeby */
+                left: 0;
+                width: 100%;
+                background: var(--dark-navy); 
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                gap: 0; /* Zeruje gap z .nav-links dla pionowego układu */
+            }
+            .nav-links.active-mobile li {
+                margin-bottom: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links.active-mobile a {
+                font-size: 1.1rem;
+                display: block; 
+                padding: 10px 0;
+            }
+            /* --- END: Hamburger Menu CSS - Responsive --- */
             
             .post-page-header {
                 padding: 120px 0 60px;
@@ -557,7 +595,7 @@
                 </a>
             </div>
             <div class="nav-right">
-                <ul class="nav-links">
+                <ul class="nav-links" id="nav-links"> <!-- DODANO id="nav-links" -->
                     <li><a href="index.html">Start</a></li>
                     <li><a href="index.html#about">O mnie</a></li>
                     <li><a href="index.html#portfolio">Portfolio</a></li>
@@ -573,6 +611,8 @@
                         <span class="flag flag-en"></span><span>EN</span>
                     </button>
                 </div>
+                 <!-- DODANO Przycisk Hamburgera -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
             </div>
         </nav>
     </header>
@@ -819,6 +859,25 @@
                     changeLanguage(this.getAttribute('data-lang'));
                 });
             });
+
+            // --- START: Hamburger Menu JS ---
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinksContainer = document.getElementById('nav-links'); 
+
+            if (mobileMenuToggle && navLinksContainer) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinksContainer.classList.toggle('active-mobile');
+                });
+
+                // Opcjonalnie: Zamknij menu po kliknięciu linku w menu mobilnym
+                navLinksContainer.addEventListener('click', function(e) {
+                    // Sprawdź, czy kliknięto link (A) i czy menu jest aktywne
+                    if (e.target.tagName === 'A' && navLinksContainer.classList.contains('active-mobile')) {
+                        navLinksContainer.classList.remove('active-mobile');
+                    }
+                });
+            }
+            // --- END: Hamburger Menu JS ---
         });
     </script>
 </body>
