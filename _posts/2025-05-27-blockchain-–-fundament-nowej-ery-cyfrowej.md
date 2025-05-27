@@ -43,14 +43,12 @@ Najważniejsze zastosowania:
 NFT (Non-Fungible Token) to unikalny zasób cyfrowy zapisany na blockchainie, reprezentujący własność czegokolwiek – od sztuki, przez muzykę, po... nieruchomości.
 
 Najczęstsze zastosowania:
-
 * Cyfrowa sztuka (OpenSea, Foundation)
 * Przedmioty w grach (Axie Infinity, Decentraland)
 * Kolekcje sportowe (NBA Top Shot)
 * Bilety na wydarzenia (POAP – proof of attendance protocol)
 
 Nieznane zastosowania:
-
 * Tożsamość cyfrowa – np. NFT jako paszport na Web3.
 * Licencje i certyfikaty – np. NFT jako potwierdzenie kursu ukończonego online.
 
@@ -74,7 +72,6 @@ Teoretycznie niezmienialne wyniki
 Przykład: Estonia testowała blockchain do głosowań lokalnych
 
 e) Zarządzanie dokumentami
-
 Notariusze i zapisy własności mogą działać na blockchainie (np. rejestry gruntów w Gruzji)
 
 **Przyszłość i wyzwania**
