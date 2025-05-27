@@ -829,14 +829,9 @@
         let currentLanguage = 'pl';
 
         function updateAllDynamicText() {
-            // Text for elements directly in HTML that change with language but aren't lists
-            // Hero section text is already in HTML with .lang-content classes
-            // About section text is also in HTML with .lang-content classes
-
-            // Update value tags dynamically
             const valuesContainerPL = document.querySelector('.about-text div[data-lang="pl"] .values');
             if (valuesContainerPL) {
-                valuesContainerPL.innerHTML = ''; // Clear previous
+                valuesContainerPL.innerHTML = ''; 
                 content.pl.aboutValues.forEach(val => {
                     const span = document.createElement('span');
                     span.className = 'value-tag';
@@ -846,7 +841,7 @@
             }
             const valuesContainerEN = document.querySelector('.about-text div[data-lang="en"] .values');
             if (valuesContainerEN) {
-                valuesContainerEN.innerHTML = ''; // Clear previous
+                valuesContainerEN.innerHTML = '';
                 content.en.aboutValues.forEach(val => {
                     const span = document.createElement('span');
                     span.className = 'value-tag';
@@ -857,26 +852,27 @@
         }
 
         function initializeContent() {
+            console.log('Attempting to initialize page content...'); // DEBUG
             updateAllDynamicText();
             updateNavigation();
             updatePortfolio();
             updateServices();
             updateFormPlaceholders();
-            // Set initial active states for .lang-content based on currentLanguage
             document.querySelectorAll('.lang-content').forEach(element => {
                 element.classList.toggle('active', element.getAttribute('data-lang') === currentLanguage);
             });
+            console.log('Page content initialization finished.'); // DEBUG
         }
         
         function updateNavigation() {
             const navLinksContainer = document.getElementById('nav-links');
+            if (!navLinksContainer) { console.error("navLinksContainer not found"); return; }
             navLinksContainer.innerHTML = ''; 
             content[currentLanguage].nav.forEach(item => {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.href = item.href;
                 a.textContent = item.text;
-                // Highlight "Blog" if on blog.html (example for future)
                 if (item.href.includes('blog.html') && window.location.pathname.includes('blog.html')) {
                     a.classList.add('active');
                 }
@@ -887,11 +883,11 @@
 
         function updatePortfolio() {
             const portfolioGrid = document.getElementById('portfolio-grid');
-            if (!portfolioGrid) return;
+            if (!portfolioGrid) { console.error("portfolioGrid not found"); return; }
             portfolioGrid.innerHTML = ''; 
             content[currentLanguage].portfolio.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'portfolio-card fade-in'; // Add fade-in for animation
+                card.className = 'portfolio-card fade-in';
                 card.innerHTML = `
                     <div class="card-icon">${item.icon}</div>
                     <h3>${item.title}</h3>
@@ -906,11 +902,11 @@
 
         function updateServices() {
             const servicesGrid = document.getElementById('services-grid');
-            if (!servicesGrid) return;
+            if (!servicesGrid) { console.error("servicesGrid not found"); return; }
             servicesGrid.innerHTML = '';
             content[currentLanguage].services.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'service-card fade-in'; // Add fade-in for animation
+                card.className = 'service-card fade-in';
                 card.innerHTML = `
                     <div class="service-icon">${item.icon}</div>
                     <h3>${item.title}</h3>
@@ -947,18 +943,14 @@
                 element.classList.toggle('active', element.getAttribute('data-lang') === lang);
             });
             
-            updateAllDynamicText();
-            updateNavigation();
-            updatePortfolio();
-            updateServices();
-            updateFormPlaceholders();
+            initializeContent(); // Re-initialize content for the new language
             
             if (lang === 'en') {
                 document.title = 'Adam - Navigator of Inner Worlds and Digital Solutions';
             } else {
                 document.title = 'Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań';
             }
-            applyScrollAnimations();
+            applyScrollAnimations(); // Re-apply animations as content changes
         }
         
         let intersectionObserverInstance;
@@ -986,9 +978,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Set initial language based on html lang attribute or default to 'pl'
             currentLanguage = document.documentElement.lang || 'pl';
-            if (currentLanguage !== 'pl' && currentLanguage !== 'en') { // Fallback for invalid lang
+            if (currentLanguage !== 'pl' && currentLanguage !== 'en') {
                 currentLanguage = 'pl';
                 document.documentElement.lang = 'pl';
             }
@@ -1007,7 +998,7 @@
                     const href = link.getAttribute('href');
                     if (href.startsWith('#') || href.includes('#')) {
                         const targetIdFull = href.substring(href.indexOf('#'));
-                        const targetId = targetIdFull.split('?')[0]; // Remove query params if any from anchor
+                        const targetId = targetIdFull.split('?')[0]; 
                         const targetPage = href.substring(0, href.indexOf('#'));
 
                         if (!targetPage || targetPage === window.location.pathname.split('/').pop() || targetPage === '.') {
@@ -1039,12 +1030,7 @@
                     const successMessage = content[currentLanguage].form.success; 
                     const errorMessage = content[currentLanguage].form.error; 
                     
-                    // Netlify AJAX form submission requires the form-name to be part of the payload.
-                    // The hidden input <input type="hidden" name="form-name" value="contact" /> handles this.
-                    // If you were constructing formData manually without that hidden field, you would do:
-                    // formData.append('form-name', form.getAttribute('name'));
-
-                    fetch("/", { // Or the path to the page where the form is if not root
+                    fetch("/", {
                         method: "POST",
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
                         body: new URLSearchParams(formData).toString()
@@ -1055,7 +1041,7 @@
                             form.reset();
                         } else {
                             response.json().then(data => {
-                                if (data.error) {
+                                if (Object.prototype.hasOwnProperty.call(data, 'error') && data.error) {
                                     alert(`${errorMessage}\nDetails: ${data.error}`);
                                 } else {
                                     alert(errorMessage);
