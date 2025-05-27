@@ -246,9 +246,9 @@
             margin: 0 10px;
         }
 
-        /* Post Content Section - ZMNIEJSZONY ODSTĘP */
+        /* Post Content Section */
         .post-content-section { 
-            padding: 40px 0; /* ZMNIEJSZONE z 80px na 40px */
+            padding: 40px 0;
             background: var(--light-beige);
         }
 
@@ -260,11 +260,11 @@
             margin-bottom: 40px;
         }
 
-        /* Featured Image - ZMNIEJSZONY ODSTĘP */
+        /* Featured Image */
         .post-featured-image {
             text-align: center;
             margin: 0;
-            padding: 15px 40px 15px; /* ZMNIEJSZONE z 40px na 15px */
+            padding: 15px 40px 15px;
         }
 
         .post-featured-image img {
@@ -276,14 +276,15 @@
             object-fit: cover;
         }
 
-        /* Post Content - ZMNIEJSZONA CZCIONKA */
+        /* Post Content - WYRÓWNANIE DO LEWEJ */
         .post-content {
-            padding: 15px 40px 40px; /* ZMNIEJSZONY top padding */
-            font-size: 1.1rem; /* ZMNIEJSZONE z 1.2rem */
-            line-height: 1.7; /* ZMNIEJSZONE z 1.8 */
+            padding: 15px 40px 40px;
+            font-size: 1.1rem;
+            line-height: 1.7;
             color: var(--dark-navy);
             word-wrap: break-word;
             overflow-wrap: break-word;
+            text-align: left !important; /* WYRÓWNANIE DO LEWEJ */
         }
 
         .post-content h1,
@@ -291,35 +292,37 @@
         .post-content h3,
         .post-content h4 {
             color: var(--navy-blue);
-            margin-top: 25px; /* ZMNIEJSZONE z 30px */
-            margin-bottom: 12px; /* ZMNIEJSZONE z 15px */
+            margin-top: 25px;
+            margin-bottom: 12px;
             font-weight: 600;
+            text-align: left !important; /* WYRÓWNANIE DO LEWEJ */
         }
 
         .post-content h1 {
-            font-size: 1.8rem; /* ZMNIEJSZONE z 2rem */
+            font-size: 1.8rem;
             border-bottom: 3px solid var(--warm-ochre);
-            padding-bottom: 8px; /* ZMNIEJSZONE z 10px */
+            padding-bottom: 8px;
         }
 
         .post-content h2 {
-            font-size: 1.5rem; /* ZMNIEJSZONE z 1.6rem */
+            font-size: 1.5rem;
         }
 
         .post-content h3 {
-            font-size: 1.3rem; /* ZMNIEJSZONE z 1.4rem */
+            font-size: 1.3rem;
         }
 
         .post-content p {
-            margin-bottom: 18px; /* ZMNIEJSZONE z 20px */
+            margin-bottom: 18px;
             word-break: break-word;
+            text-align: left !important; /* WYRÓWNANIE DO LEWEJ */
         }
 
         .post-content img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
-            margin: 20px auto; /* ZMNIEJSZONE z 25px */
+            margin: 20px auto;
             display: block;
             box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         }
@@ -327,20 +330,23 @@
         .post-content blockquote {
             background: var(--light-beige);
             border-left: 4px solid var(--warm-ochre);
-            padding: 18px 22px; /* ZMNIEJSZONE z 20px 25px */
-            margin: 20px 0; /* ZMNIEJSZONE z 25px */
+            padding: 18px 22px;
+            margin: 20px 0;
             font-style: italic;
             border-radius: 0 8px 8px 0;
+            text-align: left !important; /* WYRÓWNANIE DO LEWEJ */
         }
 
         .post-content ul,
         .post-content ol {
-            margin: 18px 0; /* ZMNIEJSZONE z 20px */
-            padding-left: 28px; /* ZMNIEJSZONE z 30px */
+            margin: 18px 0;
+            padding-left: 28px;
+            text-align: left !important; /* WYRÓWNANIE DO LEWEJ */
         }
 
         .post-content li {
-            margin-bottom: 8px; /* ZMNIEJSZONE z 10px */
+            margin-bottom: 8px;
+            text-align: left !important; /* WYRÓWNANIE DO LEWEJ */
         }
 
         .post-content code {
@@ -355,17 +361,24 @@
         .post-content pre {
             background: var(--dark-navy);
             color: white;
-            padding: 20px; /* ZMNIEJSZONE z 25px */
+            padding: 20px;
             border-radius: 10px;
             overflow-x: auto;
-            margin: 20px 0; /* ZMNIEJSZONE z 25px */
+            margin: 20px 0;
             word-wrap: normal;
+            text-align: left !important; /* WYRÓWNANIE DO LEWEJ */
         }
 
         .post-content pre code {
             background: none;
             padding: 0;
             color: inherit;
+        }
+
+        /* Specjalne style dla ćwiczeń i technik */
+        .post-content em {
+            color: var(--warm-ochre);
+            font-weight: 500;
         }
 
         /* Back to Blog Button */
@@ -485,7 +498,7 @@
             }
             
             .post-page-header {
-                padding: 120px 0 60px; /* ZMNIEJSZONE */
+                padding: 120px 0 60px;
             }
             
             .post-page-header h1 {
@@ -493,16 +506,17 @@
             }
             
             .post-content-section {
-                padding: 30px 0; /* ZMNIEJSZONE */
+                padding: 30px 0;
             }
             
             .post-content {
-                padding: 15px 20px 30px; /* ZMNIEJSZONE */
-                font-size: 1rem; /* ZMNIEJSZONE z 1.1rem */
+                padding: 15px 20px 30px;
+                font-size: 1rem;
+                text-align: left !important; /* ZACHOWAJ WYRÓWNANIE NA MOBILE */
             }
             
             .post-featured-image {
-                padding: 10px 20px 10px; /* ZMNIEJSZONE */
+                padding: 10px 20px 10px;
             }
             
             .newsletter-form {
@@ -605,16 +619,13 @@
         function formatDate(dateString) {
             if (!dateString) return '';
             
-            // Usuń część z czasem jeśli istnieje (T14:07:57.286Z)
             const cleanDate = dateString.split('T')[0];
             
-            // Sprawdź czy data jest w formacie YYYY-MM-DD
             if (cleanDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
                 const [year, month, day] = cleanDate.split('-');
                 return `${day}.${month}.${year}`;
             }
             
-            // Jeśli data ma inny format, spróbuj sparsować
             try {
                 const date = new Date(dateString);
                 if (!isNaN(date.getTime())) {
@@ -660,7 +671,6 @@
                 
                 console.log('Raw content preview:', rawContent.substring(0, 300));
                 
-                // POPRAWIONE parsowanie front matter
                 const frontMatterRegex = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
                 const match = rawContent.match(frontMatterRegex);
                 
@@ -682,7 +692,6 @@
                 console.log('Front matter:', frontMatterText);
                 console.log('Body preview:', bodyText.substring(0, 100));
                 
-                // Parsowanie front matter
                 const post = { body: bodyText };
                 
                 frontMatterText.split(/\r?\n/).forEach(line => {
@@ -706,10 +715,8 @@
         }
 
         function renderPost(post) {
-            // Update page title
             document.title = (post.title || 'Post') + ' - Blog';
             
-            // DODAJ TYTUŁ I META DO GRANATOWEJ SEKCJI Z FORMATOWANIEM DATY
             const headerContent = document.getElementById('post-header-content');
             headerContent.innerHTML = `
                 <nav class="breadcrumb-nav">
@@ -731,7 +738,6 @@
                 </div>
             `;
             
-            // FORMATOWANIE TREŚCI
             let htmlContent = post.body;
             
             if (htmlContent && htmlContent.length > 50 && !htmlContent.includes(' ') && !htmlContent.includes('\n')) {
@@ -761,15 +767,14 @@
                         return '<ul>' + paragraph + '</ul>';
                     }
                     
-                    return `<p style="word-break: break-word; overflow-wrap: break-word;">${paragraph.replace(/\n/g, '<br>')}</p>`;
+                    return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
                 })
                 .join('\n');
             
             if (!htmlContent.includes('<p>') && !htmlContent.includes('<h')) {
-                htmlContent = `<p style="word-break: break-word; overflow-wrap: break-word;">${htmlContent}</p>`;
+                htmlContent = `<p>${htmlContent}</p>`;
             }
             
-            // RENDERUJ BIAŁĄ SEKCJĘ Z GRAFIKĄ I TREŚCIĄ
             document.getElementById('post-content').innerHTML = `
                 <article class="post-article fade-in">
                     ${post.image ? `
@@ -788,7 +793,6 @@
                 </div>
             `;
             
-            // Animacje
             setTimeout(() => {
                 document.querySelectorAll('.fade-in').forEach(el => {
                     el.classList.add('visible');
@@ -809,7 +813,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadPost();
             
-            // Language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     changeLanguage(this.getAttribute('data-lang'));
