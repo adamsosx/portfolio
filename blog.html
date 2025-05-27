@@ -8,102 +8,399 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+    
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
       max-width: 800px;
       margin: 0 auto;
-      padding: 20px;
-      color: #333;
     }
+    
+    .hero-section h1 {
+      font-size: 3.5em;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .hero-section .subtitle {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+    
+    .language-toggle {
+      margin-top: 30px;
+    }
+    
+    .language-toggle button {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 12px 24px;
+      margin: 0 10px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .language-toggle button:hover,
+    .language-toggle button.active {
+      background: rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.6);
+      transform: translateY(-2px);
+    }
+    
+    .main-content {
+      background: white;
+      margin: -50px 20px 0;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 3;
+      overflow: hidden;
+    }
+    
+    .blog-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+    
     .post {
-      border-bottom: 1px solid #eee;
-      padding: 20px 0;
+      border-bottom: 1px solid #f0f0f0;
+      padding: 40px 0;
       margin-bottom: 20px;
       display: flex;
-      gap: 20px;
+      gap: 30px;
       align-items: flex-start;
+      transition: transform 0.3s ease;
     }
+    
+    .post:hover {
+      transform: translateY(-5px);
+    }
+    
+    .post:last-child {
+      border-bottom: none;
+    }
+    
     .post h2 {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 1.8em;
+      font-weight: 600;
+      color: #2c3e50;
     }
+    
+    .post h2 a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .post h2 a:hover {
+      color: #667eea;
+    }
+    
     .post-meta {
-      color: #666;
+      color: #7f8c8d;
       font-size: 0.9em;
       margin-bottom: 15px;
+      font-weight: 500;
     }
+    
     .post-excerpt {
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      color: #555;
+      line-height: 1.7;
     }
+    
     .read-more {
-      color: #0066cc;
+      color: #667eea;
       text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border: 2px solid #667eea;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      display: inline-block;
     }
+    
+    .read-more:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+    }
+    
     .loading {
       text-align: center;
-      padding: 40px;
-      color: #666;
+      padding: 60px;
+      color: #7f8c8d;
+      font-size: 1.1em;
     }
+    
     .post-thumbnail {
       flex-shrink: 0;
-      width: 200px;
+      width: 250px;
+      height: 180px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
+    
     .post-thumbnail img {
       width: 100%;
-      height: 120px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      transition: transform 0.3s ease;
     }
+    
+    .post-thumbnail:hover img {
+      transform: scale(1.05);
+    }
+    
     .post-content {
       flex: 1;
     }
+    
+    .newsletter {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      padding: 40px;
+      border-radius: 20px;
+      margin: 60px 0;
+      text-align: center;
+      border: 1px solid #dee2e6;
+    }
+    
+    .newsletter h3 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+    
+    .newsletter p {
+      color: #6c757d;
+      margin-bottom: 25px;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      gap: 15px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .newsletter input[type="email"] {
+      flex: 1;
+      padding: 15px 20px;
+      border: 2px solid #dee2e6;
+      border-radius: 25px;
+      font-size: 1em;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    
+    .newsletter input[type="email"]:focus {
+      border-color: #667eea;
+    }
+    
+    .newsletter button {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .newsletter button:hover {
+      background: #5a6fd8;
+      transform: translateY(-2px);
+    }
+    
+    /* Responsywność */
     @media (max-width: 768px) {
+      .hero-section {
+        padding: 60px 20px;
+      }
+      
+      .hero-section h1 {
+        font-size: 2.5em;
+      }
+      
+      .main-content {
+        margin: -30px 10px 0;
+        border-radius: 15px;
+      }
+      
+      .blog-container {
+        padding: 40px 20px;
+      }
+      
       .post {
         flex-direction: column;
+        gap: 20px;
       }
+      
       .post-thumbnail {
         width: 100%;
+        height: 200px;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .language-toggle button {
+        margin: 5px;
+        padding: 10px 20px;
+      }
+    }
+    
+    /* Animacje ładowania */
+    .post {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .post:nth-child(1) { animation-delay: 0.1s; }
+    .post:nth-child(2) { animation-delay: 0.2s; }
+    .post:nth-child(3) { animation-delay: 0.3s; }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Blog</h1>
-    <p>Przemyślenia o technologii, rozwoju i ludzkiej naturze</p>
-  </header>
-
-  <main>
-    <div id="blog-posts" class="loading">
-      Ładowanie postów...
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Blog</h1>
+      <p class="subtitle">Przemyślenia o technologii, rozwoju i ludzkiej naturze</p>
+      <p class="subtitle" style="font-style: italic; opacity: 0.8;">Thoughts on technology, development and human nature</p>
+      
+      <div class="language-toggle">
+        <button class="active" onclick="setLanguage('pl')">Polski</button>
+        <button onclick="setLanguage('en')">English</button>
+      </div>
     </div>
-  </main>
+  </section>
+
+  <div class="main-content">
+    <div class="blog-container">
+      <div id="blog-posts" class="loading">
+        Ładowanie postów...
+      </div>
+
+      <section class="newsletter">
+        <h3>Otrzymuj powiadomienia o nowych artykułach</h3>
+        <p>Get notifications about new articles and insights</p>
+        <form name="newsletter" method="POST" data-netlify="true" class="newsletter-form">
+          <input type="email" name="email" placeholder="Twój email / Your email" required>
+          <button type="submit">Zapisz się</button>
+          <div style="display: none;">
+            <input name="bot-field">
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
 
   <script>
+    let currentLanguage = 'pl';
+    
+    function setLanguage(lang) {
+      currentLanguage = lang;
+      document.querySelectorAll('.language-toggle button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Przeładuj posty z nowym językiem
+      loadBlogPosts();
+    }
+    
     async function loadBlogPosts() {
+      console.log('Rozpoczynam ładowanie postów...');
       try {
         const response = await fetch('https://api.github.com/repos/adamsosx/portfolio/contents/_posts');
+        console.log('Odpowiedź GitHub API:', response);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const files = await response.json();
+        console.log('Pliki z _posts:', files);
         
         const posts = [];
         for (const file of files) {
           if (file.name.endsWith('.md')) {
+            console.log('Przetwarzam plik:', file.name);
             const fileResponse = await fetch(file.download_url);
             const content = await fileResponse.text();
             const post = parseMarkdownPost(content, file.name);
-            if (post) posts.push(post);
+            if (post && post.published !== 'false') {
+              posts.push(post);
+            }
           }
         }
         
+        console.log('Znalezione posty:', posts);
         posts.sort((a, b) => new Date(b.date) - new Date(a.date));
         displayPosts(posts);
       } catch (error) {
         console.error('Błąd ładowania postów:', error);
         document.getElementById('blog-posts').innerHTML = 
-          '<p>Nie udało się załadować postów. Spróbuj ponownie później.</p>';
+          `<p>Błąd ładowania postów: ${error.message}</p>`;
       }
     }
 
     function parseMarkdownPost(content, filename) {
+      console.log('Parsowanie pliku:', filename);
       const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-      if (!frontMatterMatch) return null;
+      if (!frontMatterMatch) {
+        console.log('Nie znaleziono front matter w:', filename);
+        return null;
+      }
       
       const frontMatter = frontMatterMatch[1];
       const body = frontMatterMatch[2];
@@ -119,6 +416,7 @@
       });
       
       post.slug = filename.replace('.md', '');
+      console.log('Sparsowany post:', post);
       return post;
     }
 
@@ -130,22 +428,24 @@
         return;
       }
 
-      const postsHTML = posts.map(post => `
-        <article class="post">
+      const postsHTML = posts.map((post, index) => `
+        <article class="post" style="animation-delay: ${(index + 1) * 0.1}s">
           ${post.image ? `
             <div class="post-thumbnail">
               <img src="${post.image}" alt="${post.title}">
             </div>
           ` : ''}
           <div class="post-content">
-            <h2>${post.title}</h2>
+            <h2><a href="/post.html?slug=${post.slug}">${post.title || 'Bez tytułu'}</a></h2>
             <div class="post-meta">
-              ${post.date} • ${post.category || ''} • ${post.readTime || ''}
+              ${post.date || ''} • ${post.category || ''} • ${post.readTime || ''}
             </div>
             <div class="post-excerpt">
               ${post.excerpt || post.body.substring(0, 150) + '...'}
             </div>
-            <a href="/post.html?slug=${post.slug}" class="read-more">Czytaj więcej →</a>
+            <a href="/post.html?slug=${post.slug}" class="read-more">
+              ${currentLanguage === 'pl' ? 'Czytaj więcej →' : 'Read more →'}
+            </a>
           </div>
         </article>
       `).join('');
@@ -153,7 +453,10 @@
       container.innerHTML = postsHTML;
     }
 
-    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM załadowany, uruchamiam loadBlogPosts');
+      loadBlogPosts();
+    });
   </script>
 </body>
 </html>
