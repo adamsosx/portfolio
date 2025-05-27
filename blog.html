@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
         * {
             margin: 0;
@@ -466,6 +465,18 @@
             font-size: 1.1em;
         }
 
+        /* --- START: Hamburger Menu CSS --- */
+        .mobile-menu-toggle {
+            display: none; 
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem; 
+            cursor: pointer;
+            padding: 5px;
+        }
+        /* --- END: Hamburger Menu CSS --- */
+
         /* Responsive */
         @media (max-width: 768px) {
             .blog-page-header h1 { font-size: 2.2rem; }
@@ -477,7 +488,37 @@
             .featured-content h2 { font-size: 1.5rem; }
             .newsletter-form { flex-direction: column; }
             .category-list { padding: 0 20px; }
-            .nav-links { display: none; }
+            
+            /* --- START: Hamburger Menu CSS - Responsive --- */
+            .nav-links {
+                display: none; /* Ukrywa listę linków na mobilkach domyślnie */
+            }
+            .mobile-menu-toggle {
+                display: block; /* Pokazuje przycisk hamburgera na mobilkach */
+            }
+            .nav-links.active-mobile { /* Styl dla aktywnego (widocznego) menu mobilnego */
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 68px; /* Ustawione na podstawie wysokości nagłówka, dostosuj w razie potrzeby */
+                left: 0;
+                width: 100%;
+                background: var(--dark-navy); 
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                gap: 0; /* Zeruje gap z .nav-links dla pionowego układu */
+            }
+            .nav-links.active-mobile li {
+                margin-bottom: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-links.active-mobile a {
+                font-size: 1.1rem;
+                display: block; 
+                padding: 10px 0;
+            }
+            /* --- END: Hamburger Menu CSS - Responsive --- */
         }
 
         /* Language-specific content */
@@ -512,7 +553,7 @@
                 </a>
             </div>
             <div class="nav-right">
-                <ul class="nav-links">
+                <ul class="nav-links" id="nav-links"> <!-- DODANO id="nav-links" -->
                     <li><a href="index.html">Start</a></li>
                     <li><a href="index.html#about">O mnie</a></li>
                     <li><a href="index.html#portfolio">Portfolio</a></li>
@@ -528,6 +569,8 @@
                         <span class="flag flag-en"></span><span>EN</span>
                     </button>
                 </div>
+                <!-- DODANO Przycisk Hamburgera -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
             </div>
         </nav>
     </header>
@@ -592,16 +635,13 @@
         function formatDate(dateString) {
             if (!dateString) return '';
             
-            // Usuń część z czasem jeśli istnieje (T14:07:57.286Z)
             const cleanDate = dateString.split('T')[0];
             
-            // Sprawdź czy data jest w formacie YYYY-MM-DD
             if (cleanDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
                 const [year, month, day] = cleanDate.split('-');
                 return `${day}.${month}.${year}`;
             }
             
-            // Jeśli data ma inny format, spróbuj sparsować
             try {
                 const date = new Date(dateString);
                 if (!isNaN(date.getTime())) {
@@ -618,7 +658,6 @@
             return cleanDate;
         }
 
-        // POPRAWIONA funkcja ładowania postów Z MAPOWANIEM KATEGORII
         async function loadBlogPosts() {
             console.log('Rozpoczynam ładowanie postów...');
             try {
@@ -658,7 +697,6 @@
             }
         }
 
-        // POPRAWIONA funkcja parsowania Z AUTOMATYCZNYM MAPOWANIEM KATEGORII
         function parseMarkdownPost(content, filename) {
             console.log('Parsowanie pliku:', filename);
             
@@ -689,7 +727,6 @@
             
             post.slug = filename.replace('.md', '');
             
-            // AUTOMATYCZNE MAPOWANIE KATEGORII
             if (!post.categoryId && post.category) {
                 const categoryLower = post.category.toLowerCase();
                 if (categoryLower.includes('sztuczna') || categoryLower.includes('artificial') || categoryLower.includes('ai')) {
@@ -701,11 +738,10 @@
                 } else if (categoryLower.includes('rozwój') || categoryLower.includes('personal')) {
                     post.categoryId = 'personal';
                 } else {
-                    post.categoryId = 'technology'; // domyślna kategoria
+                    post.categoryId = 'technology'; 
                 }
             }
             
-            // Jeśli nadal brak categoryId, ustaw domyślną
             if (!post.categoryId) {
                 post.categoryId = 'technology';
             }
@@ -714,7 +750,6 @@
             return post;
         }
 
-        // POPRAWIONA funkcja wyświetlania Z FORMATOWANIEM DATY
         function displayPosts() {
             const postsGrid = document.getElementById('posts-grid');
             const featuredContainer = document.getElementById('featured-post-container');
@@ -729,7 +764,6 @@
             
             console.log(`Wyświetlam ${filteredPosts.length} postów dla kategorii: ${currentCategory}`);
             
-            // Featured post (pierwszy post)
             if (filteredPosts.length > 0) {
                 const featured = filteredPosts[0];
                 featuredContainer.innerHTML = `
@@ -750,7 +784,6 @@
                     </div>
                 `;
                 
-                // Pozostałe posty
                 const remainingPosts = filteredPosts.slice(1);
                 postsGrid.innerHTML = remainingPosts.map(post => `
                     <div class="blog-card fade-in">
@@ -775,7 +808,6 @@
                 postsGrid.innerHTML = '<p>Brak postów w tej kategorii.</p>';
             }
             
-            // Animacje
             setTimeout(() => {
                 document.querySelectorAll('.fade-in').forEach(el => {
                     el.classList.add('visible');
@@ -800,7 +832,6 @@
                 element.classList.toggle('active', element.getAttribute('data-lang') === lang);
             });
             
-            // Aktualizuj kategorie
             const categories = {
                 pl: [
                     { id: 'all', text: 'Wszystkie' },
@@ -827,23 +858,39 @@
             displayPosts();
         }
 
-        // Event listeners
         document.addEventListener('DOMContentLoaded', function() {
             loadBlogPosts();
             
-            // Language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     changeLanguage(this.getAttribute('data-lang'));
                 });
             });
             
-            // Category buttons
             document.addEventListener('click', function(e) {
                 if (e.target.classList.contains('category-btn')) {
                     filterByCategory(e.target.getAttribute('data-category'));
                 }
             });
+
+            // --- START: Hamburger Menu JS ---
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const navLinksContainer = document.getElementById('nav-links'); // Używamy ID
+
+            if (mobileMenuToggle && navLinksContainer) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    navLinksContainer.classList.toggle('active-mobile');
+                });
+
+                // Opcjonalnie: Zamknij menu po kliknięciu linku w menu mobilnym
+                navLinksContainer.addEventListener('click', function(e) {
+                    // Sprawdź, czy kliknięto link (A) i czy menu jest aktywne
+                    if (e.target.tagName === 'A' && navLinksContainer.classList.contains('active-mobile')) {
+                        navLinksContainer.classList.remove('active-mobile');
+                    }
+                });
+            }
+            // --- END: Hamburger Menu JS ---
         });
     </script>
 </body>
