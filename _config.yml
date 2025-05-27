@@ -15,3 +15,7 @@ collections:
   projects:
     output: true
     permalink: /projects/:name/
+
+# Ustawienia budowania
+safe: true
+incremental: false
