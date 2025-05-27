@@ -3,966 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <title>Blog - Przemyślenia o technologii, rozwoju i ludzkiej naturze</title>
     <style>
+        /* Reset i podstawowe style */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --navy-blue: #1e3a5f;
-            --dark-navy: #14293d;
-            --warm-ochre: #d4812a;
-            --rust-orange: #b8651f;
-            --sage-green: #8aa387;
-            --light-beige: #f5f3f0;
-            --medium-gray: #7d8285;
-            --light-gray: #e8e6e3;
-        }
-
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--dark-navy);
-            background-color: var(--light-beige);
-            scroll-behavior: smooth;
+            color: #333;
+            background-color: #f8f9fa;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header - IDENTYCZNY JAK W INDEX.HTML */
-        header {
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav {
+        /* Navbar styles */
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 2rem;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo a {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--light-beige);
-            padding: 5px;
-        }
-
-        .logo h1 {
             font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
+            font-weight: bold;
+            color: #2c3e50;
         }
 
-        .nav-right {
+        .nav-menu {
             display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-links {
-            display: flex;
+            gap: 2rem;
             list-style: none;
-            gap: 30px;
         }
 
-        .nav-links a {
-            color: white;
+        .nav-menu a {
             text-decoration: none;
-            transition: color 0.3s ease;
+            color: #333;
             font-weight: 500;
+            transition: color 0.3s ease;
         }
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--warm-ochre);
+        .nav-menu a:hover {
+            color: #007bff;
         }
 
-        /* Language Selector - IDENTYCZNY JAK W INDEX.HTML */
-        .language-selector {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .flag {
-            width: 20px;
-            height: 15px;
-            display: inline-block;
-            border-radius: 2px;
-        }
-
-        .flag-pl {
-            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
-        }
-
-        .flag-en {
-            background: linear-gradient(45deg, #012169 25%, transparent 25%), 
-                        linear-gradient(-45deg, #012169 25%, transparent 25%), 
-                        linear-gradient(45deg, transparent 75%, #012169 75%), 
-                        linear-gradient(-45deg, transparent 75%, #012169 75%),
-                        linear-gradient(to right, #c8102e, #c8102e);
-            background-size: 6px 6px, 6px 6px, 6px 6px, 6px 6px, 100% 100%;
-            background-position: 0 0, 0 3px, 3px -3px, -3px 0px, 0 0;
-        }
-
-        /* Hamburger Menu - IDENTYCZNY JAK W INDEX.HTML */
-        .hamburger {
+        /* Hamburger menu styles */
+        .hamburger-menu {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 4px;
-            z-index: 1001;
+            padding: 0.5rem;
         }
 
-        .hamburger span {
+        .hamburger-menu span {
             width: 25px;
             height: 3px;
-            background: white;
-            margin: 2px 0;
+            background-color: #333;
+            margin: 3px 0;
             transition: 0.3s;
-            border-radius: 2px;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background-color: #fff;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.3s ease;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.5rem;
+                margin: 1rem 0;
+            }
         }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
+        /* Blog content styles */
+        .blog-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
         }
 
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
-        }
-
-        /* Mobile Menu - IDENTYCZNY JAK W INDEX.HTML */
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100vh;
-            background: var(--dark-navy);
-            transition: left 0.3s ease;
-            z-index: 1000;
-            padding: 80px 20px 20px;
-            overflow-y: auto;
-        }
-
-        .mobile-menu.active {
-            left: 0;
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .mobile-menu ul li {
-            margin: 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .mobile-menu ul li a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: 500;
-            display: block;
-            padding: 15px 0;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu ul li a:hover,
-        .mobile-menu ul li a.active {
-            color: var(--warm-ochre);
-        }
-
-        .mobile-language-selector {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Blog Header Section */
-        .blog-page-header { 
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--sage-green) 100%);
-            color: white;
-            padding: 140px 0 80px;
+        .blog-header {
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 3rem;
         }
 
-        .blog-page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            opacity: 0.3;
+        .blog-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
         }
 
-        .blog-page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 300;
-            line-height: 1.2;
-            position: relative;
-            z-index: 2;
-        }
-
-        .blog-page-header p {
+        .blog-subtitle {
             font-size: 1.2rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            margin: 0 auto;
+            color: #666;
+            font-style: italic;
         }
 
-        /* Categories Section */
-        .categories-section { 
-            background: white;
-            padding: 40px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .category-list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            background: var(--light-gray);
-            color: var(--navy-blue);
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .category-btn:hover {
-            background: var(--navy-blue);
-            color: white;
-        }
-
-        .category-btn.active {
-            background: var(--warm-ochre);
-            color: white;
-        }
-
-        /* Blog Posts Grid Section */
-        .blog-posts-section { 
-            padding: 80px 0;
-            background: var(--light-beige);
-        }
-
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        /* Blog Post Card */
-        .blog-card {
-            background: white;
+        .newsletter-signup {
+            background-color: #fff;
+            padding: 2rem;
             border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column; 
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .blog-card-image {
-            width: 100%;
-            height: 200px;
-            background-size: cover; 
-            background-position: center; 
-            position: relative;
-            overflow: hidden;
-            background-image: linear-gradient(135deg, var(--sage-green), var(--navy-blue));
-        }
-
-        .blog-card-image .category-tag {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: var(--warm-ochre);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .blog-card-content {
-            padding: 30px;
-            flex-grow: 1; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card-meta {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-        }
-
-        .blog-card h3 {
-            color: var(--navy-blue);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .blog-card p.excerpt { 
-            color: var(--medium-gray);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1; 
-        }
-
-        .read-more {
-            color: var(--warm-ochre);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: gap 0.3s ease;
-            margin-top: auto; 
-        }
-
-        .read-more:hover {
-            gap: 10px;
-        }
-
-        /* Featured Post */
-        .featured-post-container { 
-            margin-bottom: 60px;
-        }
-        .featured-post {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 400px;
-        }
-
-        .featured-image {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            background-image: linear-gradient(135deg, var(--navy-blue), var(--sage-green));
-        }
-
-        .featured-content {
-            padding: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .featured-tag {
-            background: var(--warm-ochre);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block; 
-            margin-bottom: 20px;
-            align-self: flex-start; 
-        }
-
-        .featured-content h2 {
-            color: var(--navy-blue);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .featured-content p.excerpt { 
-            color: var(--medium-gray);
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        /* Newsletter */
-        .newsletter {
-            background: var(--navy-blue);
-            color: white;
-            padding: 60px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             text-align: center;
+            margin-bottom: 3rem;
         }
 
-        .newsletter h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .newsletter p {
-            margin-bottom: 30px;
-            opacity: 0.9;
+        .newsletter-signup h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
         }
 
         .newsletter-form {
             display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-            gap: 10px;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
         .newsletter-form input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 2px solid transparent;
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: var(--warm-ochre);
-            background: rgba(255,255,255,0.15);
+            min-width: 250px;
         }
 
         .newsletter-form button {
-            background: var(--warm-ochre);
+            padding: 0.75rem 1.5rem;
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 15px 30px;
             border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
         }
 
         .newsletter-form button:hover {
-            background: var(--rust-orange);
+            background-color: #0056b3;
         }
 
-        /* Footer */
-        footer {
-            background: var(--dark-navy);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
+        .blog-posts {
+            display: grid;
+            gap: 2rem;
         }
 
-        /* Loading state */
-        .loading {
-            text-align: center;
-            padding: 60px;
-            color: var(--medium-gray);
-            font-size: 1.1em;
+        .blog-post {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-page-header h1 { font-size: 2.2rem; }
-            .blog-page-header p { font-size: 1.1rem; }
-            .posts-grid { grid-template-columns: 1fr; }
-            .featured-post { grid-template-columns: 1fr; }
-            .featured-image { min-height: 250px; }
-            .featured-content { padding: 40px; }
-            .featured-content h2 { font-size: 1.5rem; }
-            .newsletter-form { flex-direction: column; }
-            .category-list { padding: 0 20px; }
-            .nav-links { display: none; }
-            .hamburger { display: flex; }
+        .post-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
         }
 
-        /* Language-specific content */
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+
+        .post-excerpt {
+            color: #555;
+            line-height: 1.7;
         }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
     <header>
-        <nav class="container">
+        <div class="nav-container">
             <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo.png" alt="Logo Adama">
-                    <h1>Adam</h1>
-                </a>
+                <a href="index.html" style="text-decoration: none; color: inherit;">Blog</a>
             </div>
-            <div class="nav-right">
-                <ul class="nav-links">
-                    <li><a href="index.html">Start</a></li>
-                    <li><a href="index.html#about">O mnie</a></li>
-                    <li><a href="index.html#portfolio">Portfolio</a></li>
-                    <li><a href="blog.html" class="active">Blog</a></li>
-                    <li><a href="index.html#services">Usługi</a></li>
-                    <li><a href="index.html#contact">Kontakt</a></li>
-                </ul>
-                <div class="language-selector">
-                    <button class="lang-btn active" data-lang="pl">
-                        <span class="flag flag-pl"></span><span>PL</span>
-                    </button>
-                    <button class="lang-btn" data-lang="en">
-                        <span class="flag flag-en"></span><span>EN</span>
-                    </button>
-                </div>
-                <div class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+            <nav class="nav-menu">
+                <a href="index.html">Strona główna</a>
+                <a href="blog.html">Blog</a>
+                <a href="#about">O mnie</a>
+                <a href="#projects">Projekty</a>
+                <a href="#contact">Kontakt</a>
+            </nav>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <!-- Mobile Menu - DODANE Z INDEX.HTML -->
-    <div class="mobile-menu" id="mobile-menu">
-        <ul>
-            <li><a href="index.html">Start</a></li>
-            <li><a href="index.html#about">O mnie</a></li>
-            <li><a href="index.html#portfolio">Portfolio</a></li>
-            <li><a href="blog.html" class="active">Blog</a></li>
-            <li><a href="index.html#services">Usługi</a></li>
-            <li><a href="index.html#contact">Kontakt</a></li>
-        </ul>
-        <div class="mobile-language-selector">
-            <div class="language-selector">
-                <button class="lang-btn active" data-lang="pl">
-                    <span class="flag flag-pl"></span><span>PL</span>
-                </button>
-                <button class="lang-btn" data-lang="en">
-                    <span class="flag flag-en"></span><span>EN</span>
-                </button>
-            </div>
+    <!-- Blog Content -->
+    <main class="blog-container">
+        <div class="blog-header">
+            <h1 class="blog-title">Przemyślenia o technologii, rozwoju i ludzkiej naturze</h1>
+            <p class="blog-subtitle">Thoughts on technology, development and human nature</p>
         </div>
-    </div>
 
-    <section class="blog-page-header">
-        <div class="container">
-            <h1 class="lang-content active" data-lang="pl">Blog</h1>
-            <h1 class="lang-content" data-lang="en">Blog</h1>
-            <p class="lang-content active" data-lang="pl">Przemyślenia o technologii, rozwoju i ludzkiej naturze</p>
-            <p class="lang-content" data-lang="en">Thoughts on technology, development and human nature</p>
-        </div>
-    </section>
-
-    <section class="categories-section">
-        <div class="container">
-            <div class="category-list" id="category-list">
-                <button class="category-btn active" data-category="all">Wszystkie</button>
-                <button class="category-btn" data-category="ai">Sztuczna Inteligencja</button>
-                <button class="category-btn" data-category="psychology">Psychologia</button>
-                <button class="category-btn" data-category="technology">Technologia</button>
-                <button class="category-btn" data-category="personal">Rozwój osobisty</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="blog-posts-section">
-        <div class="container">
-            <div class="featured-post-container" id="featured-post-container"></div>
-            <div class="posts-grid" id="posts-grid">
-                <div class="loading">Ładowanie postów...</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="newsletter">
-        <div class="container">
-            <h2 class="lang-content active" data-lang="pl">Bądź na bieżąco</h2>
-            <h2 class="lang-content" data-lang="en">Stay Updated</h2>
-            <p class="lang-content active" data-lang="pl">Otrzymuj powiadomienia o nowych artykułach i przemyśleniach</p>
-            <p class="lang-content" data-lang="en">Get notifications about new articles and insights</p>
-            <form class="newsletter-form" data-netlify="true" name="newsletter">
-                <input type="hidden" name="form-name" value="newsletter" />
-                <input type="email" name="email" placeholder="Twój e-mail" required>
+        <div class="newsletter-signup">
+            <h3>Otrzymuj powiadomienia o nowych artykułach i przemyśleniach</h3>
+            <p>Get notifications about new articles and insights</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Twój adres email" required>
                 <button type="submit">Zapisz się</button>
             </form>
         </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <p class="lang-content active" data-lang="pl">© 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
-            <p class="lang-content" data-lang="en">© 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
+        <div class="blog-posts">
+            <article class="blog-post">
+                <h2 class="post-title">Nadchodzące artykuły</h2>
+                <div class="post-meta">Wkrótce</div>
+                <p class="post-excerpt">
+                    Przygotowuję treści łączące analizę technologii blockchain, AI i kryptowalut 
+                    z głębokim zrozumieniem ludzkiej natury. Zapisz się do newslettera, 
+                    aby nie przegapić pierwszych publikacji.
+                </p>
+            </article>
         </div>
-    </footer>
+    </main>
 
     <script>
-        let currentLanguage = 'pl';
-        let currentCategory = 'all';
-        let allPosts = [];
-
-        // HAMBURGER MENU FUNCTIONALITY - DODANE Z INDEX.HTML
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // FUNKCJA FORMATOWANIA DATY
-        function formatDate(dateString) {
-            if (!dateString) return '';
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger menu toggle
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const navMenu = document.querySelector('.nav-menu');
             
-            const cleanDate = dateString.split('T')[0];
+            console.log('Hamburger menu:', hamburgerMenu);
+            console.log('Nav menu:', navMenu);
             
-            if (cleanDate.match(/^\d{4}-\d{2}-\d{2}$/)) {
-                const [year, month, day] = cleanDate.split('-');
-                return `${day}.${month}.${year}`;
-            }
-            
-            try {
-                const date = new Date(dateString);
-                if (!isNaN(date.getTime())) {
-                    return date.toLocaleDateString('pl-PL', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit'
+            if (hamburgerMenu && navMenu) {
+                hamburgerMenu.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    console.log('Menu toggled');
+                });
+
+                // Close menu when clicking on a link
+                const navLinks = document.querySelectorAll('.nav-menu a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
                     });
-                }
-            } catch (e) {
-                console.error('Błąd formatowania daty:', e);
-            }
-            
-            return cleanDate;
-        }
+                });
 
-        // POPRAWIONA funkcja ładowania postów Z MAPOWANIEM KATEGORII
-        async function loadBlogPosts() {
-            console.log('Rozpoczynam ładowanie postów...');
-            try {
-                const response = await fetch('https://api.github.com/repos/adamsosx/portfolio/contents/_posts');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const files = await response.json();
-                console.log('Pliki z _posts:', files);
-                
-                const posts = [];
-                for (const file of files) {
-                    if (file.name.endsWith('.md') && file.type === 'file') {
-                        console.log('Przetwarzam plik:', file.name);
-                        try {
-                            const fileResponse = await fetch(file.download_url);
-                            const content = await fileResponse.text();
-                            const post = parseMarkdownPost(content, file.name);
-                            if (post && post.published !== 'false') {
-                                posts.push(post);
-                            }
-                        } catch (fileError) {
-                            console.error('Błąd ładowania pliku:', file.name, fileError);
-                        }
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!hamburgerMenu.contains(e.target) && !navMenu.contains(e.target)) {
+                        navMenu.classList.remove('active');
                     }
-                }
-                
-                console.log('Znalezione posty:', posts);
-                allPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-                displayPosts();
-            } catch (error) {
-                console.error('Błąd ładowania postów:', error);
-                document.getElementById('posts-grid').innerHTML = 
-                    `<p>Błąd ładowania postów: ${error.message}</p>`;
-            }
-        }
-
-        // POPRAWIONA funkcja parsowania Z AUTOMATYCZNYM MAPOWANIEM KATEGORII
-        function parseMarkdownPost(content, filename) {
-            console.log('Parsowanie pliku:', filename);
-            
-            const frontMatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-            if (!frontMatterMatch) {
-                console.log('Nie znaleziono front matter w:', filename);
-                return null;
-            }
-            
-            const frontMatter = frontMatterMatch[1];
-            const body = frontMatterMatch[2];
-            
-            const post = { body };
-            frontMatter.split(/\r?\n/).forEach(line => {
-                const colonIndex = line.indexOf(':');
-                if (colonIndex > 0) {
-                    const key = line.substring(0, colonIndex).trim();
-                    let value = line.substring(colonIndex + 1).trim();
-                    
-                    if ((value.startsWith('"') && value.endsWith('"')) || 
-                        (value.startsWith("'") && value.endsWith("'"))) {
-                        value = value.slice(1, -1);
-                    }
-                    
-                    post[key] = value;
-                }
-            });
-            
-            post.slug = filename.replace('.md', '');
-            
-            // AUTOMATYCZNE MAPOWANIE KATEGORII
-            if (!post.categoryId && post.category) {
-                const categoryLower = post.category.toLowerCase();
-                if (categoryLower.includes('sztuczna') || categoryLower.includes('artificial') || categoryLower.includes('ai')) {
-                    post.categoryId = 'ai';
-                } else if (categoryLower.includes('psycholog')) {
-                    post.categoryId = 'psychology';
-                } else if (categoryLower.includes('technolog')) {
-                    post.categoryId = 'technology';
-                } else if (categoryLower.includes('rozwój') || categoryLower.includes('personal')) {
-                    post.categoryId = 'personal';
-                } else {
-                    post.categoryId = 'technology'; // domyślna kategoria
-                }
-            }
-            
-            // Jeśli nadal brak categoryId, ustaw domyślną
-            if (!post.categoryId) {
-                post.categoryId = 'technology';
-            }
-            
-            console.log('Sparsowany post z categoryId:', post);
-            return post;
-        }
-
-        // POPRAWIONA funkcja wyświetlania Z FORMATOWANIEM DATY
-        function displayPosts() {
-            const postsGrid = document.getElementById('posts-grid');
-            const featuredContainer = document.getElementById('featured-post-container');
-            
-            let filteredPosts = allPosts;
-            if (currentCategory !== 'all') {
-                filteredPosts = allPosts.filter(post => {
-                    console.log(`Filtrowanie: post.categoryId="${post.categoryId}" vs currentCategory="${currentCategory}"`);
-                    return post.categoryId === currentCategory;
                 });
             }
-            
-            console.log(`Wyświetlam ${filteredPosts.length} postów dla kategorii: ${currentCategory}`);
-            
-            // Featured post (pierwszy post)
-            if (filteredPosts.length > 0) {
-                const featured = filteredPosts[0];
-                featuredContainer.innerHTML = `
-                    <div class="featured-post fade-in">
-                        <div class="featured-image" style="background-image: url('${featured.image || ''}');"></div>
-                        <div class="featured-content">
-                            <span class="featured-tag">${featured.category || 'Blog'}</span>
-                            <h2>${featured.title || 'Bez tytułu'}</h2>
-                            <p class="excerpt">${featured.excerpt || featured.body.substring(0, 150) + '...'}</p>
-                            <div class="blog-card-meta">
-                                <span>${formatDate(featured.date)}</span>
-                                <span>${featured.readTime || '5 min'}</span>
-                            </div>
-                            <a href="post.html?slug=${featured.slug}" class="read-more">
-                                ${currentLanguage === 'pl' ? 'Czytaj więcej →' : 'Read more →'}
-                            </a>
-                        </div>
-                    </div>
-                `;
-                
-                // Pozostałe posty
-                const remainingPosts = filteredPosts.slice(1);
-                postsGrid.innerHTML = remainingPosts.map(post => `
-                    <div class="blog-card fade-in">
-                        <div class="blog-card-image" style="background-image: url('${post.image || ''}');">
-                            <span class="category-tag">${post.category || 'Blog'}</span>
-                        </div>
-                        <div class="blog-card-content">
-                            <div class="blog-card-meta">
-                                <span>${formatDate(post.date)}</span>
-                                <span>${post.readTime || '5 min'}</span>
-                            </div>
-                            <h3>${post.title || 'Bez tytułu'}</h3>
-                            <p class="excerpt">${post.excerpt || post.body.substring(0, 120) + '...'}</p>
-                            <a href="post.html?slug=${post.slug}" class="read-more">
-                                ${currentLanguage === 'pl' ? 'Czytaj więcej →' : 'Read more →'}
-                            </a>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                featuredContainer.innerHTML = '';
-                postsGrid.innerHTML = '<p>Brak postów w tej kategorii.</p>';
+
+            // Newsletter form handling
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = e.target.querySelector('input[type="email"]').value;
+                    alert(`Dziękuję za zapisanie się! Email: ${email}`);
+                    e.target.reset();
+                });
             }
-            
-            // Animacje
-            setTimeout(() => {
-                document.querySelectorAll('.fade-in').forEach(el => {
-                    el.classList.add('visible');
-                });
-            }, 100);
-        }
-
-        function filterByCategory(categoryId) {
-            console.log('Filtrowanie według kategorii:', categoryId);
-            currentCategory = categoryId;
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`[data-category="${categoryId}"]`).classList.add('active');
-            displayPosts();
-        }
-
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-            });
-            document.querySelectorAll('.lang-content').forEach(element => {
-                element.classList.toggle('active', element.getAttribute('data-lang') === lang);
-            });
-            
-            // Aktualizuj kategorie
-            const categories = {
-                pl: [
-                    { id: 'all', text: 'Wszystkie' },
-                    { id: 'ai', text: 'Sztuczna Inteligencja' },
-                    { id: 'psychology', text: 'Psychologia' },
-                    { id: 'technology', text: 'Technologia' },
-                    { id: 'personal', text: 'Rozwój osobisty' }
-                ],
-                en: [
-                    { id: 'all', text: 'All' },
-                    { id: 'ai', text: 'Artificial Intelligence' },
-                    { id: 'psychology', text: 'Psychology' },
-                    { id: 'technology', text: 'Technology' },
-                    { id: 'personal', text: 'Personal Development' }
-                ]
-            };
-            
-            const categoryList = document.getElementById('category-list');
-            categoryList.innerHTML = categories[lang].map(cat => 
-                `<button class="category-btn ${cat.id === currentCategory ? 'active' : ''}" 
-                         data-category="${cat.id}">${cat.text}</button>`
-            ).join('');
-            
-            displayPosts();
-        }
-
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            loadBlogPosts();
-            
-            // Language buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    changeLanguage(this.getAttribute('data-lang'));
-                });
-            });
-            
-            // Category buttons
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('category-btn')) {
-                    filterByCategory(e.target.getAttribute('data-category'));
-                }
-            });
         });
     </script>
 </body>
