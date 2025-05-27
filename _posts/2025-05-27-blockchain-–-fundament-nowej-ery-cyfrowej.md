@@ -17,7 +17,7 @@ Definicja w skrócie: Blockchain to zdecentralizowana, rozproszona baza danych, 
 
 1. Użytkownik inicjuje transakcję (np. przesłanie kryptowaluty).
 2. Transakcja trafia do sieci jako tzw. pending transaction.
-3. Górnicy/węzły (nodes) walidują transakcję przy pomocy algorytmów konsensusu (np. Proof of Work lub Proof of Stake).
+3. Górnicy/węzły (nodes) walidują transakcję przy pomocy algorytmów          konsensusu (np. Proof of Work lub Proof of Stake).
 4. Zweryfikowana transakcja trafia do nowego bloku.
 5. Blok zostaje dodany do łańcucha i zapisany w całej sieci.
 
@@ -58,26 +58,19 @@ Nieznane zastosowania:
 
 **Inne zastosowania blockchaina**
 
-**a**) Supply Chain & logistyka
-
+a) Supply Chain & logistyka
 Transparentność i śledzenie produktów (IBM + Walmart)
-
 Zwalczanie podróbek (np. luksusowe marki: LVMH)
 
 b) Ochrona praw autorskich
-
 Automatyczne tantiemy z NFT i smart contractów
-
 Rejestracja dzieł twórczych
 
 c) Identyfikacja cyfrowa
-
 Self Sovereign Identity (SSI) – użytkownik sam zarządza swoimi danymi (np. projekt uPort)
 
 d) Głosowania elektroniczne
-
 Teoretycznie niezmienialne wyniki
-
 Przykład: Estonia testowała blockchain do głosowań lokalnych
 
 e) Zarządzanie dokumentami
@@ -86,18 +79,14 @@ Notariusze i zapisy własności mogą działać na blockchainie (np. rejestry gr
 
 **Przyszłość i wyzwania**
 
-Skalowalność (Ethereum vs. Layer 2: Arbitrum, Optimism)
-
-Zużycie energii (choć Proof of Stake już to mocno ogranicza)
-
-Prawo i regulacje (np. MiCA w UE)
+Skalowalność (Ethereum vs. Layer 2: Arbitrum, Optimism).
+Zużycie energii (choć Proof of Stake już to mocno ogranicza).
+Prawo i regulacje (np. MiCA w UE).
 
 **Nowe kierunki:**
 
 RWA – Real World Assets: tokenizacja fizycznych aktywów jak nieruchomości, akcje, złoto
-
 SocialFi – sieci społecznościowe oparte o blockchain (np. Lens Protocol)
-
 AI + Blockchain – wykorzystanie AI do predykcji danych i tworzenia zautomatyzowanych DAO
 
 **Podsumowanie**
