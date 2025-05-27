@@ -1,1046 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
-    <!-- Marked.js - biblioteka do parsowania Markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- js-yaml - biblioteka do parsowania YAML (frontmatter) -->
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
-    <style>
-        /* ... (Twoje style CSS pozostają takie same - skopiuj je tutaj) ... */
-        /* SKOPIUJ CAŁY BLOK <style> z poprzedniej wersji blog.html */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --navy-blue: #1e3a5f;
-            --dark-navy: #14293d;
-            --warm-ochre: #d4812a;
-            --rust-orange: #b8651f;
-            --sage-green: #8aa387;
-            --light-beige: #f5f3f0;
-            --medium-gray: #7d8285;
-            --light-gray: #e8e6e3;
-        }
-
-        body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            line-height: 1.6;
-            color: var(--dark-navy);
-            background-color: var(--light-beige);
-            scroll-behavior: smooth;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Language Selector */
-        .language-selector {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .lang-btn.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Flags */
-        .flag {
-            width: 24px;
-            height: 18px;
-            display: inline-block;
-            border-radius: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .flag-pl {
-            background: linear-gradient(to bottom, white 0%, white 50%, #dc143c 50%, #dc143c 100%);
-        }
-
-        .flag-pl::before, .flag-pl::after {
-            content: none;
-        }
-
-        .flag-en {
-            background-color: white;
-        }
-
-        .flag-en::before {
-            content: none;
-        }
-
-        .flag-en::after {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image:
-                linear-gradient(#C8102E, #C8102E),
-                linear-gradient(#C8102E, #C8102E);
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: 100% 22.22%, 16.66% 100%;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .logo img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--light-beige);
-            padding: 5px;
-        }
-         .logo h1 { /* Text next to logo */
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--warm-ochre);
-        }
-
-        .nav-links a.active { /* Style for active link on blog page */
-            color: var(--warm-ochre);
-        }
-
-        /* Blog Header Section */
-        .blog-page-header { /* Renamed to avoid conflict with general .hero */
-            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--sage-green) 100%);
-            color: white;
-            padding: 140px 0 80px; /* Adjusted padding for fixed header */
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .blog-page-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-            opacity: 0.3;
-        }
-
-        .blog-page-header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 300;
-            line-height: 1.2;
-            position: relative;
-            z-index: 2;
-        }
-
-        .blog-page-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Categories Section */
-        .categories-section { /* Added class for clarity */
-            background: white;
-            padding: 40px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .category-list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            background: var(--light-gray);
-            color: var(--navy-blue);
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .category-btn:hover {
-            background: var(--navy-blue);
-            color: white;
-        }
-
-        .category-btn.active {
-            background: var(--warm-ochre);
-            color: white;
-        }
-
-        /* Blog Posts Grid Section */
-        .blog-posts-section { /* Added class for clarity */
-            padding: 80px 0;
-            background: var(--light-beige);
-        }
-
-        .posts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
-        }
-
-        /* Blog Post Card */
-        .blog-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column; /* Ensure content stacks vertically */
-        }
-
-        .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .blog-card-image {
-            width: 100%;
-            height: 200px;
-            background-size: cover; /* Ensure image covers the area */
-            background-position: center; /* Center the image */
-            position: relative;
-            overflow: hidden;
-            background-image: linear-gradient(135deg, var(--sage-green), var(--navy-blue));
-        }
-
-        .blog-card-image .category-tag {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: var(--warm-ochre);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .blog-card-content {
-            padding: 30px;
-            flex-grow: 1; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .blog-card-meta {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-        }
-
-        .blog-card h3 {
-            color: var(--navy-blue);
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .blog-card p.excerpt { 
-            color: var(--medium-gray);
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1; 
-        }
-
-        .read-more {
-            color: var(--warm-ochre);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: gap 0.3s ease;
-            margin-top: auto; 
-        }
-
-        .read-more:hover {
-            gap: 10px;
-        }
-
-        /* Featured Post */
-         .featured-post-container { 
-            margin-bottom: 60px;
-        }
-        .featured-post {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 400px;
-        }
-
-        .featured-image {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            background-image: linear-gradient(135deg, var(--navy-blue), var(--sage-green));
-        }
-
-        .featured-content {
-            padding: 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .featured-tag {
-            background: var(--warm-ochre);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block; 
-            margin-bottom: 20px;
-            align-self: flex-start; 
-        }
-
-        .featured-content h2 {
-            color: var(--navy-blue);
-            font-size: 2rem;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .featured-content p.excerpt { 
-            color: var(--medium-gray);
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 60px;
-        }
-
-        .page-btn {
-            background: white;
-            color: var(--navy-blue);
-            border: 2px solid var(--light-gray);
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .page-btn:hover {
-            background: var(--navy-blue);
-            color: white;
-            border-color: var(--navy-blue);
-        }
-
-        .page-btn.active {
-            background: var(--warm-ochre);
-            color: white;
-            border-color: var(--warm-ochre);
-        }
-
-        /* Newsletter */
-        .newsletter {
-            background: var(--navy-blue);
-            color: white;
-            padding: 60px 0;
-            text-align: center;
-        }
-
-        .newsletter h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .newsletter p {
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .newsletter-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
-            gap: 10px;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border: 2px solid transparent;
-        }
-
-        .newsletter-form input::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-
-        .newsletter-form input:focus {
-            outline: none;
-            border-color: var(--warm-ochre);
-            background: rgba(255,255,255,0.15);
-        }
-
-        .newsletter-form button {
-            background: var(--warm-ochre);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-form button:hover {
-            background: var(--rust-orange);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-navy);
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            padding: 5px;
-        }
-        .hidden { display: none; } 
-
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .mobile-menu-toggle { display: block; }
-            .nav-links.active-mobile { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; width: 100%; background: var(--dark-navy); padding: 20px; box-shadow: 0 5px 10px rgba(0,0,0,0.2); gap:0; }
-            .nav-links.active-mobile li { margin-bottom: 15px; width: 100%; text-align: center; }
-            .nav-links.active-mobile a { font-size: 1.1rem; display: block; padding: 10px 0; }
-            .blog-page-header h1 { font-size: 2.2rem; }
-            .blog-page-header p { font-size: 1.1rem; }
-            .posts-grid { grid-template-columns: 1fr; }
-            .featured-post { grid-template-columns: 1fr; }
-            .featured-image { min-height: 250px; }
-            .featured-content { padding: 40px; }
-            .featured-content h2 { font-size: 1.5rem; }
-            .newsletter-form { flex-direction: column; }
-            .category-list { padding: 0 20px; }
-        }
-
-        /* Language-specific content */
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
-
-        /* Animations */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        /* .fade-in will be handled by JS for IntersectionObserver */
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Przemyślenia o technologii</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+    }
+    .post {
+      border-bottom: 1px solid #eee;
+      padding: 20px 0;
+      margin-bottom: 20px;
+    }
+    .post h2 {
+      margin-bottom: 10px;
+    }
+    .post-meta {
+      color: #666;
+      font-size: 0.9em;
+      margin-bottom: 15px;
+    }
+    .post-excerpt {
+      margin-bottom: 15px;
+    }
+    .read-more {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+    .newsletter {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 40px 0;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
-                <h1 class="lang-content active" data-lang="pl">Adam</h1>
-                <h1 class="lang-content" data-lang="en">Adam</h1>
-            </div>
-            <div class="nav-right">
-                <ul class="nav-links" id="nav-links"></ul>
-                <div class="language-selector">
-                    <button class="lang-btn active" data-lang="pl"><span class="flag flag-pl"></span><span>PL</span></button>
-                    <button class="lang-btn" data-lang="en"><span class="flag flag-en"></span><span>EN</span></button>
-                </div>
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
-            </div>
-        </nav>
-    </header>
+  <header>
+    <h1>Blog</h1>
+    <p>Przemyślenia o technologii, rozwoju i ludzkiej naturze</p>
+  </header>
 
-    <section class="blog-page-header">
-        <div class="container">
-            <h1 class="lang-content active" data-lang="pl">Blog</h1>
-            <h1 class="lang-content" data-lang="en">Blog</h1>
-            <p class="lang-content active" data-lang="pl">Przemyślenia o technologii, rozwoju i ludzkiej naturze</p>
-            <p class="lang-content" data-lang="en">Thoughts on technology, development and human nature</p>
-        </div>
-    </section>
+  <main>
+    <div id="blog-posts" class="loading">
+      Ładowanie postów...
+    </div>
+  </main>
 
-    <section class="categories-section">
-        <div class="container">
-            <div class="category-list" id="category-list"></div>
-        </div>
-    </section>
+  <section class="newsletter">
+    <h3>Otrzymuj powiadomienia o nowych artykułach</h3>
+    <form name="newsletter" method="POST" data-netlify="true">
+      <input type="email" name="email" placeholder="Twój email" required>
+      <button type="submit">Zapisz się</button>
+      <div style="display: none;">
+        <input name="bot-field">
+      </div>
+    </form>
+  </section>
 
-    <section class="blog-posts-section">
-        <div class="container">
-            <div class="featured-post-container" id="featured-post-container"></div>
-            <div class="posts-grid" id="posts-grid"></div>
-            <div class="pagination" id="pagination"></div>
-        </div>
-    </section>
+  <script>
+    // Funkcja do ładowania i wyświetlania postów
+    async function loadBlogPosts() {
+      try {
+        // Pobierz listę plików z GitHub API lub użyj statycznej listy
+        const posts = await fetchPosts();
+        displayPosts(posts);
+      } catch (error) {
+        console.error('Błąd ładowania postów:', error);
+        document.getElementById('blog-posts').innerHTML = 
+          '<p>Nie udało się załadować postów. Spróbuj ponownie później.</p>';
+      }
+    }
 
-    <section class="newsletter">
-        <div class="container">
-            <h2 class="lang-content active" data-lang="pl">Bądź na bieżąco</h2>
-            <h2 class="lang-content" data-lang="en">Stay Updated</h2>
-            <p class="lang-content active" data-lang="pl">Otrzymuj powiadomienia o nowych artykułach i przemyśleniach</p>
-            <p class="lang-content" data-lang="en">Get notifications about new articles and insights</p>
-            <form class="newsletter-form" id="newsletter-form" data-netlify="true" data-netlify-honeypot="bot-field-newsletter" name="newsletter">
-                 <p class="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field-newsletter" /></label></p>
-                <input type="hidden" name="form-name" value="newsletter" />
-                <input type="email" id="newsletter-email" name="email" required>
-                <button type="submit" id="newsletter-submit"></button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p class="lang-content active" data-lang="pl">© 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
-            <p class="lang-content" data-lang="en">© 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Global variables for blog state
-        let currentLanguage = 'pl';
-        let currentPage = 1;
-        const postsPerPage = 3; 
-        let currentCategory = 'all';
-        let allBlogPosts = { pl: [], en: [] }; // Store all posts fetched from manifest
-
-        // Static text content for the page (non-CMS content)
-        const staticContent = {
-            pl: {
-                nav: [
-                    { text: 'Start', href: 'index.html' },
-                    { text: 'O mnie', href: 'index.html#about' },
-                    { text: 'Portfolio', href: 'index.html#portfolio' },
-                    { text: 'Blog', href: 'blog.html', active: true },
-                    { text: 'Usługi', href: 'index.html#services' },
-                    { text: 'Kontakt', href: 'index.html#contact' }
-                ],
-                categories_meta: [ // Meta for categories, actual posts will be fetched
-                    { id: 'all', text: 'Wszystkie' }, { id: 'ai', text: 'Sztuczna Inteligencja' },
-                    { id: 'psychology', text: 'Psychologia' }, { id: 'technology', text: 'Technologia' },
-                    { id: 'personal', text: 'Rozwój osobisty' }
-                ],
-                readMore: 'Czytaj więcej →',
-                newsletter: { placeholder: 'Twój e-mail', button: 'Zapisz się', success: 'Dziękuję za zapisanie się do newslettera!', error: 'Wystąpił błąd podczas zapisu. Spróbuj ponownie.'}
-            },
-            en: { 
-                nav: [
-                    { text: 'Home', href: 'index.html' }, { text: 'About', href: 'index.html#about' },
-                    { text: 'Portfolio', href: 'index.html#portfolio' }, { text: 'Blog', href: 'blog.html', active: true },
-                    { text: 'Services', href: 'index.html#services' }, { text: 'Contact', href: 'index.html#contact' }
-                ],
-                categories_meta: [
-                    { id: 'all', text: 'All' }, { id: 'ai', text: 'Artificial Intelligence' },
-                    { id: 'psychology', text: 'Psychology' }, { id: 'technology', text: 'Technology' },
-                    { id: 'personal', text: 'Personal Development' }
-                ],
-                readMore: 'Read more →',
-                newsletter: { placeholder: 'Your e-mail', button: 'Subscribe', success: 'Thank you for subscribing to the newsletter!', error: 'There was an error subscribing. Please try again.'}
-            }
-        };
-
-        // --- Helper function to parse YAML frontmatter ---
-        function parseFrontmatter(markdownContent) {
-            const frontmatterRegex = /^---\s*([\s\S]*?)\s*---/;
-            const match = frontmatterRegex.exec(markdownContent);
-            if (match) {
-                const frontmatter = jsyaml.load(match[1]);
-                const content = markdownContent.slice(match[0].length).trim();
-                return { frontmatter, content };
-            }
-            return { frontmatter: {}, content: markdownContent }; // No frontmatter found
+    async function fetchPosts() {
+      // Tutaj możesz zaimplementować pobieranie postów z GitHub API
+      // lub użyć statycznej listy postów
+      
+      // Przykład statycznej listy (zastąp prawdziwymi danymi):
+      return [
+        {
+          title: "Pierwszy post testowy",
+          date: "2025-05-27",
+          excerpt: "To jest przykładowy post na blogu...",
+          slug: "pierwszy-post-testowy",
+          category: "Technologia",
+          readTime: "3 min czytania"
         }
-        
-        async function fetchBlogPosts() {
-            try {
-                // Zamiast blog-manifest.json, będziemy teraz iterować po znanym zestawie plików
-                // Dla uproszczenia zakładamy, że pliki .md są w folderze _posts/blog/
-                // Ta lista powinna być generowana dynamicznie w bardziej zaawansowanym systemie
-                // Na potrzeby demonstracji, załóżmy, że mamy listę ścieżek (slugów)
-                // W prawdziwym systemie z Decap, ta lista byłaby dynamiczna lub generowana
-                const postFiles = [
-                    // Przykładowe ścieżki - w rzeczywistości Decap CMS będzie je tworzył.
-                    // Będziesz musiał dostosować te ścieżki lub sposób ich pobierania.
-                    // Dla Decap CMS, to będą ścieżki do plików Markdown, które on tworzy.
-                    // np. '/_posts/blog/2025-01-15-ai-human-design.md'
-                    // '2025-01-15-ai-human-design.md', // Featured post
-                    // '2025-01-10-cien-w-erze-cyfrowej.md',
-                    // '2025-01-05-python-i-swiadomosc.md',
-                    // '2024-12-28-manifestor-w-swiecie-kodu.md',
-                    // '2024-12-20-gpt4-jako-terapeuta.md',
-                    // '2024-12-15-archetypy-w-algorytmach.md',
-                    // '2024-12-10-clean-code-i-czysta-swiadomosc.md'
-                    // UWAGA: Poniżej używam przykładowych danych z poprzedniego obiektu `content`
-                    // aby zademonstrować strukturę. W prawdziwej implementacji Decap CMS,
-                    // te dane byłyby wczytywane z plików .md.
-                ];
+      ];
+    }
 
-                // Symulacja danych, które normalnie byłyby wczytane z plików Markdown
-                // W prawdziwej aplikacji te dane pochodziłyby z Decap CMS przez parsowanie plików .md
-                const demoPostsPL = staticContent.pl.posts || []; // Używamy poprzedniej definicji na potrzeby demo
-                const demoPostsEN = staticContent.en.posts || []; // Używamy poprzedniej definicji na potrzeby demo
-                
-                allBlogPosts.pl = demoPostsPL.map(p => ({...p, slug: p.title.toLowerCase().replace(/\s+/g, '-') + '.md'}));
-                allBlogPosts.en = demoPostsEN.map(p => ({...p, slug: p.title.toLowerCase().replace(/\s+/g, '-') + '.md'}));
+    function displayPosts(posts) {
+      const container = document.getElementById('blog-posts');
+      
+      if (posts.length === 0) {
+        container.innerHTML = '<p>Brak postów do wyświetlenia.</p>';
+        return;
+      }
 
+      const postsHTML = posts.map(post => `
+        <article class="post">
+          <h2><a href="/blog/${post.slug}" class="read-more">${post.title}</a></h2>
+          <div class="post-meta">
+            ${post.date} • ${post.category} • ${post.readTime || ''}
+          </div>
+          <div class="post-excerpt">
+            ${post.excerpt}
+          </div>
+          <a href="/blog/${post.slug}" class="read-more">Czytaj więcej →</a>
+        </article>
+      `).join('');
 
-                // Prawdziwa logika fetchowania (zakomentowana, bo wymaga działającego serwera/struktury plików):
-                /*
-                const manifestResponse = await fetch('/blog-manifest.json'); // Zakładamy, że masz taki plik
-                if (!manifestResponse.ok) throw new Error('Failed to load blog manifest');
-                const manifest = await manifestResponse.json();
-                
-                allBlogPosts.pl = manifest.pl || []; // Zakładając, że manifest ma strukturę dla obu języków
-                allBlogPosts.en = manifest.en || [];
-                */
+      container.innerHTML = postsHTML;
+    }
 
-                renderBlogContent(); // Po załadowaniu danych, renderuj treść
-            } catch (error) {
-                console.error("Error fetching blog posts:", error);
-                document.getElementById('posts-grid').innerHTML = "<p>Nie udało się załadować postów.</p>";
-            }
-        }
-
-
-        function updateNavigation() {
-            const navLinksContainer = document.getElementById('nav-links');
-            navLinksContainer.innerHTML = '';
-            const currentPageFile = window.location.pathname.split('/').pop() || 'index.html';
-            staticContent[currentLanguage].nav.forEach(item => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = item.href;
-                a.textContent = item.text;
-                const itemPageFile = item.href.split('/').pop().split('#')[0] || 'index.html';
-                if (itemPageFile === currentPageFile || (item.active && itemPageFile.includes(currentPageFile))) {
-                    a.classList.add('active');
-                }
-                li.appendChild(a);
-                navLinksContainer.appendChild(li);
-            });
-        }
-
-        function updateCategories() {
-            const categoryList = document.getElementById('category-list');
-            categoryList.innerHTML = '';
-            staticContent[currentLanguage].categories_meta.forEach(cat => { // Używamy _meta dla etykiet
-                const button = document.createElement('button');
-                button.className = 'category-btn';
-                button.textContent = cat.text;
-                button.setAttribute('data-category', cat.id);
-                if (cat.id === currentCategory) button.classList.add('active');
-                button.addEventListener('click', () => filterByCategory(cat.id));
-                categoryList.appendChild(button);
-            });
-        }
-        
-        function filterByCategory(categoryId) {
-            currentCategory = categoryId;
-            currentPage = 1; 
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            const activeBtn = document.querySelector(`.category-btn[data-category="${categoryId}"]`);
-            if (activeBtn) activeBtn.classList.add('active');
-            renderBlogContent();
-        }
-
-        function updateFeaturedPost() {
-            const featuredPostContainer = document.getElementById('featured-post-container');
-            if (!featuredPostContainer) return;
-            featuredPostContainer.innerHTML = ''; 
-            
-            // Zakładamy, że pierwszy post z manifestu dla danego języka to featured, jeśli nie ma specjalnego oznaczenia
-            // W bardziej zaawansowanym systemie, featured post byłby oznaczony w manifeście lub w pliku .md
-            const featured = allBlogPosts[currentLanguage] && allBlogPosts[currentLanguage].length > 0 
-                           ? allBlogPosts[currentLanguage][0] // Bierzemy pierwszy jako przykład
-                           : null; 
-            // Powyżej powinno być: const featured = staticContent[currentLanguage].featuredPost;
-
-            if (!featured || (currentCategory !== 'all' && featured.categoryId !== currentCategory)) {
-                featuredPostContainer.style.display = 'none';
-                return;
-            }
-            featuredPostContainer.style.display = 'block';
-
-            const postElement = document.createElement('div');
-            postElement.className = 'featured-post fade-in';
-            // Używamy danych z załadowanego "featured" postu
-            postElement.innerHTML = `
-                <div class="featured-image" style="background-image: url('${featured.image || 'images/blog/default-featured.jpg'}');"></div>
-                <div class="featured-content">
-                    <span class="featured-tag">${featured.category}</span>
-                    <h2>${featured.title}</h2>
-                    <p class="excerpt">${featured.excerpt || ''}</p>
-                    <div class="blog-card-meta" style="margin-top: 15px; margin-bottom: 15px;">
-                        <span>${featured.date}</span>
-                        <span>${featured.readTime}</span>
-                    </div>
-                    <a href="post-detail.html?slug=${featured.slug}&lang=${currentLanguage}" class="read-more">${staticContent[currentLanguage].readMore}</a>
-                </div>`;
-            featuredPostContainer.appendChild(postElement);
-        }
-
-        function updatePosts() {
-            const postsGrid = document.getElementById('posts-grid');
-            postsGrid.innerHTML = '';
-
-            let postsToDisplay = allBlogPosts[currentLanguage] || [];
-            if (currentCategory !== 'all') {
-                postsToDisplay = postsToDisplay.filter(post => post.categoryId === currentCategory);
-            }
-            
-            const featuredDetails = staticContent[currentLanguage].featuredPost; // Użyjmy danych statycznych dla featured
-            const isFeaturedPostVisible = document.getElementById('featured-post-container').style.display !== 'none';
-
-            if (isFeaturedPostVisible && featuredDetails) {
-                 postsToDisplay = postsToDisplay.filter(post => post.title !== featuredDetails.title); 
-            }
-
-            const totalPostsForPagination = postsToDisplay.length;
-            const startIndex = (currentPage - 1) * postsPerPage;
-            const endIndex = startIndex + postsPerPage;
-            const paginatedPosts = postsToDisplay.slice(startIndex, endIndex);
-
-            paginatedPosts.forEach(post => {
-                const card = document.createElement('div');
-                card.className = 'blog-card fade-in';
-                card.innerHTML = `
-                    <div class="blog-card-image" style="background-image: url('${post.image || 'images/blog/default-post.jpg'}');">
-                        <span class="category-tag">${post.category}</span>
-                    </div>
-                    <div class="blog-card-content">
-                        <div class="blog-card-meta">
-                            <span>${post.date}</span>
-                            <span>${post.readTime}</span>
-                        </div>
-                        <h3>${post.title}</h3>
-                        <p class="excerpt">${post.excerpt || ''}</p>
-                        <a href="post-detail.html?slug=${post.slug}&lang=${currentLanguage}" class="read-more">${staticContent[currentLanguage].readMore}</a>
-                    </div>`;
-                postsGrid.appendChild(card);
-            });
-            updatePagination(totalPostsForPagination);
-        }
-        
-        // Reszta funkcji (updatePagination, updateNewsletterPlaceholders, renderBlogContent, changeLanguage, initializePage, applyScrollAnimations, event listeners)
-        // powinna pozostać taka sama jak w Twojej ostatniej poprawnej wersji blog.html,
-        // z tą różnicą, że renderBlogContent i initializePage będą polegać na danych z `allBlogPosts`
-        // zamiast bezpośrednio z `content.pl.posts` lub `content.en.posts`.
-        // Poniżej wklejam te funkcje ponownie dla kompletności, zakładając, że `staticContent` jest używane do statycznych tekstów.
-
-        function updatePagination(totalPosts) {
-            const paginationContainer = document.getElementById('pagination');
-            paginationContainer.innerHTML = '';
-            const totalPages = Math.ceil(totalPosts / postsPerPage);
-
-            if (totalPages <= 1) return;
-
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.className = 'page-btn';
-                pageButton.textContent = i;
-                if (i === currentPage) {
-                    pageButton.classList.add('active');
-                }
-                pageButton.addEventListener('click', () => {
-                    currentPage = i;
-                    updatePosts(); 
-                    const blogPostsSection = document.querySelector('.blog-posts-section');
-                    if (blogPostsSection) {
-                        window.scrollTo({ top: blogPostsSection.offsetTop - 80, behavior: 'smooth' }); 
-                    }
-                });
-                paginationContainer.appendChild(pageButton);
-            }
-        }
-        
-        function updateNewsletterPlaceholders() {
-            const newsletterEmailInput = document.getElementById('newsletter-email');
-            const newsletterSubmitButton = document.getElementById('newsletter-submit');
-            const newsletterData = staticContent[currentLanguage].newsletter;
-
-            if (newsletterEmailInput) newsletterEmailInput.placeholder = newsletterData.placeholder;
-            if (newsletterSubmitButton) newsletterSubmitButton.textContent = newsletterData.button;
-        }
-
-        function renderBlogContent() {
-            updateFeaturedPost(); // Ta funkcja musi teraz używać allBlogPosts lub specjalnego featured z manifestu
-            updatePosts(); 
-            applyScrollAnimations();
-        }
-        
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            document.documentElement.lang = lang;
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-            });
-
-            document.querySelectorAll('.lang-content').forEach(element => {
-                element.classList.toggle('active', element.getAttribute('data-lang') === lang);
-            });
-
-            updateNavigation();
-            updateCategories();
-            renderBlogContent(); 
-            updateNewsletterPlaceholders();
-
-            if (lang === 'en') {
-                document.title = 'Blog - Navigator of Inner Worlds and Digital Solutions';
-            } else {
-                document.title = 'Blog - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań';
-            }
-        }
-        
-        function initializePage() {
-            currentLanguage = document.documentElement.lang || 'pl';
-            if (currentLanguage !== 'pl' && currentLanguage !== 'en') {
-                currentLanguage = 'pl';
-                document.documentElement.lang = 'pl';
-            }
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLanguage);
-            });
-            document.querySelectorAll('.lang-content').forEach(element => {
-                element.classList.toggle('active', element.getAttribute('data-lang') === currentLanguage);
-            });
-
-            updateNavigation();
-            updateCategories();
-            fetchBlogPosts(); // Zamiast bezpośredniego renderBlogContent
-            updateNewsletterPlaceholders();
-        }
-        
-        let scrollObserverInstance;
-        function applyScrollAnimations() {
-            if (scrollObserverInstance) {
-                scrollObserverInstance.disconnect();
-            }
-            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-            scrollObserverInstance = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            document.querySelectorAll('.fade-in, .blog-card, .featured-post-container').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-                scrollObserverInstance.observe(el);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initializePage();
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    changeLanguage(this.getAttribute('data-lang'));
-                });
-            });
-
-             document.addEventListener('click', function(e) {
-                const link = e.target.closest('a');
-                if (link && link.getAttribute('href') ) {
-                     const href = link.getAttribute('href');
-                    if (href.startsWith('#') || (href.includes('index.html#'))) { 
-                        const targetIdFull = href.substring(href.indexOf('#'));
-                        const targetId = targetIdFull.split('?')[0]; 
-                        const targetPage = href.substring(0, href.indexOf('#'));
-
-                        if (!targetPage || targetPage === window.location.pathname.split('/').pop() || targetPage === '.' || targetPage === 'index.html') {
-                             if (targetId.length > 1 && document.querySelector(targetId)) { 
-                                e.preventDefault();
-                                const targetElement = document.querySelector(targetId);
-                                const headerHeight = document.querySelector('header').offsetHeight;
-                                const elementPosition = targetElement.getBoundingClientRect().top;
-                                const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-                                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
-                            }
-                        } 
-                    }
-                    const navLinksContainer = document.getElementById('nav-links');
-                    if (navLinksContainer.classList.contains('active-mobile')) {
-                        navLinksContainer.classList.remove('active-mobile');
-                    }
-                }
-            });
-            
-            const newsletterForm = document.getElementById('newsletter-form');
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const form = e.target;
-                    const formData = new FormData(form);
-                    const successMessage = staticContent[currentLanguage].newsletter.success;
-                    const errorMessage = staticContent[currentLanguage].newsletter.error;
-
-                    fetch("/", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: new URLSearchParams(formData).toString()
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            alert(successMessage);
-                            form.reset();
-                        } else {
-                             response.text().then(text => { 
-                                console.error("Netlify form error response:", text);
-                                alert(errorMessage);
-                             }).catch(() => alert(errorMessage));
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error submitting newsletter form:", error);
-                        alert(errorMessage);
-                    });
-                });
-            }
-
-            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-            const navLinksContainer = document.getElementById('nav-links');
-            if (mobileMenuToggle && navLinksContainer) {
-                mobileMenuToggle.addEventListener('click', function() {
-                    navLinksContainer.classList.toggle('active-mobile');
-                });
-            }
-        });
-
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (header) {
-                if (window.scrollY > 100) {
-                    header.style.background = 'rgba(30, 58, 95, 0.95)';
-                    header.style.backdropFilter = 'blur(10px)';
-                } else {
-                    header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
-                    header.style.backdropFilter = 'none';
-                }
-            }
-        });
-    </script>
-     <script type="text/javascript">
-      (function(d, t) {
-          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-          v.onload = function() {
-            window.voiceflow.chat.load({
-              verify: { projectID: '660c04457b8b244d89b5a822' },
-              url: 'https://general-runtime.voiceflow.com',
-              versionID: 'production'
-            });
-          }
-          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-      })(document, 'script');
-    </script>
+    // Załaduj posty po załadowaniu strony
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+  </script>
 </body>
 </html>
