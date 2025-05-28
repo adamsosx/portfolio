@@ -14,14 +14,13 @@ published: true
 
 Psychodeliki to substancje psychoaktywne wpływające na percepcję, emocje i procesy poznawcze. Najbardziej znane to:
 
-\* Psylocybina (grzyby halucynogenne)
+* Psylocybina (grzyby halucynogenne)
 
-\* LSD (diethylamid kwasu lizergowego)
+* LSD (diethylamid kwasu lizergowego)
 
-\* DMT (aktywny składnik ayahuaski)
+* DMT (aktywny składnik ayahuaski)
 
-\* Meskalina (z kaktusa pejotl)
-
+* Meskalina (z kaktusa pejotl)
 \* Ketamina (choć klasyfikowana osobno, bywa używana terapeutycznie)
 
 Jak działają? Większość z nich oddziałuje na receptory serotoninowe (zwłaszcza 5-HT2A), powodując rozpuszczenie zwykłych wzorców myślenia – tzw. entropic brain. Innymi słowy, psychodelik "zmiękcza" ego i pozwala zobaczyć rzeczywistość z innej, często głębokiej, perspektywy.
@@ -34,13 +33,13 @@ Psychodeliki mogą mieć głęboko transformujący wpływ, pod warunkiem odpowie
 
 Przykładowe korzyści:
 
-\* Głębokie wglądy w siebie i swoje traumy
+* Głębokie wglądy w siebie i swoje traumy
 
-\* Rozpuszczenie lęków egzystencjalnych (np. u osób terminalnie chorych)
+* Rozpuszczenie lęków egzystencjalnych (np. u osób terminalnie chorych)
 
-\* Zmniejszenie objawów depresji, lęków i PTSD
+* Zmniejszenie objawów depresji, lęków i PTSD
 
-\* Odczucie jedności ze światem i transcendencji ego
+* Odczucie jedności ze światem i transcendencji ego
 
 🧘 Technika wspierająca: Intencja + Integracja
 
@@ -52,13 +51,13 @@ Zanim wejdziesz w doświadczenie – zadaj sobie pytanie: Po co to robię? Po do
 
 Psychodeliki to nie zabawka. Bezpieczna przestrzeń, opieka, intencja i zdrowie psychiczne to kluczowe elementy. Potencjalne ryzyka:
 
-\* Epizody psychotyczne u osób z predyspozycjami
+* Epizody psychotyczne u osób z predyspozycjami
 
-\* Retraumatyzacja przy braku integracji
+* Retraumatyzacja przy braku integracji
 
-\* Uzależnienie od “duchowego hajsu”
+* Uzależnienie od “duchowego hajsu”
 
-\* Zbyt szybkie zrywanie iluzji ego – bez fundamentu psychicznego
+* Zbyt szybkie zrywanie iluzji ego – bez fundamentu psychicznego
 
 *🧨 Nieznana pułapka: Tzw. spiritual bypassing – ucieczka w duchowość bez konfrontacji z trudnymi emocjami i cieniami. Psychodeliki mogą dać złudne poczucie oświecenia.*
 
@@ -68,13 +67,13 @@ Integracja to świadome przeniesienie doświadczeń z podróży do codziennego �
 
 Techniki integracyjne:
 
-\* Pisanie dziennika przez kilka dni po sesji
+* Pisanie dziennika przez kilka dni po sesji
 
-\* Psychoterapia wspierająca (np. somatyczna, jungowska)
+* Psychoterapia wspierająca (np. somatyczna, jungowska)
 
-\* Cisza, przyroda, spacery
+* Cisza, przyroda, spacery
 
-\* Praca z ciałem (taniec intuicyjny, joga, TRE)
+* Praca z ciałem (taniec intuicyjny, joga, TRE)
 
 *🌱 Ważne pytanie do zadania sobie po doświadczeniu:*
 
