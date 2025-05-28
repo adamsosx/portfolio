@@ -1,12 +1,10 @@
 ---
-title: "Psychologia Rynków Kryptowalut: Jak Lęk, Chciwość i Archetypy Wpływają
-  na Twoje Inwestycje"
+title: "Psychologia Rynków Kryptowalut: Jak Lęk..."
 date: 2025-05-28 12:15
 category: Psychologia
 categoryId: psychology
 image: /images/uploads/yl01g7b0ijpemwpkrsip.png
-excerpt: "Zmienność cen, nagłe wzrosty i drastyczne spadki wyzwalają w nas
-  pierwotne mechanizmy psychiczne: strach przed stratą (FUD)"
+excerpt: " , Chciwość i Archetypy Wpływają na Twoje Inwestycje."
 published: true
 ---
 <h2>Wstęp: Kryptowaluty to więcej niż tylko wykresy</h2>
