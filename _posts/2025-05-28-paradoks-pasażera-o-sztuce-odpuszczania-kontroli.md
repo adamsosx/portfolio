@@ -4,8 +4,7 @@ date: 2025-05-28 12:33
 category: Rozwój osobisty
 categoryId: personal
 image: /images/uploads/oj48wtbjtm6l9zafndyi.png
-excerpt: i Ufania Wewnętrznemu Autorytetowi w Życiu i Biznesie (Inspiracje z
-  Human Design)
+excerpt: i Ufania Wewnętrznemu Autorytetowi w Życiu i Biznesie.
 published: true
 ---
 <p>W dzisiejszym świecie, pełnym nieustannych wyzwań i presji, wielu z nas łapie się na pułapkę kontroli. Chcemy wszystko zaplanować, przewidzieć, mieć pod pełną kontrolą — zarówno w życiu prywatnym, jak i w biznesie. Tymczasem Human Design przynosi bardzo głęboką i, na pierwszy rzut oka, paradoksalną mądrość: największa moc nie leży w walce o kontrolę, lecz w <strong>odpuszczeniu</strong> i <strong>zaufaniu</strong> swojemu Wewnętrznemu Autorytetowi. To właśnie jest esencja tzw. Paradoksu Pasażera.</p>
