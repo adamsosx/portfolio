@@ -15,13 +15,10 @@ published: true
 Psychodeliki to substancje psychoaktywne wpływające na percepcję, emocje i procesy poznawcze. Najbardziej znane to:
 
 * Psylocybina (grzyby halucynogenne)
-
 * LSD (diethylamid kwasu lizergowego)
-
 * DMT (aktywny składnik ayahuaski)
-
 * Meskalina (z kaktusa pejotl)
-\* Ketamina (choć klasyfikowana osobno, bywa używana terapeutycznie)
+* Ketamina (choć klasyfikowana osobno, bywa używana terapeutycznie)
 
 Jak działają? Większość z nich oddziałuje na receptory serotoninowe (zwłaszcza 5-HT2A), powodując rozpuszczenie zwykłych wzorców myślenia – tzw. entropic brain. Innymi słowy, psychodelik "zmiękcza" ego i pozwala zobaczyć rzeczywistość z innej, często głębokiej, perspektywy.
 
