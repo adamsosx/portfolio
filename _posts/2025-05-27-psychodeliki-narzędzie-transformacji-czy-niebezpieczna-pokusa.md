@@ -4,8 +4,7 @@ date: 2025-05-27T14:23:53.055Z
 category: Psychologia
 categoryId: psychology
 image: /images/uploads/6285dd45-a6fb-4ecc-a0d7-0bd4dd5cd2b4.png
-excerpt: Psychodeliki – przez jednych uznawane za klucz do duchowego
-  przebudzenia, przez innych za zagrożenie dla psychiki.
+excerpt: Psychodeliki – przez jednych uznawane...
 published: true
 ---
 <h2>Psychodeliki – przez jednych uznawane za klucz do duchowego przebudzenia, przez innych za zagrożenie dla psychiki.</h2>
