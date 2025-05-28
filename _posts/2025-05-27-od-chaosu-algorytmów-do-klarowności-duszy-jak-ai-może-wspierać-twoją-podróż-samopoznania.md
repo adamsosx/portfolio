@@ -43,7 +43,9 @@ Zaawansowana technika:
 
 ➡️ Stwórz własny dziennik cykli emocjonalnych. AI może pomóc:
 oznaczyć wzorce
+
 przypisać wydarzenia do faz cyklu (fala emocjonalna – napięcie → szczyt → integracja)
+
 Dodatkowe pytanie do refleksji: Jak często ignorujesz swój autorytet, bo zbyt mocno słuchasz cudzych opinii online?
 
 AI jako katalizator, nie guru
@@ -52,9 +54,9 @@ AI jako katalizator, nie guru
 
 Ważna perspektywa: AI nie zastąpi Twojej intuicji, ciała ani duszy. Ale może:
 
-oszczędzić czas na analizie
-pomóc nazwać to, co niewyraźne
-podpowiedzieć metody, o których nie słyszałeś
+- oszczędzić czas na analizie
+- pomóc nazwać to, co niewyraźne
+- podpowiedzieć metody, o których nie słyszałeś
 
 Przykład techniki: 
 
@@ -77,9 +79,9 @@ Ostatni element: Nie wszystko musi być nazwane. AI to narzędzie. Klarowność 
 AI może być jak lustro – nie mówi Ci, kim jesteś, ale pozwala Ci się zobaczyć.
 
 Dzisiaj zyskałeś:
-konkretne techniki wykorzystania AI w samopoznaniu
-integrację Human Design, archetypów Junga i AI
-świadomość zagrożeń i ograniczeń
+- konkretne techniki wykorzystania AI w samopoznaniu
+- integrację Human Design, archetypów Junga i AI
+- świadomość zagrożeń i ograniczeń
 
 Dodatkowa refleksja: Jeśli boisz się, że AI „za dużo o Tobie wie” – zapytaj siebie: czy ja sam wiem o sobie choć połowę tego, co wie moje ciało?
 
