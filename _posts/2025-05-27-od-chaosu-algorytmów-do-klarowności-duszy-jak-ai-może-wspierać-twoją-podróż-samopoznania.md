@@ -14,7 +14,7 @@ Chaos algorytmiczny i wewnętrzny szum. W świecie przesyconym danymi, rekomenda
 
 Czy możliwe jest, by właśnie technologia – zamiast pogłębiać chaos – pomogła nam go uporządkować i dotrzeć do głębi duszy?
 
-
+\-
 
 **Paradoks AI: Umysł maszyny, serce człowieka**
 
@@ -28,7 +28,7 @@ Technika:
 
 ➡️ Zadaj pytanie: Co ta informacja mówi o moich niezaspokojonych potrzebach?
 
-
+**\-**
 
 **AI jako lustro Twojego wnętrza**
 
@@ -44,7 +44,7 @@ Technika: Stwórz sobie zestaw „Refleksyjnych Prompts AI”, np.:
 
 *Nieoczywista wskazówka: AI może pomóc zidentyfikować archetypy Junga w Twoich snach lub narracjach – wystarczy poprosić o analizę motywów symbolicznych.*
 
-
+**\-**
 
 **Human Design, Cień i AI – integracja wiedzy z intuicją**
 
@@ -64,7 +64,7 @@ Zaawansowana technika:
 
 *Dodatkowe pytanie do refleksji: Jak często ignorujesz swój autorytet, bo zbyt mocno słuchasz cudzych opinii online?*
 
-
+**\-**
 
 **AI jako katalizator, nie guru**
 
@@ -82,7 +82,7 @@ Przykład techniki:
 
 *Ciekawostka: AI może również wspierać terapię wewnętrznego dziecka – np. poprzez odgrywanie dialogu, w którym Ty jesteś sobą z dzieciństwa, a AI – Twoim obecnym, wspierającym Ja.*
 
-
+**\-**
 
 **Klarowność duszy – tam, gdzie zaczyna się cisza**
 
@@ -94,7 +94,7 @@ Ostatni element: Nie wszystko musi być nazwane. AI to narzędzie. Klarowność 
 
 ➡️ Zapytaj siebie: Czy to, co usłyszałem, jest prawdziwe… dla mnie?
 
-
+**\-**
 
 **Podsumowanie**:
 
@@ -107,8 +107,6 @@ Dzisiaj zyskałeś:
 * świadomość zagrożeń i ograniczeń
 
 *Dodatkowa refleksja: Jeśli boisz się, że AI „za dużo o Tobie wie” – zapytaj siebie: czy ja sam wiem o sobie choć połowę tego, co wie moje ciało?*
-
-
 
 **Propozycja pytania, które możesz sobie zadać:**
 
