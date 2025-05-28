@@ -4,9 +4,7 @@ date: 2025-05-27T15:22:52.779Z
 category: Sztuczna Inteligencja
 categoryId: ai
 image: /images/uploads/q4yeconcoqhtnqbjmewd.png
-excerpt: W erze cyfrowej transformacji technologia zaczyna pełnić rolę nie tylko
-  narzędzia wspierającego produktywność, ale również lustra, w którym możemy
-  przyjrzeć się sobie głębiej.
+excerpt: W erze cyfrowej transformacji technologia zaczyna pełnić rolę...
 published: true
 ---
 <h2>Jednym z najpotężniejszych narzędzi współczesności staje się sztuczna inteligencja (AI)</h2>
