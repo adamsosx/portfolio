@@ -4,8 +4,7 @@ date: 2025-05-27T14:57:33.013Z
 category: Rozwój osobisty
 categoryId: personal
 image: /images/uploads/c9908096-02cd-4a9e-8d52-81e1b240635b.png
-excerpt: "Czy kiedykolwiek czułeś, że mimo pracy nad sobą, czegoś Ci brakuje? Że
-  próbujesz narzucić sobie dyscyplinę, która kompletnie nie działa? "
+excerpt: Czy kiedykolwiek czułeś, że mimo pracy nad sobą, czegoś Ci brakuje?..
 published: true
 ---
 <p><strong>Czy kiedykolwiek czułeś, że mimo pracy nad sobą, czegoś Ci brakuje?</strong> Że próbujesz narzucić sobie dyscyplinę, która kompletnie nie działa? A może porównujesz się do innych, mimo że w głębi duszy wiesz, że jesteś inny?</p>
