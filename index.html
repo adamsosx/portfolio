@@ -4,8 +4,14 @@
     <!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/6a1eb717fef6372bf80f145c/script.js"></script> <!-- End cookieyes banner -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>awisniewski - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title>
+    <title>awisniewski - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań</title> <!-- Zmieniono tytuł dla spójności -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+    <!-- Google Fonts - Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -25,7 +31,7 @@
         }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
+            font-family: 'Georgia', 'Times New Roman', serif; /* Główna czcionka dla treści pozostaje bez zmian */
             line-height: 1.6;
             color: var(--dark-navy);
             background-color: var(--light-beige);
@@ -73,8 +79,8 @@
             height: 18px;
             display: inline-block;
             border-radius: 2px;
-            position: relative;   
-            overflow: hidden;     
+            position: relative;
+            overflow: hidden;
         }
 
         /* ----- Flaga Polska (PL) ----- */
@@ -98,13 +104,13 @@
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background-image:
-                linear-gradient(#C8102E, #C8102E), 
-                linear-gradient(#C8102E, #C8102E); 
+                linear-gradient(#C8102E, #C8102E),
+                linear-gradient(#C8102E, #C8102E);
             background-repeat: no-repeat;
             background-position: center center;
             background-size:
-                100% 22.22%, 
-                16.66% 100%; 
+                100% 22.22%,
+                16.66% 100%;
         }
 
         /* Header */
@@ -139,9 +145,11 @@
             padding: 5px;
         }
 
-        .logo h1 { 
-            font-size: 1.5rem;
-            font-weight: 600;
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif; /* ZMIENIONA CZCIONKA */
+            font-size: 1.5rem; /* Można dostosować rozmiar w razie potrzeby */
+            font-weight: 500; /* Dostosowana waga dla Montserrat, można wybrać 400, 600 lub 700 */
+            letter-spacing: 0.5px; /* Opcjonalnie, dla lepszej czytelności "awisniewski" */
         }
 
 
@@ -176,7 +184,7 @@
         .hero {
             background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 50%, var(--sage-green) 100%);
             color: white;
-            padding: 140px 0 80px; 
+            padding: 140px 0 80px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -215,7 +223,7 @@
         .hero p { /* This targets the main paragraph, not the subtitle */
             font-size: 1.2rem;
             margin-bottom: 40px;
-            max-width: 700px; 
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             opacity: 0.9;
@@ -249,7 +257,7 @@
         section {
             padding: 80px 0;
         }
-        section#home { 
+        section#home {
              padding: 140px 0 80px;
         }
 
@@ -430,7 +438,7 @@
             font-size: 2rem;
             margin: 0 auto 20px;
         }
-        
+
         .service-card h3 {
             color: var(--navy-blue);
             font-size: 1.3rem;
@@ -526,11 +534,11 @@
 
         /* Mobile Menu */
         .mobile-menu-toggle {
-            display: none; 
+            display: none;
             background: none;
             border: none;
             color: white;
-            font-size: 1.8rem; 
+            font-size: 1.8rem;
             cursor: pointer;
             padding: 5px;
         }
@@ -538,26 +546,26 @@
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
-                display: none; 
+                display: none;
             }
             .nav-right .language-selector {
             }
 
             .mobile-menu-toggle {
-                display: block; 
+                display: block;
             }
-            
+
             .nav-links.active-mobile {
                 display: flex;
                 flex-direction: column;
                 position: absolute;
-                top: 68px; 
+                top: 68px;
                 left: 0;
                 width: 100%;
-                background: var(--dark-navy); 
+                background: var(--dark-navy);
                 padding: 20px;
                 box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                gap: 0; 
+                gap: 0;
             }
             .nav-links.active-mobile li {
                 margin-bottom: 15px;
@@ -566,13 +574,13 @@
             }
             .nav-links.active-mobile a {
                 font-size: 1.1rem;
-                display: block; 
+                display: block;
                 padding: 10px 0;
             }
 
 
             .hero h1 {
-                font-size: 2.2rem; 
+                font-size: 2.2rem;
             }
 
             .hero .subtitle {
@@ -583,7 +591,7 @@
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            .about-image img.profile-image { 
+            .about-image img.profile-image {
                 margin-bottom: 30px;
             }
 
@@ -595,7 +603,7 @@
             .profile-image { /* Corrected from profile-logo */
                 width: 200px;
                 height: 200px;
-                margin-bottom: 20px; 
+                margin-bottom: 20px;
             }
         }
 
@@ -623,9 +631,9 @@
         .lang-content.active {
             display: block;
         }
-        
+
         .cta-button.lang-content.active {
-            display: inline-block; 
+            display: inline-block;
         }
 
 
@@ -639,9 +647,9 @@
     <header>
         <nav class="container">
             <div class="logo">
-                <img src="images/logo.png" alt="Logo awisniewski">
-                <h1 class="lang-content active" data-lang="pl">awisniewski</h1>
-                <h1 class="lang-content" data-lang="en">awisniewski</h1>
+                <img src="images/logo.png" alt="Logo awisniewski"> <!-- Zmieniono alt text -->
+                <h1 class="lang-content active" data-lang="pl">awisniewski</h1> <!-- ZMIENIONY TEKST -->
+                <h1 class="lang-content" data-lang="en">awisniewski</h1>   <!-- ZMIENIONY TEKST -->
             </div>
             <div class="nav-right">
                 <ul class="nav-links" id="nav-links">
@@ -657,13 +665,13 @@
             <div class="hero-content fade-in">
                 <h1 class="lang-content active" data-lang="pl">Nawigator Wewnętrznych Światów<br>i Cyfrowych Rozwiązań</h1>
                 <h1 class="lang-content" data-lang="en">Navigator of Inner Worlds<br>and Digital Solutions</h1>
-                
+
                 <p class="subtitle lang-content active" data-lang="pl">Od Chaosu do Klarowności</p>
                 <p class="subtitle lang-content" data-lang="en">From Chaos to Clarity</p>
-                
+
                 <p class="lang-content active" data-lang="pl">Łączę głęboką analizę ludzkiej natury (m.in. Human Design, psychologia Junga) z mocą nowoczesnych technologii (AI, Blockchain, Kryptowaluty), aby tworzyć rozwiązania, które naprawdę mają znaczenie. Moja podróż to budowanie mostów między tym, co techniczne, a tym, co ludzkie.</p>
                 <p class="lang-content" data-lang="en">I combine deep analysis of human nature (including Human Design, Jungian psychology) with the power of modern technologies (AI, Blockchain, Cryptocurrencies) to create solutions that truly matter. My journey is about building bridges between the technical and the human.</p>
-                
+
                 <a href="#portfolio" class="cta-button lang-content active" data-lang="pl">Zobacz moje projekty</a>
                 <a href="#portfolio" class="cta-button lang-content" data-lang="en">See my projects</a>
             </div>
@@ -674,10 +682,10 @@
         <div class="container">
             <h2 class="section-title lang-content active" data-lang="pl">O mnie</h2>
             <h2 class="section-title lang-content" data-lang="en">About Me</h2>
-            
+
             <div class="about-content">
                 <div class="about-image">
-                    <img src="images/profile.jpg" alt="Adam" class="profile-image">
+                    <img src="images/profile.jpg" alt="awisniewski" class="profile-image"> <!-- Zmieniono alt text -->
                 </div>
                 <div class="about-text">
                     <div class="lang-content active" data-lang="pl">
@@ -685,18 +693,18 @@
                         <p>Moja fascynacja złożonymi systemami – od kodu i algorytmów AI, przez dynamikę rynków kryptowalut, po głębię ludzkiej psychiki (Human Design, Jung) – zaprowadziła mnie na unikalną ścieżkę. Wierzę, że prawdziwe innowacje i rozwiązania rodzą się na styku tych światów, tam gdzie technologia spotyka się z ludzką mądrością i autentycznością.</p>
                         <p>Lata analiz, testowania, eksperymentowania (i tak, również potknięć!) nauczyły mnie, że kluczem jest nie tyle dążenie do iluzorycznej perfekcji, co do autentycznej skuteczności i zrozumienia przyczyn źródłowych. Moje osobiste doświadczenia transformacyjne przekładają się na unikalne, holistyczne podejście do rozwiązywania problemów.</p>
                         <p>Dziś oferuję kompleksowe spojrzenie na wyzwania technologiczne i rynkowe, zawsze z uwzględnieniem ludzkiego aspektu i dążeniem do klarowności w chaosie.</p>
-                        
+
                         <div class="values">
                             <!-- Values will be inserted by JavaScript -->
                         </div>
                     </div>
-                    
+
                     <div class="lang-content" data-lang="en">
                         <h3>Journey through Technology, Psyche, and the Market</h3>
                         <p>My fascination with complex systems – from code and AI algorithms, through the dynamics of cryptocurrency markets, to the depths of the human psyche (Human Design, Jung) – has led me on a unique path. I believe that true innovations and solutions are born at the intersection of these worlds, where technology meets human wisdom and authenticity.</p>
                         <p>Years of analysis, testing, experimenting (and yes, stumbling too!) have taught me that the key is not so much striving for illusory perfection, but for authentic effectiveness and understanding root causes. My personal transformative experiences translate into a unique, holistic approach to problem-solving.</p>
                         <p>Today, I offer a comprehensive perspective on technological and market challenges, always considering the human aspect and striving for clarity amidst chaos.</p>
-                        
+
                         <div class="values">
                             <!-- Values will be inserted by JavaScript -->
                         </div>
@@ -710,18 +718,18 @@
         <div class="container">
             <h2 class="section-title lang-content active" data-lang="pl">Portfolio Projektów</h2>
             <h2 class="section-title lang-content" data-lang="en">Project Portfolio</h2>
-            
+
             <div class="portfolio-grid" id="portfolio-grid">
                 <!-- Portfolio cards will be inserted by JavaScript -->
             </div>
         </div>
     </section>
-    
+
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title lang-content active" data-lang="pl">Jak Mogę Ci Pomóc</h2>
             <h2 class="section-title lang-content" data-lang="en">How I Can Help You</h2>
-            
+
             <div class="services-grid" id="services-grid">
                 <!-- Service cards will be inserted by JavaScript -->
             </div>
@@ -733,10 +741,10 @@
             <div class="contact-content">
                 <h2 class="section-title lang-content active" style="color: white;" data-lang="pl">Rozpocznijmy Współpracę</h2>
                 <h2 class="section-title lang-content" style="color: white;" data-lang="en">Let's Start Collaborating</h2>
-                
+
                 <p class="lang-content active" data-lang="pl">Masz projekt, który wymaga połączenia technologii, analizy rynku i głębokiego zrozumienia człowieka? Szukasz kogoś, kto spojrzy na Twoje wyzwania z nowej, holistycznej perspektywy? Skontaktuj się ze mną.</p>
                 <p class="lang-content" data-lang="en">Do you have a project that requires a blend of technology, market analysis, and a deep understanding of the human element? Looking for someone to view your challenges from a fresh, holistic perspective? Get in touch.</p>
-                
+
                 <form class="contact-form" id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
                     <p class="hidden">
                         <label>
@@ -759,8 +767,8 @@
 
     <footer>
         <div class="container">
-            <p class="lang-content active" data-lang="pl">© 2025 Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p>
-            <p class="lang-content" data-lang="en">© 2025 Adam - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p>
+            <p class="lang-content active" data-lang="pl">© 2025 awisniewski - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań. Wszystkie prawa zastrzeżone.</p> <!-- Zmieniono tekst -->
+            <p class="lang-content" data-lang="en">© 2025 awisniewski - Navigator of Inner Worlds and Digital Solutions. All rights reserved.</p> <!-- Zmieniono tekst -->
         </div>
 <a href="https://awisniewski.netlify.app/docs/privacy_policy_pl.html" target="_blank" rel="noopener noreferrer" style="color: white;">
   Polityka Prywatności
@@ -773,7 +781,7 @@
                     { text: 'Start', href: '#home' },
                     { text: 'O mnie', href: '#about' },
                     { text: 'Portfolio', href: '#portfolio' },
-                    { text: 'Blog', href: 'blog.html' }, 
+                    { text: 'Blog', href: 'blog.html' },
                     { text: 'Usługi', href: '#services' },
                     { text: 'Kontakt', href: '#contact' }
                 ],
@@ -811,9 +819,9 @@
                     { icon: '🧠', title: 'Self-Discovery Tools (AI+HD)', description: 'Innovative projects combining AI technology with systems like Human Design or Jungian psychology, creating tools that support personal development and self-understanding.', tags: ['Human Design', 'Jung', 'AI', 'NLP', 'Personal Development'] }
                 ],
                 services: [
-                    { icon: '🎯', title: 'Strategic AI Consulting and Tech Innovations', description: 'Have an idea but unsure how technology can enhance it? Want to optimize your business processes? I&apos;ll help you identify AI potential, develop an implementation strategy, select the right technologies (Voiceflow, OpenAI API, n8n, no-code/low-code), and assess risks and opportunities.' },
+                    { icon: '🎯', title: 'Strategic AI Consulting and Tech Innovations', description: 'Have an idea but unsure how technology can enhance it? Want to optimize your business processes? I'll help you identify AI potential, develop an implementation strategy, select the right technologies (Voiceflow, OpenAI API, n8n, no-code/low-code), and assess risks and opportunities.' },
                     { icon: '🔗', title: 'Crypto and Blockchain Advisory', description: 'The crypto market and blockchain technology seem complex? I will help you understand their fundamentals and potential through market and trend analysis, support in building informed investment strategies, key principles of digital asset security, and explaining the potential of Blockchain, DeFi, NFTs, and Web3.' },
-                    { icon: '🔍', title: 'Precise Diagnostics and Optimization', description: 'Your system isn it performing optimally? Have data but don&apos;t know what it says? I offer in-depth software testing (QA, UX), behavioral and business data analysis with a unique psychological perspective, and process auditing and optimization with concrete recommendations.' },
+                    { icon: '🔍', title: 'Precise Diagnostics and Optimization', description: 'Your system isn it performing optimally? Have data but don't know what it says? I offer in-depth software testing (QA, UX), behavioral and business data analysis with a unique psychological perspective, and process auditing and optimization with concrete recommendations.' },
                     { icon: '💡', title: 'Synergy of Technology and Personal Growth', description: 'Seeking deeper self-understanding or want to create a project that supports personal growth? I offer AI tool concept and prototyping for self-discovery (Human Design, Jung), consultations for creators and therapists, and, in the future, potential individual analytical sessions combining HD, Jung, and data.' }
                 ],
                 form: { name: 'Your name', email: 'E-mail', subject: 'Message subject', message: 'Describe your project or question...', submit: 'Send Message', success: 'Thank you for your message! I will contact you soon.', error: 'There was an error sending your form. Please try again.' }
@@ -861,10 +869,10 @@
                 element.classList.toggle('active', element.getAttribute('data-lang') === currentLanguage);
             });
         }
-        
+
         function updateNavigation() {
             const navLinksContainer = document.getElementById('nav-links');
-            navLinksContainer.innerHTML = ''; 
+            navLinksContainer.innerHTML = '';
             content[currentLanguage].nav.forEach(item => {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
@@ -882,7 +890,7 @@
         function updatePortfolio() {
             const portfolioGrid = document.getElementById('portfolio-grid');
             if (!portfolioGrid) return;
-            portfolioGrid.innerHTML = ''; 
+            portfolioGrid.innerHTML = '';
             content[currentLanguage].portfolio.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'portfolio-card fade-in'; // Add fade-in for animation
@@ -928,33 +936,33 @@
             if (messageInput) messageInput.placeholder = formContent.message;
             if (submitBtn) submitBtn.textContent = formContent.submit;
         }
-        
+
         function changeLanguage(lang) {
             currentLanguage = lang;
-            document.documentElement.lang = lang; 
-            
+            document.documentElement.lang = lang;
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
-            
+
             document.querySelectorAll('.lang-content').forEach(element => {
                 element.classList.toggle('active', element.getAttribute('data-lang') === lang);
             });
-            
+
             updateAllDynamicText();
             updateNavigation();
             updatePortfolio();
             updateServices();
             updateFormPlaceholders();
-            
+
             if (lang === 'en') {
-                document.title = 'Adam - Navigator of Inner Worlds and Digital Solutions';
+                document.title = 'awisniewski - Navigator of Inner Worlds and Digital Solutions'; // Zmieniono tytuł
             } else {
-                document.title = 'Adam - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań';
+                document.title = 'awisniewski - Nawigator Wewnętrznych Światów i Cyfrowych Rozwiązań'; // Zmieniono tytuł
             }
             applyScrollAnimations();
         }
-        
+
         let intersectionObserverInstance;
         function applyScrollAnimations() {
             if (intersectionObserverInstance) {
@@ -986,15 +994,15 @@
                 currentLanguage = 'pl';
                 document.documentElement.lang = 'pl';
             }
-            
-            initializeContent(); 
-            
+
+            initializeContent();
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     changeLanguage(this.getAttribute('data-lang'));
                 });
             });
-            
+
              document.addEventListener('click', function(e) {
                 const link = e.target.closest('a');
                 if (link && link.getAttribute('href') ) {
@@ -1023,15 +1031,15 @@
                     }
                 }
             });
-            
+
             const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     const form = e.target;
                     const formData = new FormData(form);
-                    const successMessage = content[currentLanguage].form.success; 
-                    const errorMessage = content[currentLanguage].form.error; 
+                    const successMessage = content[currentLanguage].form.success;
+                    const errorMessage = content[currentLanguage].form.error;
                     fetch("/", {
                         method: "POST",
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -1071,9 +1079,9 @@
 
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
-            if (header) { 
+            if (header) {
                 if (window.scrollY > 100) {
-                    header.style.background = 'rgba(30, 58, 95, 0.95)'; 
+                    header.style.background = 'rgba(30, 58, 95, 0.95)';
                     header.style.backdropFilter = 'blur(10px)';
                 } else {
                     header.style.background = 'linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-navy) 100%)';
