@@ -10,7 +10,7 @@ published: true
 ---
 Chaos algorytmiczny i wewnętrzny szum. W świecie przesyconym danymi, rekomendacjami i nieustannym dopływem informacji trudno usłyszeć… siebie. Scrollujesz, analizujesz, porównujesz – ale czujesz się coraz bardziej oderwany od własnego wnętrza.
 
-Ciekawostka: Przeciętny człowiek otrzymuje dziś więcej informacji w ciągu tygodnia niż człowiek w XVIII wieku przez całe życie. A mimo to coraz trudniej znaleźć sens.
+*Ciekawostka: Przeciętny człowiek otrzymuje dziś więcej informacji w ciągu tygodnia niż człowiek w XVIII wieku przez całe życie. A mimo to coraz trudniej znaleźć sens.*
 
 Czy możliwe jest, by właśnie technologia – zamiast pogłębiać chaos – pomogła nam go uporządkować i dotrzeć do głębi duszy?
 
@@ -46,9 +46,8 @@ Synteza narzędzi rozwoju osobistego z technologią
 
 Przykład integracji: Jesteś Generatorem 1/3 z emocjonalnym autorytetem. AI może pomóc:
 
-zbudować plan działania w zgodzie z Twoim cyklem emocjonalnym
-
-wychwycić momenty, w których próbujesz „naprawiać siebie” z poziomu głowy, a nie z poziomu ciała
+* zbudować plan działania w zgodzie z Twoim cyklem emocjonalnym
+* wychwycić momenty, w których próbujesz „naprawiać siebie” z poziomu głowy, a nie z poziomu ciała
 
 Zaawansowana technika: 
 
@@ -56,7 +55,8 @@ Zaawansowana technika:
 
 * oznaczyć wzorce
 * przypisać wydarzenia do faz cyklu (fala emocjonalna – napięcie → szczyt → integracja)
-* Dodatkowe pytanie do refleksji: Jak często ignorujesz swój autorytet, bo zbyt mocno słuchasz cudzych opinii online?
+
+*Dodatkowe pytanie do refleksji: Jak często ignorujesz swój autorytet, bo zbyt mocno słuchasz cudzych opinii online?*
 
 **AI jako katalizator, nie guru**
 
