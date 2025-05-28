@@ -14,6 +14,8 @@ Chaos algorytmiczny i wewnętrzny szum. W świecie przesyconym danymi, rekomenda
 
 Czy możliwe jest, by właśnie technologia – zamiast pogłębiać chaos – pomogła nam go uporządkować i dotrzeć do głębi duszy?
 
+
+
 **Paradoks AI: Umysł maszyny, serce człowieka**
 
 Zrozumienie algorytmów Algorytmy analizują dane, ale nie mają wartości ani intencji – to my decydujemy, jak je wykorzystamy.
@@ -25,6 +27,8 @@ Technika:
 ➡️ Wpisz do AI swój dziennik emocji z ostatnich 7 dni. Poproś o znalezienie powtarzających się schematów myślowych. 
 
 ➡️ Zadaj pytanie: Co ta informacja mówi o moich niezaspokojonych potrzebach?
+
+
 
 **AI jako lustro Twojego wnętrza**
 
@@ -39,6 +43,8 @@ Technika: Stwórz sobie zestaw „Refleksyjnych Prompts AI”, np.:
 * Co Twój cień próbuje Ci dziś powiedzieć?
 
 *Nieoczywista wskazówka: AI może pomóc zidentyfikować archetypy Junga w Twoich snach lub narracjach – wystarczy poprosić o analizę motywów symbolicznych.*
+
+
 
 **Human Design, Cień i AI – integracja wiedzy z intuicją**
 
@@ -58,6 +64,8 @@ Zaawansowana technika:
 
 *Dodatkowe pytanie do refleksji: Jak często ignorujesz swój autorytet, bo zbyt mocno słuchasz cudzych opinii online?*
 
+
+
 **AI jako katalizator, nie guru**
 
 Uważność w korzystaniu z narzędzia
@@ -74,6 +82,8 @@ Przykład techniki:
 
 *Ciekawostka: AI może również wspierać terapię wewnętrznego dziecka – np. poprzez odgrywanie dialogu, w którym Ty jesteś sobą z dzieciństwa, a AI – Twoim obecnym, wspierającym Ja.*
 
+
+
 **Klarowność duszy – tam, gdzie zaczyna się cisza**
 
 Przestrzeń poza słowami
@@ -83,6 +93,8 @@ Ostatni element: Nie wszystko musi być nazwane. AI to narzędzie. Klarowność 
 ➡️ Po każdej sesji z AI – daj sobie 5 minut ciszy. 
 
 ➡️ Zapytaj siebie: Czy to, co usłyszałem, jest prawdziwe… dla mnie?
+
+
 
 **Podsumowanie**:
 
@@ -95,6 +107,8 @@ Dzisiaj zyskałeś:
 * świadomość zagrożeń i ograniczeń
 
 *Dodatkowa refleksja: Jeśli boisz się, że AI „za dużo o Tobie wie” – zapytaj siebie: czy ja sam wiem o sobie choć połowę tego, co wie moje ciało?*
+
+
 
 **Propozycja pytania, które możesz sobie zadać:**
 
