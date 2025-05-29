@@ -8,6 +8,8 @@ excerpt: |
   Demaskowanie Perfekcjonizmu w Rozwoju Osobistym
 published: true
 ---
+Demaskowanie Perfekcjonizmu w Rozwoju Osobistym
+
 <p><em>„Jeszcze tylko przeczytam tę książkę. Jeszcze tylko zrobię ten kurs. Jeszcze tylko przepracuję ten cień.”</em> — to zdania, które zna wiele osób na ścieżce samorozwoju. Ale co, jeśli zamiast prowadzić nas ku większej wolności, zaczynają one przypominać… łańcuchy?</p>
 
 
