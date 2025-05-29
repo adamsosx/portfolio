@@ -36,41 +36,41 @@ published: true
 
   <li>
 
-\    <strong>Masz poczucie, że nigdy nie jesteś "wystarczająco gotowy".</strong>
+<strong>Masz poczucie, że nigdy nie jesteś "wystarczająco gotowy".</strong>
 
-\    <p>Nie podejmujesz działań, bo „jeszcze muszę coś przepracować”. To perfekcjonistyczna blokada przebrana za duchowe dojrzewanie.</p>
+<p>Nie podejmujesz działań, bo „jeszcze muszę coś przepracować”. To perfekcjonistyczna blokada przebrana za duchowe dojrzewanie.</p>
 
-\    <p><em>Ukryta prawda:</em> Poczucie gotowości rzadko przychodzi przed działaniem — ono pojawia się <strong>w</strong> działaniu.</p>
-
-  </li>
-
-  <li>
-
-\    <strong>Rozwój staje się ucieczką od emocji.</strong>
-
-\    <p>Wolisz analizować lęk niż naprawdę go poczuć. Szukasz przyczyn, zamiast przeżyć efekt.</p>
-
-\    <p><em>Technika:</em> Zatrzymaj analizę i zapytaj: <strong>„Co teraz czuję w ciele?”</strong>. Wróć do zmysłów.</p>
+<p><em>Ukryta prawda:</em> Poczucie gotowości rzadko przychodzi przed działaniem — ono pojawia się <strong>w</strong> działaniu.</p>
 
   </li>
 
   <li>
 
-\    <strong>Twoje życie to ciągła „praca nad sobą” bez przerw.</strong>
+<strong>Rozwój staje się ucieczką od emocji.</strong>
 
-\    <p>Nie pozwalasz sobie na nic, co nie ma „wartości rozwojowej”. Nie umiesz odpoczywać „dla siebie” — zawsze z jakimś celem.</p>
+<p>Wolisz analizować lęk niż naprawdę go poczuć. Szukasz przyczyn, zamiast przeżyć efekt.</p>
 
-\    <p><em>Ciekawostka:</em> Twój układ nerwowy potrzebuje „bezcelowości”, żeby się regulować.</p>
+<p><em>Technika:</em> Zatrzymaj analizę i zapytaj: <strong>„Co teraz czuję w ciele?”</strong>. Wróć do zmysłów.</p>
 
   </li>
 
   <li>
 
-\    <strong>Nie potrafisz powiedzieć „już wystarczy”.</strong>
+<strong>Twoje życie to ciągła „praca nad sobą” bez przerw.</strong>
 
-\    <p>Masz wrażenie, że bez tej pracy się rozpadniesz. Tak rodzi się uzależnienie od autoanalizy.</p>
+<p>Nie pozwalasz sobie na nic, co nie ma „wartości rozwojowej”. Nie umiesz odpoczywać „dla siebie” — zawsze z jakimś celem.</p>
 
-\    <p><em>Pytanie klucz:</em> „Czy to, co robię, służy mi – czy tylko mnie chroni?”</p>
+<p><em>Ciekawostka:</em> Twój układ nerwowy potrzebuje „bezcelowości”, żeby się regulować.</p>
+
+  </li>
+
+  <li>
+
+<strong>Nie potrafisz powiedzieć „już wystarczy”.</strong>
+
+<p>Masz wrażenie, że bez tej pracy się rozpadniesz. Tak rodzi się uzależnienie od autoanalizy.</p>
+
+<p><em>Pytanie klucz:</em> „Czy to, co robię, służy mi – czy tylko mnie chroni?”</p>
 
   </li>
 
