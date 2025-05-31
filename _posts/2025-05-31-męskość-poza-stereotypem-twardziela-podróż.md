@@ -33,13 +33,13 @@ published: true
 
 
 
- <li>- Króla (odpowiedzialny, ustala granice)</li>
+\- Króla (odpowiedzialny, ustala granice)
 
- <li>- Wojownika (działający, broni wartości)</li>
+\- Wojownika (działający, broni wartości)
 
- <li>- Maga (wewnętrzna mądrość, intuicja)</li>
+\- Maga (wewnętrzna mądrość, intuicja)
 
- <li>- Kochanka (wrażliwość, połączenie z życiem)</li>
+\- Kochanka (wrażliwość, połączenie z życiem)
 
   </li>
 
