@@ -7,10 +7,6 @@ image: /images/uploads/s2rj5dmiak9xbv3ofzpf.png
 excerpt: ku Autentycznej Sile w Świecie Pełnym Masek
 published: true
 ---
-<h1>Męskość Poza Stereotypem "Twardziela": Podróż ku Autentycznej Sile w Świecie Pełnym Masek (Wnioski z Doświadczeń i Psychologii Junga)</h1>
-
-<h2>Wstęp</h2>
-
 <p>Współczesny mężczyzna stoi na rozdrożu. Z jednej strony kuszą go obietnice siły, dominacji i kontroli, jakie niosą narracje Red Pill czy stereotypy "prawdziwego faceta". Z drugiej - wewnętrzne wołanie do autentyczności, wrażliwości i integracji tego, co Jung nazwał Animą - żeńskiego pierwiastka w psyche mężczyzny.</p>
 
 <p>W tym wpisie podzielę się osobistymi refleksjami i psychologiczną analizą, by odkryć, czym jest zintegrowana, zdrowa męskość - taka, która nie potrzebuje maski twardziela, by być silną.</p>
