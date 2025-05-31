@@ -11,8 +11,6 @@ published: true
 
 <p>W tym wpisie podzielę się osobistymi refleksjami i psychologiczną analizą, by odkryć, czym jest zintegrowana, zdrowa męskość - taka, która nie potrzebuje maski twardziela, by być silną.</p>
 
-
-
 <h2>1. Maska Twardziela: Iluzja Siły</h2>
 
 <ul>
@@ -23,8 +21,6 @@ published: true
 
 </ul>
 
-
-
 <h2>2. Psychologia Junga i Archetypy Męskości</h2>
 
 <ul>
@@ -33,13 +29,15 @@ published: true
 
 <ul>
 
-    <li>Króla (odpowiedzialny, ustala granice)</li>
+```
+<li>Króla (odpowiedzialny, ustala granice)</li>
 
-    <li>Wojownika (działający, broni wartości)</li>
+<li>Wojownika (działający, broni wartości)</li>
 
-    <li>Maga (wewnętrzna mądrość, intuicja)</li>
+<li>Maga (wewnętrzna mądrość, intuicja)</li>
 
-    <li>Kochanka (wrażliwość, połączenie z życiem)</li>
+<li>Kochanka (wrażliwość, połączenie z życiem)</li>
+```
 
 </ul>
 
@@ -48,8 +46,6 @@ published: true
   <li><strong>Krok 2: Oceń, który z tych archetypów w tobie dominuje, a którego brakuje.</strong><br><em>Technika:</em> Prowadzenie dziennika archetypowego – codziennie zapisz, który archetyp przejawiał się w twoich działaniach.</li>
 
 </ul>
-
-
 
 <h2>3. Integracja Animy: Spotkanie z Wewnętrzną Kobiecością</h2>
 
@@ -61,19 +57,15 @@ published: true
 
 </ul>
 
-
-
 <h2>4. Odwaga Wrażliwości: Autentyczność jako Siła</h2>
 
 <ul>
 
   <li><strong>Krok 1: Rozpoznaj swoje emocje i nazwij je.</strong><br><em>Nieznana siła:</em> Nazywanie emocji aktywuje korę przedczołową i zmniejsza intensywność negatywnych przeżyć.</li>
 
-  <li><strong>Krok 2: Dziel się emocjami w bezpiecznej przestrzeni.</strong><br><em>Przykład:</em> krąg mężczyzn, terapia, rozmowa z partnerką.</li>
+  <li><strong>Krok 2: Dziel się emocjami w bezpiecznej przestrzeni.</strong><br><em>Przykład:</em> krąg mężczyzn, terapia.</li>
 
 </ul>
-
-
 
 <h2>5. Nowa Definicja Siły</h2>
 
@@ -81,19 +73,13 @@ published: true
 
 <p><strong>Przykład:</strong> przyznanie się do lęku, przeproszenie, nieukrywanie słabości.</p>
 
-
-
 <h2>Podsumowanie</h2>
 
 <p>Zdrowa męskość to nie teatr „macho”, ale podróż w głąb siebie – do króla, który nie rządzi strachem, lecz obecnością. To odwaga zrzucenia zbroi, nie po to by być słabym, ale by być prawdziwym.</p>
 
-
-
 <h3>Wnioski poza podsumowaniem:</h3>
 
 <p><strong>Zadaj sobie pytanie:</strong> „Czy moja definicja męskości pochodzi z moich wartości, czy z lęku i oczekiwań społecznych?”</p>
-
-
 
 <h3>Co możesz zrobić dalej?</h3>
 
@@ -106,7 +92,5 @@ published: true
   <li>Rozważ dołączenie do grupy mężczyzn lub warsztatów rozwojowych dla mężczyzn</li>
 
 </ul>
-
-
 
 <p><strong>To początek prawdziwej podróży – nie do bycia „lepszym mężczyzną”, ale do bycia sobą.</strong></p>
