@@ -85,7 +85,7 @@ published: true
 
 <ul>
 
-  <li>Przeczytaj książki: <em>„King, Warrior, Magician, Lover”</em> oraz <em>„Mężczyzna i jego symbole”</em> (Jung)</li>
+  <li>Przeczytaj książki: <em>„King, Warrior, Magician, Lover”</em> oraz <em>„Człowiek i jego symbole”</em> (Jung)</li>
 
   <li>Zacznij pisać swój dziennik emocji i archetypów</li>
 
