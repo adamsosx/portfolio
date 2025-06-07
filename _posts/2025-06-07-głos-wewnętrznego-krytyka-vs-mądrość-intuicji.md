@@ -4,7 +4,7 @@ date: 2025-06-07 18:06
 category: Rozwój osobisty
 categoryId: personal
 image: /images/uploads/stasmzlpaocaczhbwo5g.png
-excerpt: Jak Nauczyć Się Je Rozróżniać i Komu Ufać?
+excerpt: "Jak Nauczyć Się Je Rozróżniać i Komu Ufać? "
 published: true
 ---
 <p><em>Dla kogo:</em> Dla tych, którzy codziennie zmagają się z szorstką narracją wewnętrzną. Dla tych, którzy czują, że ich decyzje są podszyte strachem lub presją perfekcjonizmu. Dla osób eksplorujących Human Design, które mają zdefiniowaną Śledzionę – zwłaszcza z Bramą 57, 44, 32 czy 50 – i chcą nareszcie rozróżniać prawdę od autosabotażu.</p>
