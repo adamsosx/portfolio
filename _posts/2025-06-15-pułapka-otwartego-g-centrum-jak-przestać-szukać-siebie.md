@@ -4,8 +4,7 @@ date: 2025-06-15 10:52
 category: Rozwój osobisty
 categoryId: personal
 image: /images/uploads/bkqrcvcof5ytrkmebbok.png
-excerpt: " Na Zewnątrz i Odkryć Mądrość Płynności (Praktyczne Strategie dla
-  „Zagubionych”)"
+excerpt: " Na Zewnątrz i Odkryć Mądrość Płynności"
 published: true
 ---
 <p>Jeśli masz <em>otwarte G-Centrum</em> w swoim Human Design (tak jak ja), zapewne znasz ten stan: „Kim jestem? Dokąd zmierzam? Gdzie jest moje miejsce? Dlaczego czuję się zagubiony?”. Ten artykuł powstał z serca i doświadczenia kogoś, kto przez lata próbował znaleźć siebie na zewnątrz — w ludziach, miejscach, ideach — i kto w końcu zaczął dostrzegać ukrytą mądrość płynności, którą daje otwarte G.</p>
